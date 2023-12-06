@@ -11,7 +11,7 @@ public class Test08나눗셈 {
 		
 		//숫자의 100의자리, 10의 자리, 1의 자리를 각각 출력
 		int number2 = 139;
-		System.out.println(number2/100); 		//System.out.println(number2/10/10); 
+		System.out.println(number2/100); 	//System.out.println(number2/10/10); 
 		System.out.println(number2%100/10);	//System.out.println(number2/10%10); 
 		System.out.println(number2%100%10);	//System.out.println(number2%10);
 	}

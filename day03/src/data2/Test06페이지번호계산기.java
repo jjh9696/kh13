@@ -21,13 +21,13 @@ public class Test06페이지번호계산기 {
 
 		275페이지에 위치할 때 첫 번호와 마지막 번호를 출력하세요
 	 */	
-		int nowPage = 275;
+		int nowPage = 270;
 		
 		int firstNum = 1; 
 		int lastNum = 10;
 		
-		int printFN = (nowPage/10*10)+firstNum;
-		int printLN = (nowPage/10*10)+lastNum;
+		int printFN = ((nowPage-1)/10*10)+firstNum; 
+		int printLN = ((nowPage-1)/10*10)+lastNum;
 		
 		System.out.println(nowPage+" 페이지의 "+"첫번째 번호는 "+ printFN+"이고, "+"마지막 번호는 "+printLN+"입니다.");
 		

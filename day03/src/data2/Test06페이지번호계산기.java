@@ -29,7 +29,7 @@ public class Test06페이지번호계산기 {
 		int printFN = (nowPage/10*10)+firstNum;
 		int printLN = (nowPage/10*10)+lastNum;
 		
-		System.out.println("첫번째 번호는 "+ printFN+"이고, "+" 마지막 번호는 "+printLN+"입니다.");
+		System.out.println(nowPage+" 페이지의 "+"첫번째 번호는 "+ printFN+"이고, "+"마지막 번호는 "+printLN+"입니다.");
 		
 	}
 

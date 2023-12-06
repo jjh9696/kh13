@@ -1,6 +1,6 @@
 package data;
 
-public class Test6복습시간풀이 {
+public class Test06복습시간풀이 {
 
 	public static void main(String[] args) {
 

@@ -1,6 +1,6 @@
 package data2;
 
-public class Test06페이지번호계산기 {
+public class Test06페이지번호계산기풀이 {
 
 	public static void main(String[] args) {
 	
@@ -21,15 +21,14 @@ public class Test06페이지번호계산기 {
 
 		275페이지에 위치할 때 첫 번호와 마지막 번호를 출력하세요
 	 */	
-		int nowPage = 275;
+		int page = 275;
 		
-		int firstNum = 1; 
-		int lastNum = 10;
+		int size = 10;  //이렇게 만들면 size에 따라 맞게 적용된다
 		
-		int printFN = ((nowPage-1)/10*10)+firstNum; 
-		int printLN = ((nowPage-1)/10*10)+lastNum;
+		int begin = ((page-1)/size*size)+1; 
+		int end = ((page-1)/size*size)+size; // == int end = begin + (size-1);
 		
-		System.out.println(nowPage+" 페이지의 "+"첫번째 번호는 "+ printFN+"이고, "+"마지막 번호는 "+printLN+"입니다.");
+		System.out.println(page+" 페이지의 "+"첫번째 번호는 "+ begin+"이고, "+"마지막 번호는 "+end+"입니다.");
 		
 	}
 

@@ -34,7 +34,7 @@ public class Test04여행사 {
 		
 		if(summer) {
 			System.out.println("인원 "+people+"명, "
-								+ ""+"기간 "+period+"일, "+"여름 할인가 "
+								+"기간 "+period+"일, "+"여름 할인가 "
 								+saleTotal+"원 입니다.");
 		}
 		else {

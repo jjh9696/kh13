@@ -17,7 +17,7 @@ public class Test02비만계산기풀이 {
 		double m = cm/100;
 		double bmi  = kg / (m*m);
 		
-		//입력
+		//출력
 		System.out.println("귀하의 BMI 지수는 "+ bmi +" 입니다.");
 	}
 

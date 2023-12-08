@@ -36,6 +36,8 @@ public class Test06분식점 {
 		System.out.print("튀김 "+fCount+"인분의 가격은 "+fPrice+"원, ");
 		int sPrice = (sundae * sCount)-(sundae * sCount)/10;
 		System.out.print("순대 "+sCount+"인분의 가격은 "+sPrice+"원");
+		System.out.println();
+		System.out.print("10% 할인 된 총 가격은 "+(tPrice+fPrice+sPrice)+"원 입니다.");
 	}
 
 }

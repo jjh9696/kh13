@@ -16,7 +16,7 @@ public class Test05시간출력 {
  * 
  */
 		Scanner sc = new Scanner(System.in);
-		System.out.print("초를 입력하세요");
+		System.out.print("초를 입력하세요 : ");
 		int writeTime = sc.nextInt();
 		
 		boolean before = writeTime < 10;
@@ -24,21 +24,24 @@ public class Test05시간출력 {
 		boolean	min =  writeTime < 60*60;
 		boolean hour = writeTime < 60*60*24;
 		
+		String status;
+		
 		if(before) {
-			System.out.println("방금 전에 작성");
+			status = "방금 전";
 		}
 		else if(sec) {
-			System.out.println(writeTime+"초 전에 작성");
+			status = writeTime+"초 전";
 		}
 		else if(min) {
-			System.out.println((writeTime/60)+"분 전에 작성"); 
+			status = writeTime/60+"분 전";
 		}
 		else if(hour) {
-			System.out.println(writeTime/60/60+"시간 전에 작성");
+			status = writeTime/60/60+"시간 전";
 		}
 		else {
-			System.out.println(writeTime/60/60/24+"일 전에 작성");
+			status = writeTime/60/60/24+"일 전";
 		}
+		System.out.println(status+"에 작성");
 	}
 
 }

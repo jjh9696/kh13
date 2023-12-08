@@ -2,7 +2,7 @@ package io;
 
 import java.util.Scanner;
 
-public class Test06분식점 {
+public class Test06분식점풀이 {
 
 	public static void main(String[] args) {
 		/*
@@ -18,6 +18,7 @@ public class Test06분식점 {
 		(단, 현재 행사중이라서 10% 할인된 가격으로 판매합니다)
 		*/
 		
+		//입력
 		int tteok = 3000;
 		int fried = 500;
 		int sundae = 2000;
@@ -29,15 +30,21 @@ public class Test06분식점 {
 		int fCount = sc.nextInt();
 		System.out.print("순대 주문수량 : ");
 		int sCount = sc.nextInt();
+		int rate = 10;
 		
-		int tPrice = (tteok * tCount)-(tteok * tCount)/10;
+		//계산
+		int tPrice = tteok * tCount;
 		System.out.print("떡볶이 "+tCount+"인분의 가격은 "+tPrice+"원, ");
-		int fPrice = (fried * fCount)-(fried * fCount)/10;
+		int fPrice = fried * fCount;
 		System.out.print("튀김 "+fCount+"인분의 가격은 "+fPrice+"원, ");
-		int sPrice = (sundae * sCount)-(sundae * sCount)/10;
+		int sPrice = sundae * sCount;
 		System.out.print("순대 "+sCount+"인분의 가격은 "+sPrice+"원");
+		int total = tPrice+fPrice+sPrice;
+		int discount = (int)(total*rate/100);
+		
+		//출력
 		System.out.println();
-		System.out.print("10% 할인 된 총 가격은 "+(tPrice+fPrice+sPrice)+"원 입니다.");
+		System.out.print("총 금액 "+total+"원에서 "+rate+"% 할인 된 총 가격은 "+(total-discount)+"원 입니다.");
 	}
 
 }

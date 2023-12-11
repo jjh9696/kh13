@@ -28,15 +28,16 @@ public class Test10구구단 {
 		System.out.println("몇 단을 공부할까요?");
 		Scanner sc = new Scanner(System.in);
 		n = sc.nextInt();
-				
+		System.out.println("\n시작!\n");
+		
 		for (int i=1; i<10; i++) {
 			System.out.print(n+" x "+i+" = ");
 			answer = sc.nextInt();
 				if(answer==n*i) {
-					System.out.println("정답");
+					System.out.println("정답\n");
 				}
 				else {
-					System.out.println("땡!");
+					System.out.println("땡!\n");
 				}
 		}
 		System.out.println("게임 끝!");

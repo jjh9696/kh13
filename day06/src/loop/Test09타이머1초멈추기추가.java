@@ -26,6 +26,11 @@ public class Test09타이머1초멈추기추가 {
 		int sec = a.nextInt();
 		for (int time = min*60+sec;time>=0;time--) {
 			System.out.println(time/60+"분 "+time%60+"초 후 알람");
+				try {
+					Thread.sleep(1000);
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
 		}
 		System.out.println("띠링");
 	}

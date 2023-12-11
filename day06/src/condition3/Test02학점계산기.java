@@ -34,7 +34,7 @@ public class Test02학점계산기 {
 		case 8:
 			grade="A";
 		break;
-		case 7:s
+		case 7:
 			grade="B";
 		break;
 		case 6:

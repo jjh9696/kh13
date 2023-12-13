@@ -25,11 +25,11 @@ public class Test04업다운게임 {
 		int count = 0;
 		
 		int randomNumber = r.nextInt(1000)+1;
+		System.out.println("콤퓨타가 1~1000 사이의 수를 뽑앗읍니다");
 		while(true) {
-			count++;
-			
 			System.out.print("숫자를 입력하세요 : ");
 			int input = sc.nextInt();
+			count++;
 			if (randomNumber==input) {
 				System.out.println("정답");
 				break;

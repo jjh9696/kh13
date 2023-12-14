@@ -13,7 +13,7 @@ public class Test05배열입력 {
 		System.out.println("숫자를 5개 입력하세요:");
         for (int i = 0; i < numbers.length; i++) {
             System.out.print("숫자 " + (1+i) + " : ");
-            numbers[i] = input = sc.nextInt();
+            numbers[i] = input=sc.nextInt();
         }
         for (int i = 0; i < numbers.length; i++) {
         	System.out.print(numbers[i]+" ");

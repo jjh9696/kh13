@@ -16,6 +16,8 @@ public class Test06배열섞기 {
 		
 		Random random = new Random();
 		int numbers[]=new int[] {30,50,20,10,40};
+		
+		
 		for(int i=0;i<numbers.length;i++) {
 			int r=random.nextInt(numbers.length);
 			int temp =numbers[i];

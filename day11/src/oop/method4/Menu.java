@@ -8,18 +8,23 @@ public class Menu {
 	
 	
 	void information( ) {
+		if (this.event=="행사중") {
+			name=name+("(행사중)");
+		}
 		System.out.println("이름 : " +name);
 		System.out.println("분류 : " +category);
-		System.out.println("가격 : " +price+"원");
+		if (this.event=="행사중") {
+			int discount = this.price * 80 / 100;
+			System.out.println("가격 : "+discount+"원 (원가 :"+price+"원)" );
+		}
+		else {
+			System.out.println("가격 : " +price+"원");
+		}
 		System.out.println();
 		
 	}
 	
 	void data (String name, String category, int price, String event) {
-		if (event=="행사중") {
-			price*=0.8;
-			name=name+("(행사중)");
-		}
 		this.name=name;
 		this.category=category;
 		this.price=price;

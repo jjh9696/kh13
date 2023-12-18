@@ -18,5 +18,6 @@ public class Test01온라인쇼핑몰상품정보 {
 		b.information();
 		c.information();
 		d.information();
+		
 	}
 }

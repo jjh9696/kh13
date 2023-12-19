@@ -12,7 +12,6 @@ public class Book {
 	//변수가 잠기면 외부에서는 직접 접근할 수 있는 방법이 없다
 	//-설정을 위한 setter 메소드, 확인을 위한 getter 메소드를 설정해야 한다
 	
-	
 	public String getTitle() {
 		return title;
 	}

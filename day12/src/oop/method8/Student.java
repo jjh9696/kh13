@@ -9,7 +9,7 @@ public class Student {
     
     //멤버 메소드
     void data(int level, int group, String name, int korean, int english, int math) {
-        this.level = level;
+    	this.level = level;
         this.group = group;
         this.name = name;
         this.korean = korean;

@@ -1,4 +1,4 @@
-package loo4;
+package loop4;
 
 import java.util.Scanner;
 

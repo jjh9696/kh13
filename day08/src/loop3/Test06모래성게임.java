@@ -1,4 +1,4 @@
-package loo3;
+package loop3;
 
 import java.util.Scanner;
 

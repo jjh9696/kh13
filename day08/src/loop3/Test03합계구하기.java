@@ -1,8 +1,8 @@
-package loo3;
+package loop3;
 
 import java.util.Scanner;
 
-public class Test03합계구하기2 {
+public class Test03합계구하기 {
 
 	public static void main(String[] args) {
 //		사용자가 0을 입력하기 전까지 입력한 숫자들의 합계와 평균을 구하여 출력
@@ -12,7 +12,7 @@ public class Test03합계구하기2 {
 		double average=0;
 		double count=0;
 		
-		for(;;) {
+		while(true) {
 			System.out.print("숫자를 입력하세요 (0 입력 시 종료): ");
 			int input = sc.nextInt();
 			
@@ -23,6 +23,8 @@ public class Test03합계구하기2 {
 			total+=input;
 			average=total/count;
 		}
+		
+		System.out.println("입력한 숫자개수 : "+(int)count);
 		System.out.println("입력한 숫자의 합계 : "+total);
 		System.out.println("입력한 숫자의 평균 : "+average);
 	}

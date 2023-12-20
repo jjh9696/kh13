@@ -1,8 +1,8 @@
-package loo3;
+package loop3;
 
 import java.util.Scanner;
 
-public class Test05베스킨라빈스31 {
+public class Test05베스킨라빈스312 {
 
 	public static void main(String[] args) {
 		/*
@@ -36,7 +36,15 @@ public class Test05베스킨라빈스31 {
 			System.out.println("현재 숫자 : "+num);
 			System.out.print("1~3 사이의 숫자 입력 : ");
 			int input = sc.nextInt();
+			
+			if(!(input>=1&&input<=3 )) {
+				continue;
+			}
+			for (int i=1; i<=input; i++) {
+				System.out.println(num+i);
+			}
 			num+=input;
+			
 			if (num>=31) {
 				System.out.println("탈락!");
 				break;

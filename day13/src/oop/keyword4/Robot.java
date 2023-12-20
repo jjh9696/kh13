@@ -25,8 +25,9 @@ public class Robot {
 	}
 	
 	public static boolean leap(int year) {
-		if ((year%4==0&&year % 100 != 0)||year % 400 == 0) return true;
-		return false;
+//		if ((year%4==0&&year % 100 != 0)||year % 400 == 0) return true;
+//		return false;
+		return (year%4==0&&year % 100 != 0)||year % 400 == 0;
 	}
 	
 	public static double bmi(double cm,double kg) {

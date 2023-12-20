@@ -2,7 +2,7 @@ package oop.keyword6;
 
 import java.util.Scanner;
 
-public class Test01 {
+public class Test01파이널문제입력추가 {
 
 	public static void main(String[] args) {
 

@@ -15,5 +15,4 @@ public class Test01음원차트 {
 		d.information();
 		
 	}
-
 }

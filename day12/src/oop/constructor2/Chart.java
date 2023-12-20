@@ -2,10 +2,10 @@ package oop.constructor2;
 
 public class Chart {
 
-	String title;
-	String singer;
-	int play;
-	int thumbsUp;
+	private String title;
+	private String singer;
+	private long play;
+	private int thumbsUp;
 	
 	void setTitle(String title) {
 		this.title = title;
@@ -13,7 +13,7 @@ public class Chart {
 	void setSinger(String singer) {
 		this.singer = singer;
 	}
-	void setPlay(int play) {
+	void setPlay(long play) {
 		if(play>=0) {//재생수는 0이상
 		this.play = play;
 		}
@@ -25,31 +25,31 @@ public class Chart {
 	}
 	
 	String getTitle() {
-		return title;
+		return this.title;
 	}
 	String getSinger() {
-		return singer;
+		return this.singer;
 	}
-	int getPlay() {
-		return play;
+	long getPlay() {
+		return this.play;
 	}
 	int getThumbsUp() {
-		return thumbsUp;
+		return this.thumbsUp;
 	}
 	boolean getBest() {//재생 10만 이상은 true
-			return this.play>=100000;
+		return this.play>=100000;
 	}
 	boolean getPop() {//좋아요 10만 이상은 true
-			return this.thumbsUp>=100000;
+		return this.thumbsUp>=100000;
 	}
-	int getRankPoint() { // 랭킹점수 = 재생수 * 2 + 좋아요수 / 2
-		return (play*2)+(thumbsUp/2);
+	long getRankPoint() { // 랭킹점수 = 재생수 * 2 + 좋아요수 / 2
+		return (this.play*2)+(this.thumbsUp/2);
 	}
 	
 	Chart (String title,String singer){
 		this(title,singer,0,0);
 	}
-	Chart (String title,String singer,int play,int thumbsUp){
+	Chart (String title,String singer,long play,int thumbsUp){
 		this.setTitle(title);
 		this.setSinger(singer);
 		this.setPlay(play);

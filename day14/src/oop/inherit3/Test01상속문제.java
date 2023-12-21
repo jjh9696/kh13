@@ -4,6 +4,7 @@ public class Test01상속문제 {
 
 	public static void main(String[] args) {
 
+//		Page page = new Page(); //존재하면 안되는 객체
 		Chrome p1 = new Chrome();
 		Edge p2 = new Edge();
 		Whale p3 = new Whale();
@@ -26,5 +27,4 @@ public class Test01상속문제 {
 		p3.naverSearch();
 		
 	}
-
 }

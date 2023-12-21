@@ -2,62 +2,47 @@ package oop.total1;
 
 public class Time {
 
-	private int hour;
-	private int min;
-	private int sec;
+	private long totalTime;
 	
-	public int getSec() {
-		return sec;
+	public long getTotalTime() {
+		return totalTime;
 	}
 	
-	public void setSec(int sec) {
-		if(sec>=60) {
-			
-			min=min+sec/60;
-			sec=sec%60;
-		}
-		this.sec = sec;
+	public void setTotalTime(long totalTime) {
+		
 	}
-	public int getMin() {
-		return min;
+	public Time(long hour,long min,long sec) {
+		long total = hour*60*60+min*60+sec;
+		this.setTotalTime(total);
+	}
+	public Time(long min,long sec) {
+		long total = +min*60+sec;
+		this.setTotalTime(total);
+	}
+	public Time(long sec) {
+		long total = sec;
+		this.setTotalTime(total);
 	}
 	
-	public void setMin(int min) {
-		if(min>=60) {
-			hour=hour+min/60;
-			min=min%60;
-		}
-		this.min = min;
+	public long getHour() {
+		return this.totalTime/60/60;
 	}
-	public int getHour() {
-		return hour;
+	public long getMin() {
+		return this.totalTime/60%60;
 	}
-
-	public void setHour(int hour) {
-		this.hour = hour;
-	}
-
-
-
-	public Time(int hour,int min,int sec) {
-		this.setHour(hour);
-		this.setMin(min);
-		this.setSec(sec);
-	}
-	public Time(int min,int sec) {
-		this.setHour(hour);
-		this.setMin(min);
-		this.setSec(sec);
-	}
-	public Time(int sec) {
-		this.setHour(hour);
-		this.setMin(min);
-		this.setSec(sec);
+	public long getSec() {
+		return this.totalTime%60;
 	}
 	
 	
 	void show () {
 		System.out.println(this.getHour()+"시간 "+this.getMin()+"분 "+this.getSec()+"초");
 	}
+
+
+
+
+
+
 	
 }

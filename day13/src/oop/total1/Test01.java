@@ -6,8 +6,8 @@ public class Test01 {
 
 		Time a = new Time(3,30,40);
 		Time b = new Time(1,70,100);
-		Time c = new Time(0,50,20);
-		Time d = new Time(0,0,30000);
+		Time c = new Time(50,20);
+		Time d = new Time(30000);
 		
 		a.show();
 		b.show();

@@ -1,4 +1,4 @@
-package oop.total1_1;
+package oop.total1_풀이;
 
 public class Time {
 	//필드 - 시간을 초로 저장할 수 있는 필드 1개만 구현

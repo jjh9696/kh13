@@ -1,4 +1,4 @@
-package oop.total1_1;
+package oop.total1_풀이;
 
 public class TimeCalculator {
 	//시간 덧셈 메소드

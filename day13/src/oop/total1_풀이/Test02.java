@@ -1,4 +1,4 @@
-package oop.total1_1;
+package oop.total1_풀이;
 
 public class Test02 {
 	public static void main(String[] args) {

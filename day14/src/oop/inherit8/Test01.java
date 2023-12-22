@@ -5,9 +5,9 @@ public class Test01 {
 	public static void main(String[] args) {
 
 		Galaxy23FE p1=new Galaxy23FE("010-1111-1111", "black");
-		GalaxyFold5 p2 = new GalaxyFold5("010-2222-2222", "blue");
+		GalaxyFold5 p2 = new GalaxyFold5("010-2222-2222", "gold");
 		IPhone14 p3 =new IPhone14("010-3333-3333", "white");
-		IPhone15 p4 =new IPhone15("010-4444-4444", "gold");
+		IPhone15 p4 =new IPhone15("010-4444-4444", "blue");
 		
 		p1.show();
 		p1.call();

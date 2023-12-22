@@ -18,6 +18,6 @@ public class Galaxy23FE extends GalaxyPhone{
 		System.out.println("갤럭시23FE 삼성페이 기능 실행");
 	}
 	public void bixby() {
-		
+		System.out.println("갤럭시23FE 음성인식 기능 실행");
 	}
 }

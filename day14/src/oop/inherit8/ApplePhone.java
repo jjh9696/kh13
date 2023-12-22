@@ -6,7 +6,5 @@ public abstract class ApplePhone extends Phone {
 	public ApplePhone(String number, String color) {
 		super(number, color);
 	}
-	public abstract void call();
-	public abstract void sms();
 	public abstract void siri();
 }

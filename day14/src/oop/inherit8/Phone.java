@@ -23,7 +23,9 @@ public abstract class Phone {
 		this.setColor(color);
 	}
 //메소드
-	public void show() {
+	public abstract void call();
+	public abstract void sms();
+	public /*final*/void show() { //파이널 키워드로 넣어도 좋다
 		System.out.println("전화번호 : "+this.number);
 		System.out.println("색상 : "+this.color);
 		

@@ -17,7 +17,7 @@ public class Test01Object클래스 {
 		System.out.println(a);
 		System.out.println(b);
 		
-		System.out.println(a.hashCode());//객체의 일렵번호 반환 (주소아님)
+		System.out.println(a.hashCode());//객체의 일련번호 반환 (주소아님)
 		System.out.println(b.hashCode());
 		
 		System.out.println(a.toString());

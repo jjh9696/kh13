@@ -26,7 +26,5 @@ public class Test02최상위클래스 {
 		System.out.println(b instanceof Integer);//b의 데이터가 Integer(int) 형태인가요?
 		
 		
-		
 	}
-
 }

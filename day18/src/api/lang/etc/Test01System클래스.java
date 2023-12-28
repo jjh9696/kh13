@@ -1,6 +1,6 @@
 package api.lang.etc;
 
-public class Test01시스템클래스 {
+public class Test01System클래스 {
 
 	public static void main(String[] args) {
 	
@@ -40,10 +40,6 @@ public class Test01시스템클래스 {
 		//출력도 종류가 나눠져 있다
 		System.out.println("Hello");//정상출력
 		System.err.println("Hello");//오류출력
-		
-		
-		
-		
 		
 		
 	}

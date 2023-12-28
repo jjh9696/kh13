@@ -28,7 +28,7 @@ public class Test07이메일검사 {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("이메일 주소를 입력하세요 : ");
 		String email = sc.nextLine();
-		String regex = "^[a-z0-9][a-z0-9\\_-]{4,19}+@[a-zA-Z0-9]{3,20}\\.(co.kr|com|net|org|dev)$";
+		String regex = "^[a-z0-9][a-z0-9\\_-]{4,19}@[a-zA-Z0-9]{3,20}.(co.kr|com|net|org|dev)$";
 		System.out.println(email.matches(regex));
 		
 	}

@@ -66,7 +66,5 @@ public class Test07만나이계산기 {
 				System.err.println("예외 발생 : "+e.getMessage());
 			}
 		}
-		
 	}
-
 }

@@ -3,7 +3,7 @@ package api.lang.exception;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Test06예외메세징 {
+public class Test08예외로그 {
 	public static void main(String[] args) {
 		
 		
@@ -26,18 +26,10 @@ public class Test06예외메세징 {
 			System.out.println("다 주면 "+rest+"개 남아요.");
 		}
 		catch(Exception e) {//Plan B
-			//다양한 예외들이 모이다보니...구분 내지는 추가 정보를 얻고 싶다
-			//예외가 발생하면 catch 블록의 매개변수에 정보가 들어오니 이것을 분석!
-			
-			//System.err.println(e);
-			//System.err.println((e.getMessage()));//예외 메세지 추출
-			
-			if(e.getMessage()==null) {//예외 메시지가 없다면
-				System.err.println("예외 발생");
-			}
-			else {
-				System.err.println(e.getMessage());
-			}
+			//예외가 발생했을 떄 나오는 메세지를 스택 트레이스(stack trace)라고 한다
+			//스택 트레이스에는 예외 종류,원인,위치 등이 매우 상세하게 나온다
+			//개발자한테는 도움이 되는 정보
+			e.printStackTrace();
 		}
 	}
 }

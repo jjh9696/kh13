@@ -30,5 +30,4 @@ public class Test03시간형식만들기 {
 		SimpleDateFormat fmtD = new SimpleDateFormat("yyyy-MM-dd E HH:mm:ss");
 		System.out.println(fmtD.format(a));
 	}
-
 }

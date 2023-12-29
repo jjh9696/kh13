@@ -20,6 +20,8 @@ public class Test03출력형식지정 {
 		String str = "2024년 1월 1일 월";
 		System.out.println(str);
 		LocalDate a = LocalDate.parse(str,fmt);//str을 fmt기반으로 해석하겠다
+//		LocalDate a = LocalDate.parse(str,DateTimeFormatter.ofPattern("y년 M월 d일 E"));//길어서 헷갈리지만 같은 코드
+		
 		System.out.println(a);
 	}
 

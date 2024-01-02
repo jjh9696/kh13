@@ -35,7 +35,7 @@ public class Test01LocalDate클래스 {
 		//오늘은 수료 며칠 전입니까?
 		//finish와 a의 차이를 구하세요
 		//=주인공이 애매하므로 별도의 클래스로 계산(Period)
-		Period period = Period.between(a, finish);
+		Period period = Period.between(a, finish);//23/12/29  24/5/20
 		System.out.println(period.getYears());//남은 연도 0
 		System.out.println(period.getMonths());//남은 개월수 4
 		System.out.println(period.getDays());//남은 일수 21

@@ -13,6 +13,7 @@ public class Test01Set {
 		//-구조적으로 중복이 불가능
 		//-구조적으로 정해진 저장 순서를 따른다
 		//-구조적으로 인덱스가 존재하지 않는다
+		//-둘다 빨리 찾지만 그중에서도 정렬이필요하면 TreeSet, 정렬 필요없이 빠르게 찾기만 필요하면 HashSet
 		
 //		TreeSet<String> ts = new TreeSet<>();
 		Set<String> ts = new TreeSet<>();//업캐스팅
@@ -37,7 +38,6 @@ public class Test01Set {
 		//데이터 출력
 		System.out.println(ts);
 		System.out.println(ts.size());//개수
-		
 		
 	}
 

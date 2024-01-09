@@ -14,7 +14,7 @@ public class Test02사원검색instr {
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
-		
+		System.out.print("사원 이름 입력 : ");
 		String keyword = sc.nextLine();
 		sc.close();
 		

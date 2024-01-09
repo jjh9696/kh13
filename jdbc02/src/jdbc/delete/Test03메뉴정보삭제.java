@@ -14,6 +14,7 @@ public class Test03메뉴정보삭제 {
 		단, 존재하지 않는 번호라면 그에 맞는 메세지 출력
 		*/
 		Scanner sc = new Scanner(System.in);
+		System.out.println("메뉴 번호 입력 : ");
 		int menuNo = sc.nextInt();
 		sc.close();
 		

@@ -15,6 +15,7 @@ public class Test02사원정보삭제 {
 		*/
 		
 		Scanner sc = new Scanner(System.in);
+		System.out.println("사원 번호 입력 : ");
 		int empNo = sc.nextInt();
 		sc.close();
 		

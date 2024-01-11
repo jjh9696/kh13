@@ -19,8 +19,6 @@ public class Test02사원검색instr2 {
 		sc.close();
 		
 		JdbcTemplate jdbcTemplate = JdbcHelper.getJdbcTemplate();
-//		String sql = "SELECT * FROM emp WHERE INSTR(emp_name, ?) > 0 OR INSTR(emp_dept, ?) > 0";
-//        Object[] data = { "%" + keyword + "%", "%" + keyword + "%" };
 		String sql = "SELECT * FROM emp WHERE INSTR(emp_name, ?) > 0 OR INSTR(emp_dept, ?) > 0";
         Object[] data = {keyword ,keyword};
         

@@ -26,7 +26,7 @@ public class MemberDao {
 //							+ "member_birth,member_contact, member_email, "
 //							+ "member_post, member_address1, member_address2,"
 //							+ "member_level, member_point, member_join, member_login"
-//						+ ") values(?, ?, ?, ?, ?, ?, ?, ?, ?, '일반회원', 0, sysdate, null)";
+//						+ ") values(?, ?, ?, ?, ?, ?, ?, ?, ?, '일반회원', 0, sysdate, null)";	//디폴트 값을 쓰는게 아닌 내가 넣어주는 경우
 		Object[] data = {
 			dto.getMemberId(), dto.getMemberPw(), dto.getMemberNick(),
 			dto.getMemberBirth(), dto.getMemberContact(), dto.getMemberEmail(),
@@ -35,7 +35,7 @@ public class MemberDao {
 		jdbcTemplate.update(sql, data);
 	}
 
-	//수정
+	//수정 (Update)
 	public boolean update(MemberDto dto) {
 		String sql = "update member set "
 				+ "member_id=?, member_pw=?, member_nick=?, member_birth=?, member_contact=?, member_email=?, member_post=?, member_address1=?, member_address2=?";
@@ -44,21 +44,32 @@ public class MemberDao {
 		};
 		return jdbcTemplate.update(sql, data)>0;
 	}
-	//삭제
+	
+	//비밀번호 변경(수정, Update) Test04
+	public boolean updateMemberPw(MemberDto dto) {
+		String sql = "update member set "
+				+ "member_pw=? where member_id=?";
+		Object[] data = {
+				dto.getMemberPw(), dto.getMemberId()
+		};
+		return jdbcTemplate.update(sql, data)>0;
+	}
+	
+	//삭제 Test05
 	public boolean delete (String memberId) {
 		String sql = "delete member where member_id=?";
 		Object[] data = {memberId};
 		return jdbcTemplate.update(sql,data)>0;
 	}
 	
-	//목록(조회, Read) Test02
+	//목록(조회, Read) Test02,06
 	public List<MemberDto> selectList(){
 		String sql = "select * from member order by member_id asc";
 //		Object[] data = {}
 		return jdbcTemplate.query(sql, mapper);
 	}
 	
-	//상세(조회, Read) Test03
+	//상세(조회, Read) Test01,03,04,05,06
 	public MemberDto selectOne(String memberId) {
 		String sql = "select * from member where member_id=?";
 		Object[] data = {memberId};
@@ -66,9 +77,10 @@ public class MemberDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
-	//검색
-	public List<MemberDto> selectList(String column,String keyword){
-		String sql = "select * from member where instr("+column+",?)>0";
+	//검색(조회, Read)
+	public List<MemberDto> selectList(String column, String keyword) {
+		String sql = "select * from member where instr("+column+", ?) > 0 "
+										+ "order by "+column+" asc, member_id asc";
 		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, mapper, data);
 	}

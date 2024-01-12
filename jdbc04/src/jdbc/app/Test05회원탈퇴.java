@@ -21,18 +21,12 @@ public class Test05회원탈퇴 {
         scanner.close();
 
         MemberDao dao = new MemberDao();
-        MemberDto dto = new MemberDto();
+        MemberDto find = dao.selectOne(memberId);
         
         // 입력받은 아이디와 비밀번호로 회원 탈퇴 진행
-        
-        
-        boolean result = dao.delete(memberId);
-		
-		if(result) {
-			if(dto.getMemberId().equals(memberId)&&dto.getMemberPw().equals(memberPw)) {
+		if(find!=null&&find.getMemberId().equals(memberId)) {
 	        	dao.delete(memberId);
 	        	System.out.println("회원 탈퇴 완료");
-	        }
 		}
 		else {
 			System.out.println("아이디 또는 비밀번호가 일치하지 않습니다.");

@@ -12,20 +12,22 @@ public class Test04비밀번호변경 {
 		
 		Scanner sc = new Scanner(System.in);
 		
+		System.out.print("아이디 입력 : ");
 		String inputId = sc.nextLine();
+		System.out.print("변경할 비밀번호 : ");
 		String inputPw = sc.nextLine();
 		
+		sc.close();
+		
 		MemberDto dto = new MemberDto();
+		dto.setMemberId(inputId);
+		dto.setMemberPw(inputPw);
 		
 		MemberDao dao = new MemberDao();
-		boolean result = dao.update(dto);
+		boolean result = dao.updateMemberPw(dto);
 		
 		if(result) {
-			if(dto.getMemberId().equals(inputId)&&dto.getMemberId()!=null) {
-				dto.setMemberPw(inputPw);
 				System.out.println("비밀번호 변경 완료");
-				
-			}
 		}
 		else {
 			System.out.println("존재하지 않는 아이디");

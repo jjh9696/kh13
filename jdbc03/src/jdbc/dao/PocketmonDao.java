@@ -69,7 +69,7 @@ public class PocketmonDao {
 		return jdbcTemplate.query(sql, mapper);
 	}
 	
-	//상세 메소드 - 기본키를 조건으로 설정하여 결과가 하나만 나오도록 구현
+	//상세메소드 - 기본키를 조건으로 설정하여 결과가 하나만 나오도록 구현
 	public PocketmonDto selectOne(int pocketmonNo) {
 		JdbcTemplate jdbcTemplate = JdbcHelper.getJdbcTemplate();
 		String sql = "select * from pocketmon where pocketmon_no = ?";
@@ -82,5 +82,14 @@ public class PocketmonDao {
 	}
 	
 	//검색메소드
+	public List<PocketmonDto> selectList(String column, String keyword){
+		JdbcTemplate jdbcTemplate = JdbcHelper.getJdbcTemplate();
+		String sql = "select * from pocketmon where instr("+column+",?)>0";
+		Object[] data = {keyword};
+		PocketmonMapper mapper = new PocketmonMapper();
+		return jdbcTemplate.query(sql, mapper, data);
+		
+	}
+	
 	
 }

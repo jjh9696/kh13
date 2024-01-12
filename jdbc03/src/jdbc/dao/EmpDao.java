@@ -62,4 +62,13 @@ public class EmpDao {
 		
 	}
 	
+	//검색메소드
+	public List<EmpDto> selectList(String column,String keyword){
+		JdbcTemplate jdbcTemplate = JdbcHelper.getJdbcTemplate();
+		String sql="select * from emp where instr("+column+",?)>0";
+		Object[] data = {keyword};
+		EmpMapper mapper = new EmpMapper();
+		return jdbcTemplate.query(sql, mapper, data);
+	}
+	
 }

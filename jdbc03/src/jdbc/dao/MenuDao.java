@@ -1,9 +1,11 @@
 package jdbc.dao;
 
+import java.util.List;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import jdbc.dto.EmpDto;
 import jdbc.dto.MenuDto;
+import jdbc.mapper.MenuMapper;
 import jdbc.util.JdbcHelper;
 
 public class MenuDao {
@@ -39,4 +41,23 @@ public class MenuDao {
 		Object[] data = {menuNo};
 		return jdbcTemplate.update(sql,data)>0;
 	}
+	
+	//목록메소드
+	public List<MenuDto> selectlist(){
+		JdbcTemplate jdbcTemplate = JdbcHelper.getJdbcTemplate();
+		String sql = "select * from menu order by menu_no asc";
+		MenuMapper mapper = new MenuMapper();
+		return jdbcTemplate.query(sql, mapper);
+	}
+	
+	//상세메소드
+	public MenuDto selectOne(int menuNo) {
+		JdbcTemplate jdbcTemplate = JdbcHelper.getJdbcTemplate();
+		String sql = "select * from menu where menu_no=?";
+		Object[] data = {menuNo};
+		MenuMapper mapper = new MenuMapper();
+		List<MenuDto> list = jdbcTemplate.query(sql, mapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
 }

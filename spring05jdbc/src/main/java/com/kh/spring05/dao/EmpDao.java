@@ -14,7 +14,7 @@ public class EmpDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	private EmpMapper empMapper;
+	private EmpMapper mapper;
 	
 	public void insert(EmpDto dto) {
 		String sql = "insert into emp ("

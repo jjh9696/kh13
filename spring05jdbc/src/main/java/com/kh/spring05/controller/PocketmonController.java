@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.spring05.dao.PocketmonDao;
 import com.kh.spring05.dto.PocketmonDto;
 
-import org.springframework.web.bind.annotation.RequestMethod;
-
 
 @RestController
 @RequestMapping("/pocketmon")//공용주소 http://localhost:8080/pocketmon/insert~

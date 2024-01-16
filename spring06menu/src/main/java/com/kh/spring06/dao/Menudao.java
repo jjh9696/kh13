@@ -30,6 +30,7 @@ public class Menudao {
 		};
 		jdbcTemplate.update(sql,data);
 	}
+	
 	public boolean update(MenuDto dto) {
 		String sql = "update menu "
 				+ "set menu_name_kor=?, menu_name_eng=?, menu_type=?, menu_price=? "
@@ -38,4 +39,11 @@ public class Menudao {
 				dto.getMenuType(), dto.getMenuPrice(), dto.getMenuNo()};
 		return jdbcTemplate.update(sql,data)>0;
 	}
+	
+	public boolean delete(int menuNo) {
+		String sql="delete menu where menu_no=?";
+		Object[] data = {menuNo};
+		return jdbcTemplate.update(sql,data)>0;
+	}
+	
 }

@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.spring06.dao.Menudao;
 import com.kh.spring06.dto.MenuDto;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/menu")
@@ -44,6 +47,17 @@ public class MenuController {
 			return "존재하지 않는 메뉴 번호";
 		}
 	}
+	
+	@RequestMapping("/delete")
+	public String delete (@RequestParam int menuNo) {
+		if(dao.delete(menuNo)) {
+			return "메뉴 삭제 완료";
+		}
+		else {
+			return "존재하지 않는 메뉴";
+		}
+	}
+	
 	
 	
 }

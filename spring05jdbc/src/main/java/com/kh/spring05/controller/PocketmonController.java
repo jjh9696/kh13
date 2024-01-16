@@ -60,6 +60,7 @@ public class PocketmonController {
 	
 	//업그레이드
 	//-DB처리를 DAO에게 전담하여 처리
+	//-위에꺼는 필요없고 아래부터 보면 됨 (없어도 돌아감)
 	
 	@Autowired
 	private PocketmonDao dao;
@@ -69,6 +70,19 @@ public class PocketmonController {
 		dao.insert(dto);
 		return "포켓몬스터 등록 완료";
 	}
+	
+	@RequestMapping("/edit")
+	public String edit(@ModelAttribute PocketmonDto dto) {
+		boolean result = dao.update(dto);
+		if(result) {
+			
+			return "포켓몬 수정 완료";
+		}
+		else {
+			return "존재하지 않는 포켓몬스터 번호";
+		}
+	}
+	
 	
 	
 }

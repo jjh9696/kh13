@@ -34,6 +34,18 @@ public class EmpController {
 	}
 
 
+	@RequestMapping("/edit")
+	public String edit(@ModelAttribute EmpDto dto) {
+		boolean result = dao.update(dto);
+		if(result) {
+			
+			return "직원 수정 완료";
+		}
+		else {
+			return "존재하지 않는 직원 번호";
+		}
+	}
+	
 	
 	
 	

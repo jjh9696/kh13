@@ -33,6 +33,17 @@ public class MenuController {
 		return "메뉴 등록 완료";
 	}
 	
+	@RequestMapping("/edit")
+	public String edit(@ModelAttribute MenuDto dto) {
+		boolean result = dao.update(dto);
+		if(result) {
+			
+			return "메뉴 수정 완료";
+		}
+		else {
+			return "존재하지 않는 메뉴 번호";
+		}
+	}
 	
 	
 }

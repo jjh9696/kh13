@@ -27,7 +27,7 @@ public class PocketmonDto {
 	}
 	@Override
 	public String toString() {
-		return "pocketmonDto [pocketmonNo=" + pocketmonNo + ", pocketmonName=" + pocketmonName + ", pocketmonType="
+		return "포켓몬 번호=" + pocketmonNo + ", 포켓몬 이름=" + pocketmonName + ", 포켓몬 타입="
 				+ pocketmonType + "]";
 	}
 	

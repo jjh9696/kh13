@@ -15,4 +15,29 @@ public class HtmlController {
 	public String image() {
 		return "/WEB-INF/views/image.jsp";
 	}
+	
+	@RequestMapping("/snslogin")
+	public String snslogin() {
+		return "/WEB-INF/views/snslogin.jsp";
+	}
+	
+	@RequestMapping("/dummy")
+	public String dummy() {
+		return "/WEB-INF/views/dummy.jsp";
+	}
+	
+	@RequestMapping("/link")
+	public String link() {
+		return "/WEB-INF/views/link.jsp";
+	}
+	
+	@RequestMapping("/realtime")
+	public String realtime() {
+		return "/WEB-INF/views/realtime.jsp";
+	}
+	
+	
+	
+	
+	
 }

@@ -34,5 +34,4 @@ public class MenuController {
 		return "/WEB-INF/views/menu/insertComplete.jsp";
 	}
 	
-	
 }

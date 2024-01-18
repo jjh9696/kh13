@@ -25,7 +25,9 @@ public class PocketmonController {
 			@ModelAttribute PocketmonDto dto
 			) {
 		dao.insert(dto);
-		return "redirect:insert3";//리다이렉트(다른 주소로 강제 이동)
+		return "redirect:insert3";//리다이렉트(다른 주소로 강제 이동) //상대경로
+//		return "redirect:/pocketmon/insert3"; //절대경로
+		
 	}
 	
 	@RequestMapping("/insert3")

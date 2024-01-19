@@ -31,19 +31,22 @@
 	<h2>n은 홀수입니다</h2>
 </c:if>
 
+
 <%--
 	그룹 조건을 사용하고 싶다면 <c:choose>를 사용한다
 	-<c:when>은 원하는 개수만큼 배치가 가능하며 test로 조건식을 작성(EL)
 	-<c:otherwise>는 마지막에 1개만 배치가 가능하며 나머지 경우를 처리
 --%>
 <c:choose>
-	<c:when test="test=${param.n%2==0}">
+	<c:when test="${param.n % 2 == 0}">
 		<h2>n은 짝수입니다</h2>
 	</c:when>
 	<c:otherwise>
 		<h2>n은 홀수입니다</h2>
 	</c:otherwise>
 </c:choose>
+
+
 
 <h1>JSTL을 이용한 반복 코드</h1>
 

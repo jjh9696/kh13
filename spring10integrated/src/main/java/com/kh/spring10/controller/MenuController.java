@@ -37,31 +37,32 @@ public class MenuController {
 		return "/WEB-INF/views/menu/insertComplete.jsp";
 	}
 	
-	//수정
-	@GetMapping("/change")
-    public String change(@RequestParam int menuNo, Model model) {
-		MenuDto dto = dao.selectOne(menuNo);
-        model.addAttribute("dto",dto);
-        return "/WEB-INF/views/menu/change.jsp";
-    }
-	
-	@PostMapping("/change")
-	public String change(@ModelAttribute MenuDto dto) {
-		if(dao.update(dto)) {
+	//수정페이지
+		@GetMapping("/change")
+		public String change(Model model, @RequestParam int menuNo) {
+			MenuDto dto = dao.selectOne(menuNo);//번호에 대한 메뉴 조회
+			if(dto == null) {//없는 메뉴면
+				return "redirect:changeFail";//실패 페이지로 강제이동
+			}
+			else {//있는 메뉴면
+				model.addAttribute("dto", dto);//JSP로 메뉴정보를 전달
+				return "/WEB-INF/views/menu/change.jsp";//수정화면을 연결
+			}
+		}
+		
+		@PostMapping("/change")
+		public String change(@ModelAttribute MenuDto dto) {
+			dao.update(dto);
 			return "redirect:changeSuccess";
 		}
-		else {
-			return "redirect:changeFail";
+
+		@RequestMapping("/changeSuccess")
+		public String changeSuccess() {
+			return "/WEB-INF/views/menu/changeSuccess.jsp";
 		}
-	}
-	
-	@RequestMapping("/changeSuccess")
-	public String changeSuccess() {
-		return "/WEB-INF/views/menu/changeSuccess.jsp";
-	}
-	
-	@RequestMapping("/changeFail")
-	public String changeFail() {
-		return "/WEB-INF/views/menu/changeFail.jsp";
-	}
+
+		@RequestMapping("/changeFail")
+		public String changeFail() {
+			return "/WEB-INF/views/menu/changeFail.jsp";
+		}
 }

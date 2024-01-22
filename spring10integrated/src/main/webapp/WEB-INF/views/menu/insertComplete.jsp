@@ -2,4 +2,5 @@
     pageEncoding="UTF-8"%>
 
     <h1>메뉴 등록 완료!</h1>
-    <h2><a href="insert">다시 등록하기</a></h2>
+    <h2><a href="list">목록보기</a></h2>
+    <h2><a href="insert">다시 등록하기</a></h2>  

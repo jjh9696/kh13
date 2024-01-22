@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <h1>직원 목록</h1>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<!--     <h1>직원 목록</h1> -->
     
 <!-- <!--     검색 --> 
 <!-- 	<form action="list" method = "get"> -->
@@ -32,7 +34,7 @@
 		<h1>사원 검색</h1>
 	</c:when>
 	<c:otherwise>
-		<h1>사원 목록</h1>
+		<h1>사원 목록 <a href="insert"> +신규등록</a></h1>
 	</c:otherwise>
 </c:choose>
 
@@ -88,10 +90,13 @@
 		<c:forEach var="dto" items="${list}">
 		<tr>
 			<td>${dto.empNo}</td>			
-			<td>${dto.empName} </td>			
+			<td><a href="detail?empNo=${dto.empNo}">${dto.empName}</a> </td>			
 			<td>${dto.empDept}</td>			
 			<td>${dto.empDate}</td>			
-			<td>${dto.empSal}</td>			
+			<td><fmt:formatNumber value="${dto.empSal}" pattern="#,##0"/>원</td>		
+			<td><a href="detail?empNo=${dto.empNo}">이동</a></td>
+			
+			
 		</tr>
 		</c:forEach>
 	</tbody>

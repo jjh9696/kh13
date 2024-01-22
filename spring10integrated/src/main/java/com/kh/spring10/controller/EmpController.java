@@ -74,7 +74,8 @@ public class EmpController {
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute EmpDto dto) {
 		if(dao.update(dto)) {
-			return "redirect:editSuccess";
+//			return "redirect:editSuccess";
+			return "redirect:detail?empNo="+dto.getEmpNo();
 		}
 		else {
 			return "redirect:editFail";
@@ -124,6 +125,23 @@ public class EmpController {
 		model.addAttribute("isSearch", isSearch);
 		model.addAttribute("list", list);
 		return "/WEB-INF/views/emp/list2.jsp";
+	}
+	
+	//상세
+	@RequestMapping("/detail")
+	public String detail(@RequestParam int empNo, Model model) {
+		EmpDto dto = dao.selectOne(empNo);
+		model.addAttribute("dto", dto);
+		return "/WEB-INF/views/emp/detail.jsp";
+	}
+	
+	//삭제
+	@RequestMapping("/delete")
+	public String delete(@RequestParam int empNo) {
+		dao.delete(empNo);
+		return "redirect:list"; //상대
+//		return "redirect:/emp/list"; //절대
+//		return "/WEB-INF/views/emp/list.jsp"; 이거 안쓰게 조심
 	}
 	
 	

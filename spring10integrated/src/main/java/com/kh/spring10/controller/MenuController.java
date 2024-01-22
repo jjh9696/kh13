@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.spring10.dao.Menudao;
 import com.kh.spring10.dto.MenuDto;
@@ -55,7 +56,8 @@ public class MenuController {
 		@PostMapping("/change")
 		public String change(@ModelAttribute MenuDto dto) {
 			dao.update(dto);
-			return "redirect:changeSuccess";
+//			return "redirect:changeSuccess";//수정 성공 페이지
+			return "redirect:detail?menuNo="+dto.getMenuNo();
 		}
 
 		@RequestMapping("/changeSuccess")
@@ -78,7 +80,23 @@ public class MenuController {
 			model.addAttribute("list", list);
 			
 			return "/WEB-INF/views/menu/list.jsp";
-			
 		
 		}
+		
+		//상세
+		@RequestMapping("/detail")
+		public String detail(@RequestParam int menuNo, Model model) {
+			MenuDto dto = dao.selectOne(menuNo);
+			model.addAttribute("dto", dto);
+			return "/WEB-INF/views/menu/detail.jsp";
+			
+		}
+		
+		//삭제
+		@RequestMapping("/delete")
+		public String delete(@RequestParam int menuNo) {
+			dao.delete(menuNo);
+			return "redirect:list";
+		}
+		
 }

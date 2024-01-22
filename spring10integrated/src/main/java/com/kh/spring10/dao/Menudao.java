@@ -53,9 +53,17 @@ public class Menudao {
 		return jdbcTemplate.query(sql, mapper);
 	}
 	
-	public List<MenuDto> selectList(String column, String keyword){
-		String sql = "select * from menu where instr("+column+",?)>0 "
-				+ "order by "+column+" asc, menu_no asc";
+//	public List<MenuDto> selectList(String column, String keyword){
+//		String sql = "select * from menu where instr("+column+",?)>0 "
+//				+ "order by "+column+" asc, menu_no asc";
+//		Object[] data = {keyword};
+//		return jdbcTemplate.query(sql, mapper, data);
+//	}
+	public List<MenuDto> selectList(String column, String keyword) {
+		String sql = "select * from menu "
+//						+ "where instr("+column+", ?) > 0 "//대소문자 구별
+						+ "where instr(upper("+column+"), upper(?)) > 0 "//대소문자 무시
+						+ "order by "+column+" asc, menu_no asc";
 		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, mapper, data);
 	}
@@ -66,4 +74,5 @@ public class Menudao {
 		List<MenuDto> list= jdbcTemplate.query(sql, mapper, data);
 		return list.isEmpty()? null : list.get(0);
 	}
+	
 }

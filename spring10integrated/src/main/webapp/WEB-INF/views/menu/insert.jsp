@@ -26,4 +26,5 @@
     	<br> <br>
     	메뉴가격 <input name="menuPrice" type="text" required> <br> <br>
     	<button>메뉴등록</button>
+    	<a href="list">목록 보기</a>
     </form>

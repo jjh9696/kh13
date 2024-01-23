@@ -3,6 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <h1>직원 목록</h1>
     
+    <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+    
 <!-- <!--     검색 --> -->
 <!-- 	<form action="list" method = "get"> -->
 <!-- 		<select name="column"> -->
@@ -93,3 +95,5 @@
 		&lt;${dto.empSal}원&gt;
 	</h1>
 </c:forEach>
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

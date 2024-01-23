@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
     <h1>포켓몬 목록
     	<a href="insert1">+신규등록</a>
     </h1>
@@ -24,4 +27,6 @@
     	<a href="detail?pocketmonNo=${dto.pocketmonNo}">이동</a>
     	</h2>
     </c:forEach>
+    
+    <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
     

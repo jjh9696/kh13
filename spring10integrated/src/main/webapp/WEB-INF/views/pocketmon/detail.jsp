@@ -7,6 +7,8 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
 <c:choose>
 	<c:when test="${dto != null}">
 		<h1>몬스터 정보</h1>
@@ -35,3 +37,5 @@
 		<h1>존재하지 않는 포켓몬스터 번호</h1>
 	</c:otherwise>
 </c:choose>
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

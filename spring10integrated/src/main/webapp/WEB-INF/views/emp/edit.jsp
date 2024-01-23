@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 ${dto}
     <h1>직원 정보 수정</h1>
@@ -12,3 +14,5 @@ ${dto}
     	급여 <input type="number" name=empSal required value="${dto.empSal}"><br><br>
     	<button>정보 수정</button>
     </form>
+    
+    <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

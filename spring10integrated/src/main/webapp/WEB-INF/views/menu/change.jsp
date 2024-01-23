@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 ${dto}
     <h1>메뉴 정보 수정</h1>
     
@@ -11,3 +13,5 @@ ${dto}
     	메뉴가격 <input type="number" name=menuPrice required value="${dto.menuPrice}"><br><br>
     	<button>정보 수정</button>
     </form>
+    
+    <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

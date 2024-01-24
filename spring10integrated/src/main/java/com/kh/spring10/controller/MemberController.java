@@ -2,6 +2,7 @@ package com.kh.spring10.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,6 +62,10 @@ public class MemberController {
 		if(isValid) {
 			//세션에 데이터 추가
 			session.setAttribute("loginId",findDto.getMemberId());
+			
+			//최종 로그인시각 갱신
+			memberDao.updateMemberLogin(findDto.getMemberId());
+			
 			return "redirect:/";
 		}
 		else {
@@ -95,6 +100,71 @@ public class MemberController {
 		session.removeAttribute("loginId");
 		return "redirect:/";	
 	}
+	
+	//마이페이지
+	//-(중요) 내 아이디는 HttpSession에 있다
+	//-그리고 화면에 정보를 표시해야 한다
+	@RequestMapping("/mypage")
+	public String mypage(Model model, HttpSession session) {
+		//1. 세션에 저장된 아이디를 꺼낸다
+		String loginId=(String)session.getAttribute("loginId");
+		//2. 아이디에 맞는 정보를 조회한다
+		MemberDto memberDto = memberDao.selectOne(loginId);
+		//3. 화면에 조회한 정보를 전달한다
+		model.addAttribute("memberDto",memberDto);
+		//4. 연결된 화면을 반환한다
+		return "/WEB-INF/views/member/mypage.jsp";
+	}
+	
+	@GetMapping("/password")
+	public String password() {
+		return "/WEB-INF/views/member/password.jsp";
+		
+	}
+	@PostMapping("/password")
+	public String password(@RequestParam String oldPw, 
+							@RequestParam String newPw,
+							HttpSession session) {
+		String loginId=(String)session.getAttribute("loginId");
+		MemberDto findDto = memberDao.selectOne(loginId);
+		boolean isValid = findDto !=null 
+				&& oldPw.equals(findDto.getMemberPw());
+		if(isValid) {
+			MemberDto memberDto=memberDao.updateMemberPw(newPw);
+			return "/member/passwordFinish.jsp";
+			
+		}
+		else {
+			return "redirect:password?error";
+		}
+	}
+
+		
+
+//		public String login(@ModelAttribute MemberDto inputDto, HttpSession session) {
+//			//사용자가 입력한 아이디로 회원정보를 조회한다
+//			MemberDto findDto = memberDao.selectOne(inputDto.getMemberId());
+//			//로그인 가능 여부를 판정
+//			boolean isValid = findDto !=null 
+//					&& inputDto.getMemberPw().equals(findDto.getMemberPw());
+//					//findDto !=null(아이디가 있으면)
+//					//inputDto.getMemberPw()(사용자가 입력한 비밀번호)
+//					//findDto.getMemberPw()(DB에 저장된 비밀번호)
+//			//결과에 따라 다른 처리
+//			if(isValid) {
+//				//세션에 데이터 추가
+//				session.setAttribute("loginId",findDto.getMemberId());
+//				
+//				//최종 로그인시각 갱신
+//				memberDao.updateMemberLogin(findDto.getMemberId());
+//				
+//				return "redirect:/";
+//			}
+//			else {
+//				return "redirect:login?error";//로그인 실패
+//			}
+//			
+//		}		
 	
 	
 }

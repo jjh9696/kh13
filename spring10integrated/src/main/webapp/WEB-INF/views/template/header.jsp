@@ -48,13 +48,11 @@
 		<c:choose>
 			<c:when test="${sessionScope.loginId != null}">
 				<a href="/member/logout">로그아웃</a>
-				<a href="">내정보</a>
+				<a href="/member/mypage">내정보</a>
 			</c:when>
 			<c:otherwise>
 				<a href="/member/join">회원가입</a>
 				<a href="/member/login">로그인</a>
-	<!-- 		<a href="">로그아웃</a> -->
-	<!-- 		<a href="">내정보</a> -->
 			</c:otherwise>
 		</c:choose>
 	</div>

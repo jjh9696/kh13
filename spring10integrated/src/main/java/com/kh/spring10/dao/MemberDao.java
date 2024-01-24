@@ -60,7 +60,7 @@ public class MemberDao {
 		return jdbcTemplate.update(sql, data)>0;
 	}
 	
-	//삭제 Test05
+	//삭제 Test05 (회원탈퇴, 삭제/Delete)
 	public boolean delete (String memberId) {
 		String sql = "delete member where member_id=?";
 		Object[] data = {memberId};
@@ -90,4 +90,12 @@ public class MemberDao {
 		return jdbcTemplate.query(sql, mapper, data);
 	}
 	
+	//최종로그인시각 변경(수정, Update)
+	public boolean updateMemberLogin(String memberId) {
+		String sql="update member set "
+				+ "member_login=sysdate "
+				+ "where member_id=?";
+		Object data[]= {memberId};
+		return jdbcTemplate.update(sql, data)>0;
+	}
 }

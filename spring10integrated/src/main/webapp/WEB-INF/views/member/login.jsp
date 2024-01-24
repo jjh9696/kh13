@@ -7,7 +7,7 @@
 	<h1>로그인</h1>
 	
 	<c:if test="${param.error != null}">
-		<h3 style="color:red"; style="backgroun-color:blue";>로그인 정보가 일치하지 않습니다</h3>
+		<h3 style="color:red">로그인 정보가 일치하지 않습니다</h3>
 	</c:if>
 	
     <form action="login" method="post">

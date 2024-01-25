@@ -101,10 +101,10 @@ public class MemberDao {
 	
 	//회원이 자신의 정보를 변경(수정, Update)
 	public boolean updateMember(MemberDto memberDto) {
-		String sql="updat member set "
+		String sql="update member set "
 				+ "member_nick=?, member_email=?, member_birth=?, "
 				+ "member_contact=?, member_post=?, "
-				+ "member_address1=?, member_address2"
+				+ "member_address1=?, member_address2=? "
 				+ "where member_id=?";
 		Object[] data= {
 				memberDto.getMemberNick(), memberDto.getMemberEmail(), 

@@ -4,15 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 등록 완료</title>
+<title>비밀번호 변경 완료</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
  
-	<h1>회원 등록 완료!</h1>
-	<p>
-		환영합니다!
-	</p>	
+	<h1>비밀번호 변경 완료!</h1>
+
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 </body>
 </html>

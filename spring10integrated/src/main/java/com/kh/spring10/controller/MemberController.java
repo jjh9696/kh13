@@ -194,7 +194,34 @@ public class MemberController {
 			return "redirect:change?error";
 		}
 	}
-
 	
+	//회원탈퇴
+	@GetMapping("/exit")
+	public String exit() {
+		return "/WEB-INF/views/member/exit.jsp";
+	}
+
+	@PostMapping("/exit")
+	public String exit(@RequestParam String memberPw, HttpSession session) {
+		String loginId = (String)session.getAttribute("loginId");
+		
+		MemberDto findDto = memberDao.selectOne(loginId);
+		boolean isValid = findDto.getMemberPw().equals(memberPw);
+		
+		if(isValid) {
+			memberDao.delete(loginId);//회원탈퇴
+			session.removeAttribute("loginId");//로그아웃
+			return "redirect:exitFinish";
+		}
+		else {
+			return"redirect:exit?error";
+		}
+		
+	}
+	
+	@RequestMapping("/exitFinish")
+	public String exitFinish() {
+		return "/WEB-INF/views/member/exitFinish.jsp";
+	}
 	
 }

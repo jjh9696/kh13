@@ -22,21 +22,22 @@ public class BoardDao {
 	public void insert(BoardDto boardDto) {
 		String sql = "insert into board("
 				+ "board_no, board_title, board_content, "
-				+ "board_writer, board_wtime, board_etime"
-				+ ") values(board_seq.nextval, ?, ?, ?, ?, ?)";
+				+ "board_writer"
+				+ ") values(board_seq.nextval, ?, ?, ?)";
 		Object[] data= {boardDto.getBoardTitle(), boardDto.getBoardContent(), 
-				boardDto.getBoardWriter(), boardDto.getBoardWtime(), 
-				boardDto.getBoardEtime()
+				boardDto.getBoardWriter()
 		};
 		jdbcTemplate.update(sql,data);
 	}
 	
 	//게시글 수정
 	public boolean update(BoardDto boardDto) {
-		String sql = "update board set "
-				+ "board_title=?, board_content=?, board_etime=?";
+		String sql = "update board set " //작성자 넣어줘야하나
+				+ "board_title=?, board_content=?, board_etime=sysdate, "
+				+ "board_witer";
 		Object[] data = {
-				boardDto.getBoardTitle(), boardDto.getBoardContent(), boardDto.getBoardEtime()
+				boardDto.getBoardTitle(), boardDto.getBoardContent(), 
+				boardDto.getBoardWriter()
 		};
 		return jdbcTemplate.update(sql,data)>0;
 	}
@@ -50,7 +51,7 @@ public class BoardDao {
 	
 	//게시글 목록 조회
 	public List<BoardDto> selectList(){
-		String sql = "select * from board order by board_no=? desc";
+		String sql = "select * from board order by board_no desc";
 		return jdbcTemplate.query(sql, boardMapper);
 	}
 	

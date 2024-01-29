@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring10.dto.MenuDto;
 import com.kh.spring10.mapper.MenuMapper;
+import com.kh.spring10.mapper.StatMapper;
+import com.kh.spring10.vo.StatVO;
 
 @Repository
 public class Menudao {
@@ -75,4 +77,14 @@ public class Menudao {
 		return list.isEmpty()? null : list.get(0);
 	}
 	
+	@Autowired
+	private StatMapper statMapper;
+	
+	//변종메소드 - 유형별 메뉴 개수 출력
+	public List<StatVO> statByType(){
+		String sql = "select menu_type 항목, count(*) 개수 "
+				+ "from menu group by menu_type "
+				+ "order by 개수 desc, menu_type asc";
+		return jdbcTemplate.query(sql, statMapper);
+	}
 }

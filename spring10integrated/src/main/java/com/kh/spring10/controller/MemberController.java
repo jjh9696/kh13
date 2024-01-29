@@ -62,6 +62,7 @@ public class MemberController {
 		if(isValid) {
 			//세션에 데이터 추가
 			session.setAttribute("loginId",findDto.getMemberId());
+			session.setAttribute("loginLevel", findDto.getMemberLevel());
 			
 			//최종 로그인시각 갱신
 			memberDao.updateMemberLogin(findDto.getMemberId());
@@ -79,7 +80,9 @@ public class MemberController {
 	//-로그인 때 저장한 세션의 데이터만 삭제 처리
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute("loginId");
+		session.removeAttribute("loginId");//세션의 값 삭제
+		session.removeAttribute("loginLevel");//세션의 값 삭제
+//		session.invalidate();//세선 삭제(비추천) 다음 로그인 시 새로운 사용자로 인식되어 데이터가 꼬일 수 있다
 		return "redirect:/";
 	}
 	

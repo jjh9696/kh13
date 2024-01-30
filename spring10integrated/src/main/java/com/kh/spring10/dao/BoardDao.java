@@ -92,7 +92,7 @@ public class BoardDao {
 	
 	//게시글 상세 조회
 	public BoardDto selectOne(int boardNo) {
-		String sql = "select * from board where board_no=?";
+		String sql = "select * from board where board_no = ?";
 		Object[] data = {boardNo};
 		List<BoardDto> list = jdbcTemplate.query(sql, boardMapper, data);
 		return list.isEmpty() ? null : list.get(0);

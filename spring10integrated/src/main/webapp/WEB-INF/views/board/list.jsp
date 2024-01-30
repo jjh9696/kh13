@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
     <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
     
@@ -19,22 +20,26 @@
     </form>
     
 <!--     목록 -->
-	<table border="1" width="300">
+	<table border="1" width="500">
     <thead>
 		<tr>
 			<th>번호</th>
-			<th>제목</th>
+			<th width=40%>제목</th>
 			<th>작성자</th>
+			<th>작성일</th>
+			<th>조회수</th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody align="center">
 		<c:forEach var="boardDto" items="${list}">
 		<tr>
-			<td>${boardDto.boardNo }</td>
-			<td>
-			<a href="detail?boardTitle=${boardDto.boardTitle }">${boardDto.boardTitle }</a>
+			<td>${boardDto.boardNo}</td>
+			<td align="left">
+			<a href="detail?boardNo=${boardDto.boardNo}">${boardDto.boardTitle }</a>
 			</td>
-			<td>${boardDto.boardWriter }</td>
+			<td>${boardDto.boardWriterStr}</td>
+			<td>${boardDto.boardWtimeStr}</td>
+			<td>${boardDto.boardReadCount }</td>
 		</tr>
 		</c:forEach>
 			

@@ -40,8 +40,10 @@ public class BoardController {
 		String loginId=(String) session.getAttribute("loginId");
 		MemberDto memberDto = memberDao.selectOne(loginId);
 		model.addAttribute("memberDto",memberDto);
+		int seq = boardDao.getSeq();
+		boardDto.setBoardNo(seq);
 		boardDao.insert(boardDto);
-		return "redirect:detail?boardNo="+boardDto.getBoardNo(); 
+		return "redirect:detail?boardNo="+seq; 
 	}
 	
 	//수정
@@ -80,6 +82,11 @@ public class BoardController {
 	public String detail(@RequestParam int boardNo, Model model) {
 		BoardDto boardDto = boardDao.selectOne(boardNo);
 		model.addAttribute("boardDto", boardDto);
+		//조회한 게시글 정보에 있는 회원 아이디로 작성자 정보를 불러와서 첨부
+		if(boardDto.getBoardWriter() != null) {
+			MemberDto memberDto = memberDao.selectOne(boardDto.getBoardWriter());
+			model.addAttribute("memberDto",memberDto);
+		}
 		return "/WEB-INF/views/board/detail.jsp";
 	}
 	

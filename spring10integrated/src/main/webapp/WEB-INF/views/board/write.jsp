@@ -6,7 +6,7 @@
     <h1>게시글 작성</h1>
     
     <form action="write" method="post">
-    	작성자 <input type="text" name="boardWriter" value="${sessionScope.loginId}" readonly>
+    	작성자 <input type="text" name="boardWriter" value="${sessionScope.loginId}" readonly> <br> <br>
     	제목 <input name="boardTitle" type="text" required> <br> <br>
     	내용 <input name="boardContent" type="text" required> <br> <br>
     	<button>작성</button>

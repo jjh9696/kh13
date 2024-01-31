@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-    <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-    
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+<h1>${boardDto.boardNo}번 글 보기</h1>
+
 <table border="1" width="800">
 	<tr>
 		<td>
@@ -33,7 +34,7 @@
 	</tr>
 	<tr>
 		<td>
-			조회수 ${boardDto.boardReadCount} 
+			조회수 ${boardDto.boardReadcount} 
 			댓글 ? 
 			<br>
 			<fmt:formatDate value="${boardDto.boardWtime}" 
@@ -41,7 +42,8 @@
 		</td>
 	</tr>
 </table>
-    
+
+
     <a href="write">글 작성</a>
     <a href="edit?boardNo=${boardDto.boardNo }">글 수정</a>
     <a href="delete?boardNo=${boardDto.boardNo }">글 삭제</a>

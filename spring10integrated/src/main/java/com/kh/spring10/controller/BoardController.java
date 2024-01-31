@@ -1,7 +1,5 @@
 package com.kh.spring10.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,38 +44,20 @@ public class BoardController {
 		return "redirect:detail?boardNo="+seq; 
 	}
 	
-	//수정
-	@GetMapping("/edit")
-	public String edit(@RequestParam int boardNo, Model model, 
-						HttpSession session) {
-		String loginId=(String)session.getAttribute("loginId");
-		MemberDto memberDto = memberDao.selectOne(loginId);
-		model.addAttribute("memberDto",memberDto);
-		BoardDto boardDto = boardDao.selectOne(boardNo);
-		model.addAttribute("boardDto", boardDto);
-		return "/WEB-INF/views/board/edit.jsp";
-	}
-	
-	@PostMapping("/edit")
-	public String edit(@ModelAttribute BoardDto boardDto) {
-		boardDao.update(boardDto);
-		return "redirect:detail?boardNo="+boardDto.getBoardNo();
-	}
-	
-	//목록
 	@RequestMapping("/list")
-	public String list(@RequestParam(required = false)String column,
-						@RequestParam(required = false)String keyword,
-						Model model) {
-		boolean isSearch = column !=null && keyword !=null;
-		List<BoardDto> list = isSearch ? 
-				boardDao.selectList(column, keyword) : boardDao.selectList();
-		model.addAttribute("list", list);
-		
+	public String list(
+			@RequestParam(required = false) String column, 
+			@RequestParam(required = false) String keyword, Model model) {
+		boolean isSearch = column != null && keyword != null;
+		if(isSearch) {
+			model.addAttribute("list", boardDao.selectList(column, keyword));
+		}
+		else {
+			model.addAttribute("list", boardDao.selectList());
+		}
 		return "/WEB-INF/views/board/list.jsp";
 	}
 	
-	//상세
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int boardNo, Model model) {
 		BoardDto boardDto = boardDao.selectOne(boardNo);
@@ -96,5 +76,21 @@ public class BoardController {
 		boardDao.delete(boardNo);
 		return "redirect:list";
 	}
+	
+	//게시글수정
+    @GetMapping("/edit")
+    public String edit(@RequestParam int boardNo, Model model) {
+        BoardDto boardDto = boardDao.selectOne(boardNo);//게시글번호조회
+        model.addAttribute("boardDto", boardDto);//화면에 넘겨
+        return "/WEB-INF/views/board/edit.jsp";
+        
+    }
+    @PostMapping("/edit")
+    public String edit(@ModelAttribute BoardDto boardDto) {
+        boardDao.update(boardDto);
+        return "redirect:detail?boardNo="+boardDto.getBoardNo();//수정한 게시글 번호 상세로 이동
+    }
+    
+    
 	
 }

@@ -3,28 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-    <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-    
-     <h1>게시글 목록 </h1> <a href="write">글 작성</a>
-    
-<!--     검색창 -->
-    <form action="list" method="get">
-    	<select name="column">
-    		<option value="board_title" ${param.column == 'board_title'
-    		 ? 'selected' : '' }>제목</option>
-    		<option value="board_writer" ${param.column == 'board_writer'
-    		 ? 'selected' : '' }>작성자</option>
-    	</select>
-    	<input type="text" name="keyword" placeholder="검색어 입력" required value="${param.keyword}">
-	<button>검색</button>
-    </form>
-    
-<!--     목록 -->
-	<table border="1" width="500">
-    <thead>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+<%-- 제목 --%>
+<h1>자유 게시판</h1>
+<p>
+	타인에 대한 무분별한 비방 또는 욕설은 경고 없이 삭제될 수 있습니다
+</p>
+
+<%-- 테이블 --%>
+<table border="1" width="800">
+	<thead>
 		<tr>
 			<th>번호</th>
-			<th width=40%>제목</th>
+			<th width="40%">제목</th>
 			<th>작성자</th>
 			<th>작성일</th>
 			<th>조회수</th>
@@ -35,16 +27,40 @@
 		<tr>
 			<td>${boardDto.boardNo}</td>
 			<td align="left">
-			<a href="detail?boardNo=${boardDto.boardNo}">${boardDto.boardTitle }</a>
+				<a href="detail?boardNo=${boardDto.boardNo}">
+					${boardDto.boardTitle}
+				</a>
 			</td>
-			<td>${boardDto.boardWriterStr}</td>
+			<%--
+			<c:choose>
+				<c:when test="${boardDto.boardWriter == null}">
+					<td>탈퇴한사용자</td>
+				</c:when>			
+				<c:otherwise>
+					<td>${boardDto.boardWriter}</td>
+				</c:otherwise>
+			</c:choose>
+			 --%>
+		 	<td>${boardDto.boardWriterStr}</td>
 			<td>${boardDto.boardWtimeStr}</td>
-			<td>${boardDto.boardReadCount }</td>
+			<td>${boardDto.boardReadcount}</td>
 		</tr>
 		</c:forEach>
-			
 	</tbody>
-	</table>
-	
-				
-    <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+</table>
+
+<%-- 네비게이터 --%>
+
+<%-- 검색창 --%>
+<form action="list" method="get">
+	<select name="column">
+		<option value="board_title" ${param.column == 'board_title' ? 'selected' : ''}>제목</option>
+		<option value="board_writer" ${param.column == 'board_writer' ? 'selected' : ''}>작성자</option>
+		<option value="board_content" ${param.column == 'board_content' ? 'selected' : ''}>내용</option>
+	</select>
+	<input type="search" name="keyword" placeholder="검색어 입력" required value="${param.keyword}">
+	<button>검색</button>
+</form>
+
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

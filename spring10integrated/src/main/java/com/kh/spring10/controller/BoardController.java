@@ -34,13 +34,12 @@ public class BoardController {
 	
 	@PostMapping("/write")
 	public String write(@ModelAttribute BoardDto boardDto, 
-						Model model, HttpSession session) {
-		String loginId=(String) session.getAttribute("loginId");
-		MemberDto memberDto = memberDao.selectOne(loginId);
-		model.addAttribute("memberDto",memberDto);
-		int seq = boardDao.getSeq();
-		boardDto.setBoardNo(seq);
-		boardDao.insert(boardDto);
+						HttpSession session) {
+		String loginId= (String)session.getAttribute("loginId");
+		boardDto.setBoardWriter(loginId);
+		int seq = boardDao.getSeq();//번호를 미리 받고
+		boardDto.setBoardNo(seq);//번호를 Dto에 넣고
+		boardDao.insert(boardDto);//구문을 실행한다
 		return "redirect:detail?boardNo="+seq; 
 	}
 	
@@ -48,13 +47,18 @@ public class BoardController {
 	@RequestMapping("/list")
 	public String list(
 			@RequestParam(required = false) String column, 
-			@RequestParam(required = false) String keyword, Model model) {
+			@RequestParam(required = false) String keyword,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "10") int size,
+			Model model) {
 		boolean isSearch = column != null && keyword != null;
-		if(isSearch) {
-			model.addAttribute("list", boardDao.selectList(column, keyword));
+		if(isSearch) {//검색이면
+			model.addAttribute("list", boardDao.selectListByPaging(column, keyword, page, size));
 		}
-		else {
-			model.addAttribute("list", boardDao.selectList());
+		else {//목록이면
+//			model.addAttribute("list", boardDao.selectList());
+			model.addAttribute("list", boardDao.selectListByPaging(page, size));
+			
 		}
 		return "/WEB-INF/views/board/list.jsp";
 	}

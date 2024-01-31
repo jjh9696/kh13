@@ -11,6 +11,11 @@
 	<tr>
 		<td>
 			${boardDto.boardTitle}
+			
+<!-- 			(추가) 수정시간 유무에 따라 수정됨 표시 -->
+			<c:if test="${boardDto.boardEtime != null }">
+				(수정됨) - ${boardDto.boardEtime}에 수정
+			</c:if>
 		</td>
 	</tr>
 	<tr>
@@ -39,14 +44,33 @@
 			<br>
 			<fmt:formatDate value="${boardDto.boardWtime}" 
 										pattern="yyyy-MM-dd HH:mm:ss"/>
+										
+			<br>
+			${boardDto.boardWtimeDiff}
+		</td>
+		
+		
+		
+	</tr>
+	<tr align="end">
+		<td>
+		    <a href="write">글 작성</a>
+		    
+		<!-- 		    
+			수정과 삭제 링크는 회원이면서 본인글이거나 관리자일 경우만 출력 
+			-본인글이란 로그인한 사용자 아이디와 게시글 작성자가 같은것
+			-관리자란 로그인한 사용자 등급이 '관리자'인 경우
+		-->
+			<c:if test="${sessionScope.loginId != null && (sessionScope.loginId == boardDto.boardWriter || sessionScope.loginLevel == '관리자')}">
+		    <a href="edit?boardNo=${boardDto.boardNo }">글 수정</a>
+		    <a href="delete?boardNo=${boardDto.boardNo }">글 삭제</a>
+			</c:if>
+		    <a href="list">글 목록</a>
 		</td>
 	</tr>
 </table>
 
 
-    <a href="write">글 작성</a>
-    <a href="edit?boardNo=${boardDto.boardNo }">글 수정</a>
-    <a href="delete?boardNo=${boardDto.boardNo }">글 삭제</a>
     
     
     <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

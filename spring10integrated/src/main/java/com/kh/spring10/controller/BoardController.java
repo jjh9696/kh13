@@ -44,6 +44,7 @@ public class BoardController {
 		return "redirect:detail?boardNo="+seq; 
 	}
 	
+	//목록
 	@RequestMapping("/list")
 	public String list(
 			@RequestParam(required = false) String column, 
@@ -58,6 +59,7 @@ public class BoardController {
 		return "/WEB-INF/views/board/list.jsp";
 	}
 	
+	//상세
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int boardNo, Model model) {
 		BoardDto boardDto = boardDao.selectOne(boardNo);
@@ -77,7 +79,7 @@ public class BoardController {
 		return "redirect:list";
 	}
 	
-	//게시글수정
+	//수정
     @GetMapping("/edit")
     public String edit(@RequestParam int boardNo, Model model) {
         BoardDto boardDto = boardDao.selectOne(boardNo);//게시글번호조회

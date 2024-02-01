@@ -94,7 +94,7 @@ public class Menudao {
 		if(pageVO.isSearch()) {//검색
 			String sql = "select * from ("
 								+ "select rownum rn, TMP.* from ("
-									+ "select * from menu"
+									+ "select * from menu "
 									+ "where instr("+pageVO.getColumn()+", ?) > 0 "
 									+ "order by menu_no desc"
 								+ ") TMP"
@@ -122,6 +122,7 @@ public class Menudao {
 		if(pageVO.isSearch()) {//검색
 			String sql = "select count(*) from menu "
 					+ "where instr("+pageVO.getColumn()+", ?)>0";
+			
 			Object[] data = {pageVO.getKeyword()};
 			return jdbcTemplate.queryForObject(sql,int.class, data);
 		}

@@ -22,6 +22,9 @@
 			<th>작성자</th>
 			<th>작성일</th>
 			<th>조회수</th>
+			<th>그룹</th>
+			<th>대상</th>
+			<th>차수</th>
 		</tr>
 	</thead>
 	<tbody align="center">
@@ -29,6 +32,17 @@
 		<tr>
 			<td>${boardDto.boardNo}</td>
 			<td align="left">
+<!-- 				제목앞에 차수만큼 띄어쓰기 처리 -->
+				<c:forEach var="i" begin="1" end="${boardDto.boardDepth }" step="1">
+					&nbsp;&nbsp;&nbsp;&nbsp;
+				</c:forEach>
+				
+<!-- 				답글일 경우만 이미지를 출력 -->
+				<c:if test="${boardDto.boardDepth > 0 }">
+					->
+				</c:if>
+
+
 				<a href="detail?boardNo=${boardDto.boardNo}">
 					${boardDto.boardTitle}
 				</a>
@@ -46,6 +60,11 @@
 		 	<td>${boardDto.boardWriterStr}</td>
 			<td>${boardDto.boardWtimeStr}</td>
 			<td>${boardDto.boardReadcount}</td>
+			
+			<td>${boardDto.boardGroup}</td>
+			<td>${boardDto.boardTarget}</td>
+			<td>${boardDto.boardDepth}</td>
+			
 		</tr>
 		</c:forEach>
 	</tbody>
@@ -92,6 +111,7 @@
 	<input type="search" name="keyword" placeholder="검색어 입력" required value="${param.keyword}">
 	<button>검색</button>
 </form>
+
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -14,6 +14,11 @@ public class BoardDto {
 	private Date boardWtime;//작성시각
 	private Date boardEtime;//편집시각
 	private int boardReadcount;//조회수
+	
+	private int boardGroup; 
+	private Integer boardTarget; //null이 가능하기 때문에 Integer로 만든다
+	private int boardDepth;
+	
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -55,6 +60,27 @@ public class BoardDto {
 	}
 	public void setBoardReadcount(int boardReadcount) {
 		this.boardReadcount = boardReadcount;
+	}
+	
+	
+	
+	public int getBoardGroup() {
+		return boardGroup;
+	}
+	public void setBoardGroup(int boardGroup) {
+		this.boardGroup = boardGroup;
+	}
+	public Integer getBoardTarget() {
+		return boardTarget;
+	}
+	public void setBoardTarget(Integer boardTarget) {
+		this.boardTarget = boardTarget;
+	}
+	public int getBoardDepth() {
+		return boardDepth;
+	}
+	public void setBoardDepth(int boardDepth) {
+		this.boardDepth = boardDepth;
 	}
 	
 	public String getBoardWriterStr() {

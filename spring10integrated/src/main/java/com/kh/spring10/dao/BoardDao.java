@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.spring10.dto.BoardDto;
 import com.kh.spring10.mapper.BoardListMapper;
 import com.kh.spring10.mapper.BoardMapper;
+import com.kh.spring10.vo.PageVO;
 
 @Repository
 public class BoardDao {
@@ -131,7 +132,6 @@ public class BoardDao {
     }
     
     //검색 + 페이징
-	//검색
 	public List<BoardDto> selectListByPaging(String column, String keyword,int page, int size) {
     	int endRow = page * size;
     	int beginRow = endRow - (size-1);
@@ -149,4 +149,64 @@ public class BoardDao {
 		Object[] data = {keyword, beginRow, endRow};
 		return jdbcTemplate.query(sql, boardListMapper, data);
 	}
+	
+	//통합 페이징
+	public List<BoardDto> selectListByPaging(PageVO pageVO){ 
+		if(pageVO.isSearch()) {//검색
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select "
+										+ "board_no, board_title, board_writer, "
+										+ "board_wtime, board_etime, board_readcount "
+									+ "from board "
+									+ "where instr("+pageVO.getColumn()+", ?) > 0 "
+									+ "order by board_no desc"
+								+ ")TMP"
+							+ ") where rn between ? and ?";
+			Object[] data = {
+					pageVO.getKeyword(), 
+					pageVO.getBeginRow(), 
+					pageVO.getEndRow()
+			};
+			return jdbcTemplate.query(sql, boardListMapper, data);
+		}
+		else {//목록
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select "
+										+ "board_no, board_title, board_writer, "
+										+ "board_wtime, board_etime, board_readcount "
+									+ "from board order by board_no desc"
+								+ ")TMP"
+							+ ") where rn between ? and ?";
+			Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, boardListMapper, data);
+		}
+	}
+	
+	//카운트 - 목록일 경우와 검색일 경우를 각각 구현
+	public int count() {
+		String sql = "Select count(*) from board";
+		return jdbcTemplate.queryForObject(sql, int.class);
+		
+	}
+	public int count(String column, String keyword) {
+		String sql = "select count(*) from board "
+				+ "where instr("+column+", ?)>0";
+		Object[] data = {keyword};
+		return jdbcTemplate.queryForObject(sql,int.class, data);
+	}
+	public int count(PageVO pageVO) {
+		if(pageVO.isSearch()) {//검색
+			String sql = "select count(*) from board "
+					+ "where instr("+pageVO.getColumn()+", ?)>0";
+			Object[] data = {pageVO.getKeyword()};
+			return jdbcTemplate.queryForObject(sql,int.class, data);
+		}
+		else {//목록
+			String sql = "Select count(*) from board";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
+	
 }

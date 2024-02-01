@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.spring10.dto.MenuDto;
 import com.kh.spring10.mapper.MenuMapper;
 import com.kh.spring10.mapper.StatMapper;
+import com.kh.spring10.vo.PageVO;
 import com.kh.spring10.vo.StatVO;
 
 @Repository
@@ -18,7 +19,7 @@ public class Menudao {
 	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	private MenuMapper mapper;
+	private MenuMapper menuMapper;
 	
 	public void insert(MenuDto dto) {
 		String sql = "insert into menu("
@@ -52,14 +53,14 @@ public class Menudao {
 	
 	public List<MenuDto> selectList(){
 		String sql = "select * from menu order by menu_no asc";
-		return jdbcTemplate.query(sql, mapper);
+		return jdbcTemplate.query(sql, menuMapper);
 	}
 	
 //	public List<MenuDto> selectList(String column, String keyword){
 //		String sql = "select * from menu where instr("+column+",?)>0 "
 //				+ "order by "+column+" asc, menu_no asc";
 //		Object[] data = {keyword};
-//		return jdbcTemplate.query(sql, mapper, data);
+//		return jdbcTemplate.query(sql, menuMapper, data);
 //	}
 	public List<MenuDto> selectList(String column, String keyword) {
 		String sql = "select * from menu "
@@ -67,13 +68,13 @@ public class Menudao {
 						+ "where instr(upper("+column+"), upper(?)) > 0 "//대소문자 무시
 						+ "order by "+column+" asc, menu_no asc";
 		Object[] data = {keyword};
-		return jdbcTemplate.query(sql, mapper, data);
+		return jdbcTemplate.query(sql, menuMapper, data);
 	}
 	
 	public MenuDto selectOne(int menuNo) {
 		String sql = " select * from menu where menu_no=?";
 		Object[] data = {menuNo};
-		List<MenuDto> list= jdbcTemplate.query(sql, mapper, data);
+		List<MenuDto> list= jdbcTemplate.query(sql, menuMapper, data);
 		return list.isEmpty()? null : list.get(0);
 	}
 	
@@ -86,5 +87,47 @@ public class Menudao {
 				+ "from menu group by menu_type "
 				+ "order by 개수 desc, menu_type asc";
 		return jdbcTemplate.query(sql, statMapper);
+	}
+	
+	//통합 페이지
+	public List<MenuDto> selectListByPaging(PageVO pageVO){
+		if(pageVO.isSearch()) {//검색
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select * from menu"
+									+ "where instr("+pageVO.getColumn()+", ?) > 0 "
+									+ "order by menu_no desc"
+								+ ") TMP"
+							+ ") where rn between ? and ?";
+			Object[] data = {
+					pageVO.getKeyword(), 
+					pageVO.getBeginRow(), 
+					pageVO.getEndRow()
+			};
+			return jdbcTemplate.query(sql, menuMapper, data);
+		}
+		else {//목록
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select * from menu "
+									+ "order by menu_no desc"
+								+ ") TMP"
+							+ ") where rn between ? and ?";
+			Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, menuMapper, data);
+		}
+	}
+	
+	public int count(PageVO pageVO) {
+		if(pageVO.isSearch()) {//검색
+			String sql = "select count(*) from menu "
+					+ "where instr("+pageVO.getColumn()+", ?)>0";
+			Object[] data = {pageVO.getKeyword()};
+			return jdbcTemplate.queryForObject(sql,int.class, data);
+		}
+		else {//목록
+			String sql = "Select count(*) from menu";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
 	}
 }

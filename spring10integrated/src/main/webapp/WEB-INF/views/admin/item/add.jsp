@@ -21,7 +21,7 @@
 	 --%>
 	
 <!-- 	이미지 <input type="file" name = "attach" required accept=".png, .jpg, .gif"> <br> <br> -->
-	이미지 <input type="file" name = "attach"  accept="image/*"> <br> <br>
+	이미지 <input type="file" name = "attach"  accept="image/*" > <br> <br>
 	<button>신규등록</button>
 </form>
 

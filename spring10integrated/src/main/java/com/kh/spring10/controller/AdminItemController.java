@@ -59,7 +59,7 @@ public class AdminItemController {
 			//[1]
 			File dir = new File(System.getProperty("user.home") , "upload");//디렉터리 객체 생성
 			dir.mkdirs();//실제 디렉터리 생성(이미 있으면 안만들어짐)
-			System.out.println("dir = " + dir.getAbsolutePath());
+//			System.out.println("dir = " + dir.getAbsolutePath());
 			
 			//[2]
 			File target = new File(dir, String.valueOf(attachNo));//파일 객체 생성
@@ -76,6 +76,7 @@ public class AdminItemController {
 			
 			attachDao.insert(attachDto);
 			
+			//연결
 			itemDao.connect(itemNo, attachNo);
 		}
 		return "redirect:add";

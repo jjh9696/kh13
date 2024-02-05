@@ -67,8 +67,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 					);
 		
 		//관리자 인터셉터 등록
-		registry.addInterceptor(adminInterceptor)
-					.addPathPatterns("/admin/**");
+//		registry.addInterceptor(adminInterceptor)
+//					.addPathPatterns("/admin/**");
 		
 		//게시글 조회수 중복방지 인터셉터 등록
 		registry.addInterceptor(boardReadcountInterceptor)

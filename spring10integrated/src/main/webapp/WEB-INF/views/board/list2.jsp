@@ -31,18 +31,19 @@
 		<c:forEach var="boardDto" items="${list}">
 		<tr>
 			<td>${boardDto.boardNo}</td>
+			<%-- 제목 칸 --%>
 			<td align="left">
-<!-- 				제목앞에 차수만큼 띄어쓰기 처리 -->
-				<c:forEach var="i" begin="1" end="${boardDto.boardDepth }" step="1">
-					&nbsp;&nbsp;&nbsp;&nbsp;
+				<%-- 제목 앞에 차수만큼 띄어쓰기 처리 --%>
+				<c:forEach var="i" begin="1" end="${boardDto.boardDepth}" step="1">
+					&nbsp;&nbsp;
 				</c:forEach>
 				
-<!-- 				답글일 경우만 이미지를 출력 -->
-				<c:if test="${boardDto.boardDepth > 0 }">
-					->
+				<%-- 답글일 경우만 이미지를 출력 --%>
+				<c:if test="${boardDto.boardDepth > 0}">
+					→
 				</c:if>
-
-
+				
+				<%-- 제목 출력 --%>
 				<a href="detail?boardNo=${boardDto.boardNo}">
 					${boardDto.boardTitle}
 				</a>
@@ -60,15 +61,13 @@
 		 	<td>${boardDto.boardWriterStr}</td>
 			<td>${boardDto.boardWtimeStr}</td>
 			<td>${boardDto.boardReadcount}</td>
-			
 			<td>${boardDto.boardGroup}</td>
 			<td>${boardDto.boardTarget}</td>
 			<td>${boardDto.boardDepth}</td>
-			
 		</tr>
 		</c:forEach>
 	</tbody>
-</table>
+</table> 
 
 <%-- 네비게이터 --%>
 <h2>
@@ -113,5 +112,7 @@
 </form>
 
 
-
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+
+
+

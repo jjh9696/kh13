@@ -15,9 +15,9 @@ public class BoardDto {
 	private Date boardEtime;//편집시각
 	private int boardReadcount;//조회수
 	
-	private int boardGroup; 
-	private Integer boardTarget; //null이 가능하기 때문에 Integer로 만든다
-	private int boardDepth;
+	private int boardGroup;//그룹번호
+	private Integer boardTarget;//원본글번호
+	private int boardDepth;//차수
 	
 	public int getBoardNo() {
 		return boardNo;
@@ -62,8 +62,6 @@ public class BoardDto {
 		this.boardReadcount = boardReadcount;
 	}
 	
-	
-	
 	public int getBoardGroup() {
 		return boardGroup;
 	}
@@ -82,7 +80,6 @@ public class BoardDto {
 	public void setBoardDepth(int boardDepth) {
 		this.boardDepth = boardDepth;
 	}
-	
 	public String getBoardWriterStr() {
 		if(boardWriter == null)
 			return "탈퇴한사용자";
@@ -109,34 +106,33 @@ public class BoardDto {
 		}
 	}
 	
-	//현재시간을 기준으로 얼마나 지난 글인지를 계산하여 반환
+	//현재시각을 기준으로 얼마나 지난 글인지를 계산하여 반환
 	public String getBoardWtimeDiff() {
 		long now = System.currentTimeMillis();
 		long before = boardWtime.getTime();
 		long gap = now - before;
-		
 		gap /= 1000;//초로 변경
 		
-		if(gap < 60) {//1분 미만은 방금 전
+		if(gap < 60) {//1분 미만은 방금 전으로 표시
 			return "방금 전";
 		}
-		else if (gap < 60*60) {//1시간 미만
+		else if(gap < 60 * 60) {//1시간 미만은 분으로 표시
 			return gap / 60 + "분 전";
 		}
-		else if (gap < 24*60*60) {//1일 미만
+		else if(gap < 24 * 60 * 60) {//1일 미만은 시간으로 표시
 			return gap / 60 / 60 + "시간 전";
 		}
-		else if (gap < 7*24*60*60) {//7일 미만
+		else if(gap < 7 * 24 * 60 * 60) {//7일 미만은 일로 표시
 			return gap / 24 / 60 / 60 + "일 전";
 		}
-		else if (gap < 30*24*60*60) {//한 달 미만
+		else if(gap < 30 * 24 * 60 * 60) {//한달 미만은 주로 표시
 			return gap / 7 / 24 / 60 / 60 + "주 전";
 		}
-		else if (gap < 1*365*24*60*60) {//1년 미만
-			return gap / 30 / 24 / 60 / 60 + "개월 전";
+		else if(gap < 1 * 365 * 24 * 60 * 60) {//1년 미만은 개월로 표시
+			return gap / 30 / 24 / 60 / 60  + "개월 전";
 		}
-		else if (gap < 10*365*24*60*60) {//10년 미만
-			return gap / 365 / 24 / 60 / 60 + "개월 전";
+		else if(gap < 10 * 365 * 24 * 60 * 60) {//10년 미만은 연으로 표시
+			return gap / 365 / 24 / 60 / 60 + "년 전";
 		}
 		else {//나머지는 오래전으로 표시
 			return "오래 전";

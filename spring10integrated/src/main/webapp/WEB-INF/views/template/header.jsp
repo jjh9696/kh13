@@ -63,6 +63,7 @@
 	<c:if test="${sessionScope.loginLevel == '관리자' }">
 		<div>
 			<a href="/admin/member/search">회원관리</a>
+			<a href="/admin/item/list">충전상품관리</a>
 			<a href="/admin/stat/pocketmon">포켓몬통계</a>
 			<a href="/admin/stat/emp">사원통계</a>
 			<a href="/admin/stat/menu">메뉴통계</a>

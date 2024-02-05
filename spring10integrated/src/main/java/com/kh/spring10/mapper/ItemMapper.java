@@ -19,10 +19,9 @@ public class ItemMapper implements RowMapper<ItemDto> {
 		itemDto.setItemName(rs.getString("item_name"));
 		itemDto.setItemPrice(rs.getInt("item_price"));
 		itemDto.setItemCharge(rs.getInt("item_charge"));
-		return null;
+		return itemDto;
 	}
 	
-	
-
-	
 }
+
+

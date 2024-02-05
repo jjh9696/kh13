@@ -1,5 +1,7 @@
 package com.kh.spring10.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,12 +10,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.spring10.dao.AttachDao;
 import com.kh.spring10.dao.MemberDao;
 import com.kh.spring10.dto.MemberDto;
+import com.kh.spring10.service.AttachService;
 
 import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.Session;
 
 
 @Controller
@@ -23,17 +27,36 @@ public class MemberController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	@Autowired
+	private AttachDao attachDao;
+	
+	@Autowired
+	private AttachService attachService;
+	
 	//회원가입
 	@GetMapping("/join")
 	public String join() {
 		return "/WEB-INF/views/member/join.jsp";
 	}
 	
+//	@PostMapping("/join")
+//	public String join(@ModelAttribute MemberDto memberDto) {
+//		memberDao.insert(memberDto);
+//		return "redirect:joinFinish";
+//	}
+	
 	@PostMapping("/join")
-	public String join(@ModelAttribute MemberDto memberDto) {
-		memberDao.insert(memberDto);
+	public String join(@ModelAttribute MemberDto memberDto,
+			@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
+			memberDao.insert(memberDto);
+
+			if(!attach.isEmpty()) {
+				int attachNo = attachService.save(attach);//파일저장+DB저장
+				memberDao.connect(memberDto.getMemberId(), attachNo);//연결
+			}
 		return "redirect:joinFinish";
 	}
+	
 	
 	@RequestMapping("/joinFinish")
 	public String joinFinish() {
@@ -212,6 +235,16 @@ public class MemberController {
 		boolean isValid = findDto.getMemberPw().equals(memberPw);
 		
 		if(isValid) {
+			//탈퇴 전에 프로필 번호를 찾아서 삭제 처리
+			try {
+				int attachNo = memberDao.findAttachNo(loginId);
+				attachService.remove(attachNo);//파일삭제+DB삭제
+				
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 			memberDao.delete(loginId);//회원탈퇴
 			session.removeAttribute("loginId");//로그아웃
 			return "redirect:exitFinish";
@@ -226,5 +259,6 @@ public class MemberController {
 	public String exitFinish() {
 		return "/WEB-INF/views/member/exitFinish.jsp";
 	}
+	
 	
 }

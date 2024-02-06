@@ -19,13 +19,6 @@
 	<title>은 문서의 제목이며 브라우저의 탭 부분에 표시됨 (그 옆에 작은 아이콘은 파비콘(Favicon))
 	
  --%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title> 나의 홈페이지 </title>
-</head>
-<body>
 	<%--
 		상단 영역
 		-홈페이지에서 가장 많이 보이는 부분
@@ -52,6 +45,7 @@
 			<c:when test="${sessionScope.loginId != null}">
 				<a href="/member/logout">로그아웃</a>
 				<a href="/member/mypage">내정보</a>
+				<a href="/point/charge">포인트충전</a>
 			</c:when>
 			<c:otherwise>
 				<a href="/member/join">회원가입</a>
@@ -95,4 +89,3 @@
 		-실질적인 홈페이지의 내용이 표시되는 영역
 		-크기는 무제한으로 늘어날 수 있음
 	 --%>
-	<div>

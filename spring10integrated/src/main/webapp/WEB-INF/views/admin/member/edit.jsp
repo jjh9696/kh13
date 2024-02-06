@@ -27,7 +27,7 @@
     	<br>
     	주소 
     	<br>
-    	<input type ="text" name = "memberPost" value = "${memberDto.memberPost }" placeholder="우편번호" >
+    		<input type ="text" name = "memberPost" value = "${memberDto.memberPost }" placeholder="우편번호" >
     	<br>
     		<input type ="text" name = "memberAddress1" value = "${memberDto.memberAddress1 }" placeholder="기본주소">
     	<br>

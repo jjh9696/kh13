@@ -5,18 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.spring10.dao.BuyDao;
 import com.kh.spring10.dao.EmpDao;
 import com.kh.spring10.dao.MemberDao;
 import com.kh.spring10.dao.Menudao;
 import com.kh.spring10.dao.PocketmonDao;
 import com.kh.spring10.dto.MemberDto;
 import com.kh.spring10.vo.StatVO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 //관리자가 이용할 수 있는 기능을 제공하는 컨트롤러
@@ -24,6 +25,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/admin")
 public class AdminController {
 
+	
+	
+	@Autowired
+	private BuyDao buyDao;
+	
 	@Autowired
 	private PocketmonDao pocketmonDao;
 	//포켓몬스터 통계
@@ -88,6 +94,8 @@ public class AdminController {
 	public String memberDetail(@RequestParam String memberId, Model model) {
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		model.addAttribute("memberDto", memberDto);
+		//회원의 구매내역을 첨부
+		model.addAttribute("buyList", buyDao.selectList(memberId));
 		return "/WEB-INF/views/admin/member/detail.jsp";
 	}
 	

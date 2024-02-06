@@ -47,7 +47,7 @@
 			</tr>
 			<tr>
 				<th>회원포인트</th>
-				<td>${memberDto.memberPoint}</td>
+				<td>${memberDto.memberPoint} point</td>
 			</tr>
 			<tr>
 				<th>가입일</th>
@@ -69,6 +69,39 @@
 		<h2><a href="/member/password">비밀번호 변경</a></h2>
 		<h2><a href="/member/change">개인정보 변경</a></h2>
 		<h2><a href="/member/exit">회원 탈퇴</a></h2>
+		
+		<hr>
+		<h1>포인트 구매 내역
+			<a href="/point/charge">추가구매</a>
+		</h1>
+		
+		
+		<table border="1" width="600">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>상품명</th>
+					<th>수량</th>
+					<th>구매금액</th>
+					<th>구매일시</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="buyDto" items="${buyList}">
+				<tr>
+					<td>${buyDto.buySerial}</td>						 
+					<td>${buyDto.itemName}</td>						 
+					<td>${buyDto.buyQty}</td>						 
+					<td>
+						<fmt:formatNumber value="${buyDto.buyTotal}" pattern="#,##0"/>
+					</td>						 
+					<td>
+						<fmt:formatDate value="${buyDto.buyTime}" pattern="yyyy-MM-dd HH:mm"/>
+					</td>
+				</tr>
+				</c:forEach>
+			</tbody>	
+		</table>
 	
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 </body>

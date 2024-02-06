@@ -5,11 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.spring10.dto.MemberDto;
 import com.kh.spring10.mapper.MemberMapper;
 import com.kh.spring10.mapper.StatMapper;
 import com.kh.spring10.vo.StatVO;
+
+import jakarta.servlet.http.HttpSession;
 
 
 //member 테이블 데이터 처리를 담당하는 클래스
@@ -161,5 +164,6 @@ public class MemberDao {
 		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 	
+
 	
 }

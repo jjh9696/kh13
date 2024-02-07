@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>네이버</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            font-family: 빙그레 메로나체, sans-serif;
+        }
+        .logo{
+            font-size: 55px;
+            display: block;
+            width: 190px;
+            margin: 50px;
+            color:#03cf5d;
+        }
+        .box{
+            display: block;
+            width: 300px;
+            font-size: 16px;
+        }
+        /*box도 있고 input도 있는 경우 */
+        .box.input{
+            padding: 0.85em;
+            border: 1px solid #b2bec3;
+            background-color: white;
+            outline: none;
+        }
+        /*조건부 선택자 focus - 클릭 했을 때*/
+        .box.input:focus{
+            border: 1px solid;
+            border-color:#03cf5d;
+        }
+        .box.btn{
+            font-size: 20px;
+            font-weight: bolder;
+            padding: 0.65em;
+            background-color: #03cf5d;
+            color: white;
+            border-radius: 8px;
+            border : 1px solid #03cf5d;
+            margin: 20px 0px;
+        }
+        .input.top{
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            border-bottom: 0px; /*none도 됨*/
+            
+        }
+        .input.bottom{
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+        .bodymid {
+            width: 350px;
+            padding: 20px; 
+            margin: 50px auto 0;
+        }
+    </style>
+</head>
+<body class="bodymid">
+    <div>
+        <!-- <h1 align="center" class="logo">NAVER</h1> -->
+        <img class="logo" src="img/naver.png" alt="naver">
+    
+        <form action="#" method="post" autocomplete="off">
+            <input class="box input top" type=plete="off" name="memberId" placeholder="아이디">
+            <input class="box input bottom" type="password" name="memberPw" placeholder="비밀번호">
+            <button class="box btn">로그인</button>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인스타 디자인</title>
+    <style>
+        /* 전체 선택자 - 모든 태그에 설정(전체규칙) */
+        *{
+            box-sizing: border-box;
+            font-family: 빙그레 메로나체, sans-serif;
+        }
+        img{
+            display: block;
+            width: 180px;
+            margin: 50px;
+        }
+        input{
+            display: block;
+            width: 300px;
+            font-size: 16px;
+            padding: 0.5em;
+            /* 
+            border-style: solid;
+            border-color: #57606f;
+            */
+            border: 1px solid #747d8c;
+            border-radius: 4px; 
+            background-color: #ecf0f1;
+            /* 
+            margin-top: 10px;
+            margin-bottom: 10px; 
+            */
+            margin: 10px 0px;
+        }
+        button{
+            display: block;
+            width: 300px;
+            font-size: 16px;
+            padding: 0.5em;
+            border-radius: 8px;
+            border : 0;
+            /* 
+            margin-top: 10px;
+            margin-bottom: 10px; 
+            */
+            margin: 20px 0px;
+            background-color: #0984e3;
+            color: white;
+        }
+        .container {
+            border: 1px solid #ccc;
+            width: 350px; /* 변경된 부분: .container의 크기 지정 */
+            padding: 20px;
+            border-radius: 8px;
+            margin: 50px auto;
+        }
+        hr{
+            color: #747d8c;
+            margin-top: 20px;
+        }
+        a{
+            color: #0984e3; 
+            text-decoration:none;
+        }
+        </style>
+</head>
+<body align="center" class="container" >
+    <div align="center" >
+    <img src="img/insta.png" alt="Instagram">
+    
+    <form action="#" method="post" autocomplete="off">
+        <input type="text" name="memberId" placeholder="전화번호, 사용자 이름 또는 이메일">
+        <input type="password" name="memberPw" placeholder="비밀번호">
+        <button>로그인</button>
+        
+    </form>
+    </div>
+    <hr>
+    <a href="#" align="center">비밀번호를 잊으셨나요?</a>
+</body>
+</html>

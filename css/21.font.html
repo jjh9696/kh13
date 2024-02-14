@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>제목을 설정하세요</title>
+    <title>폰트 스타일</title>
+    
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- 내가 구현한 스타일 -->
     <link rel="stylesheet" type="text/css" href="commons.css">
     <link rel="stylesheet" type="text/css" href="test.css">
 
@@ -11,13 +18,53 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-
+/* 
+        텍스트 디자인 
+        -word-break 설정을 통해 줄바꿈 기준을 정한다
+        -줄바꿈을 원치 않는 경우도 설정 가능하도록 구현한다
+*/
+        .dummy-text{
+            word-break: break-all;
+        }
+        .ellipsis{
+/*
+             다음 세 개의 스타일을 같이 사용하면 말줄임표 처리가 된다
+             단, 반드시 영역에 폭이 설정되어 있어야 한다
+*/
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+/* 
+        웹 폰트 설정
+*/
+        @font-face {
+            font-family: ssamanco;
+            src: url("font/BinggraeSamanco.ttf");
+        }
+        *{
+            /* font-family: ssamanco; */
+            font-family: "Noto Sans KR", sans-serif;
+        }
     </style>
 </head>
 <body>
     <div class="container w-500">
         <div class="cell center">
+            <h1>폰트 디자인</h1>
+        </div>
+        <div class="cell">
+            <h2>줄바꿈 기준 정렬</h2>
+        </div>
+        <div class="cell dummy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lacinia, mauris at venenatis aliquam, massa elit sagittis velit, sit amet ultrices ante tortor ac arcu. Morbi suscipit ornare porttitor. Cras sit amet facilisis dolor. Maecenas sed dolor a quam egestas varius sit amet sed quam. Donec id vestibulum ipsum, non cursus magna. Quisque et porta nibh. Ut pellentesque ac est ac luctus. In viverra nibh purus, at semper tortor euismod id. Quisque tristique, leo ut ultrices placerat, ligula eros dapibus lacus, at vehicula dolor erat sed elit. Vivamus sed auctor ipsum. Curabitur porttitor, ligula vitae sagittis varius, massa ligula tempus sapien, at aliquet enim erat a felis. Nunc ipsum lectus, dapibus nec iaculis sed, tincidunt vel dolor. Sed sit amet ex purus. Mauris non tellus eu magna porta gravida. Fusce vitae dignissim leo, eget finibus enim.
+        </div>
 
+        <div class="cell">
+            <h2>줄바꿈 기준 정렬</h2>
+        </div>
+        <div class="cell ellipsis">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lacinia, mauris at venenatis aliquam, massa elit sagittis velit, sit amet ultrices ante tortor ac arcu. Morbi suscipit ornare porttitor. Cras sit amet facilisis dolor. Maecenas sed dolor a quam egestas varius sit amet sed quam. Donec id vestibulum ipsum, non cursus magna. Quisque et porta nibh. Ut pellentesque ac est ac luctus. In viverra nibh purus, at semper tortor euismod id. Quisque tristique, leo ut ultrices placerat, ligula eros dapibus lacus, at vehicula dolor erat sed elit. Vivamus sed auctor ipsum. Curabitur porttitor, ligula vitae sagittis varius, massa ligula tempus sapien, at aliquet enim erat a felis. Nunc ipsum lectus, dapibus nec iaculis sed, tincidunt vel dolor. Sed sit amet ex purus. Mauris non tellus eu magna porta gravida. Fusce vitae dignissim leo, eget finibus enim.
         </div>
     </div>
 </body>

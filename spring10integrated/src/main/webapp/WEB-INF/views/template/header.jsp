@@ -43,7 +43,7 @@
 --%>
 	<%-- 템플릿 페이지는 무조건 절대경로를 써야한다 --%>
 	
-	<ul class="menu" style="width=1200px">
+	<ul class="menu" <%--style="width:1200px" --%> >
 		<li>
 			<a href="/">
 				<i class="fa-solid fa-house"></i>

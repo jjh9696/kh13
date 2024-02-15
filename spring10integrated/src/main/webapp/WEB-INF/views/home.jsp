@@ -8,8 +8,8 @@
 	<div class="cell center">
 		<h1>환영합니다!</h1>
 	</div>
-	<div class="cell">
-		<img src="https://via.placeholder.com/600x400">
+	<div class="cell center">
+		<img src="/image/cat.jpg">
 	</div>
 </div>
 

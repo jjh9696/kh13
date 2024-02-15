@@ -39,12 +39,12 @@
 				<tr>
 					<td>${dto.menuNo}</td>
 					<td class="left">
-						<a href="detail?menuNo=${dto.menuNo}">${dto.menuNameKor}</a>
+						<a class="link link-animation" href="detail?menuNo=${dto.menuNo}">${dto.menuNameKor}</a>
 						(${dto.menuNameEng})
 					</td>
 					<td>${dto.menuType}</td>
 		<%-- 			<td align="right">${dto.menuPrice}</td> --%>
-					<td align="right">
+					<td class="right">
 						<fmt:formatNumber value="${dto.menuPrice}" pattern="#,##0"/> 
 						원
 					</td>

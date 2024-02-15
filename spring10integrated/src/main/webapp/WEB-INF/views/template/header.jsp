@@ -21,8 +21,19 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>나의 홈페이지</title>
-		<link rel="stylesheet" type="text/css" href="/css/commons.css">
-		<link rel="stylesheet" type="text/css" href="/css/test.css">
+		
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+   
+    <link rel="stylesheet" type="text/css" href="commons.css">
+    <link rel="stylesheet" type="text/css" href="test.css">
+
+  
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 	</head>
 	<body>
 		<%-- 

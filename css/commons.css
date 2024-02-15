@@ -63,10 +63,12 @@
 .w-1200 { width: 1200px; }
 
 .w-100 { width:100%; }
+.w-90 { width:90%; }
 .w-75 { width:75%; }
 .w-50 { width:50%; }
 .w-33 { width:33.3333%; }
 .w-25 { width:25%; }
+.w-10 { width:10%; }
 
 /*
     입력창과 버튼 스타일
@@ -558,16 +560,16 @@ textarea.tool.tool-fixed {
         글자 색상 디자인
 */
 
-.red{color: #d63031;}
-.orange{color: #fdcb6e;}
-.yellow{color: #ffeaa7;}
-.green{color: #00b894;}
-.skyblue{color: #74b9ff;}
-.blue{color: #0984e3;}
-.purple{color: #6c5ce7;}
-.black{color: #2d3436;}
-.gray{color: #636e72;}
-.white{color: white}
+.red { color: #d63031 !important; }
+.orange { color: #fdcb6e !important;}
+.yellow { color: #ffeaa7 !important;}
+.green { color: #00b894 !important;}
+.skyblue { color: #74b9ff !important;}
+.blue {color: #0984e3 !important;}
+.purple {color: #6c5ce7 !important;}
+.black {color: #2d3436 !important;}
+.gray {color: #636e72 !important;}
+.white {color: white !important;}
 
 .ellipsis{
     /*
@@ -687,3 +689,15 @@ textarea.tool.tool-fixed {
         left: auto;
         right: 100%;
     }
+
+/* 
+        float 모듈 디자인
+        -float를 사용하고 싶다면 div에 floating-cell이라는 클래스를 부여
+        -영역이 끝나는 시점에 자동으로 clear를 수행하도록 디자인
+        -가상 선택자인 ::after를 사용하여 강제 영역 생성 후 clear 수행
+*/
+.floating-cell::after{
+    content: "";  /* 태그 종료 시점의 가상 영역을 생성하고 */
+    display: block; /* div처럼 block 상태로 만들고 */
+    clear: both; /* 사용한 float 속성을 모두 제거 */
+}

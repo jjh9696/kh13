@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>제목을 설정하세요</title>
+    <title>요기요 가게 리스트 카드 구현2</title>
 
     <!-- 구글 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,16 +21,12 @@
         .card {
             box-shadow: 0 0 1px 1px #b2bec3;
         }
-        .card > .image-wrapper {
-            width: 25%;
-            padding: 20px 15px;
-        }
-        .card > .content-wrapper {
-            width: 75%;
-            padding: 15px;
-        }
         .card > .content-wrapper > .title-wrapper {
             font-size: 24px;
+        }
+        .flex-cell.middle {
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
@@ -40,12 +36,12 @@
         <div class="cell center">
             <h1>요기요 가게 리스트 카드 구현</h1>
         </div>
-        <div class="cell floating-cell card">
-            <div class="image-wrapper">
+        <div class="cell flex-cell card">
+            <div class="w-25 flex-cell middle p-10">
                 <img src="img/짜장면.jpg" width="100%">
             </div>
-            <div class="content-wrapper">
-                <div class="title-wrapper">제목줄</div>  
+            <div class="content-wrapper width-fill p-10">
+                <div class="title-wrapper">짜장집</div>  
                 <div> 
                     <span class="yellow">
                         <i class="fa-solid fa-star"></i> 4.9

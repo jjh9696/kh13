@@ -103,16 +103,11 @@
 		            </ul>
 				</c:otherwise>
 			</c:choose>
-			
-        
-        	
+		                	
         </li>
     </ul>
-
 		
-
-
-		<div>
+		<div class="right">
 			<%--
 			<c:choose>
 				<c:when test="${sessionScope.loginId != null}">
@@ -124,9 +119,7 @@
 			</c:choose>
 			 --%>
 			
-			login = ${sessionScope.loginId != null} , 
-			loginId = ${sessionScope.loginId} ,
-			loginLevel = ${sessionScope.loginLevel}
+			${sessionScope.loginLevel}
 		</div>
 
 		<%-- 

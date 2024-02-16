@@ -11,105 +11,87 @@
 
 <style>
 
+	
 </style>
 
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 	
-	<div class="container">
-		<h1>${memberDto.memberId }님의 정보</h1>
-		
-		<div class="cell floating-cell">
-			<div class="cell">
-				<img src="image" width="200" height="200"><br>
-			</div>
-			
-			<div class="cell">
-				<h2><a href="/member/password">비밀번호 변경</a></h2>
-			</div>
-			<div class="cell">
-				<h2><a href="/member/change">개인정보 변경</a></h2>
-			</div>
-			<div class="cell">
-				<h2><a href="/member/exit">회원 탈퇴</a></h2>
-			</div>
-			
-			
-			<div class="cell">
-				<table border="1" width="400">
-				   <tr>
-				        <th width = "30%">닉네임</th>
-				        <td>${memberDto.memberNick}</td>
-				    </tr>
-					<tr>
-						<th>이메일</th>
-						<td>${memberDto.memberEmail}</td>
-					</tr>
-					<tr>
-						<th>연락처</th>
-						<td>${memberDto.memberContact}</td>
-					</tr>
-					<tr>
-						<th>생년월일</th>
-						<td>${memberDto.memberBirth}</td>
-					</tr>
-					<tr>
-						<th>주소</th>
-						<td>
-						[${memberDto.memberPost}]
-						${memberDto.memberAddress1}
-						${memberDto.memberAddress2}
-						</td>
-					</tr>
-					<tr>
-						<th>회원등급</th>
-						<td>${memberDto.memberLevel}</td>
-					</tr>
-					<tr>
-						<th>회원포인트</th>
-						<td>${memberDto.memberPoint} point</td>
-					</tr>
-					<tr>
-						<th>가입일</th>
-						<td>
-						<fmt:formatDate value="${memberDto.memberJoin}" 
-						pattern="y년 M월 d일 H시 m분 s초"/>
-						</td>
-					</tr>
-					<tr>
-						<th>로그인일시</th>
-						<td>
-						<fmt:formatDate value="${memberDto.memberLogin}" 
-						pattern="y년 M월 d일 H시 m분 s초"/>
-						</td>
-					</tr>
-				</table>
-			</div>
-			
-			<div class="cell">
-				<h2><a href="/member/password">비밀번호 변경</a></h2>
-			</div>
-			<div class="cell">
-				<h2><a href="/member/change">개인정보 변경</a></h2>
-			</div>
-			<div class="cell">
-				<h2><a href="/member/exit">회원 탈퇴</a></h2>
-			</div>
-			
-			
+	<div class="container w-1000">
+	<div class="cell">
+		<h3>${memberDto.memberId}님의 페이지</h3>
+	</div>
+	<div class="cell floating-cell">
+		<div class="image-wrapper w-25 center">
+			<img src="image" width="200" height="200">
+			<h2><a class="link" href="/member/password">비밀번호 변경</a></h2>
+			<h2><a class="link" href="/member/change">개인정보 변경</a></h2>
+			<h2><a class="link" href="/member/exit">회원 탈퇴</a></h2>
 		</div>
 		
+		<div class="infotm-wrapper w-75">
+			<div class="cell">
+				<h3>가입정보</h3>
+			</div>
+			<table class="table table-horizontal">
+				<tr>
+					<th width="25%">닉네임</th>
+					<td>${memberDto.memberNick}</td>
+				</tr>
+				<tr>
+					<th>생년월일</th>
+					<td>${memberDto.memberBirth}</td>
+				</tr>
+				<tr>
+					<th>연락처</th>
+					<td>${memberDto.memberContact}</td>
+				</tr>
+				<tr>
+					<th>이메일</th>
+					<td>${memberDto.memberEmail}</td>
+				</tr>
+				<tr>
+					<th>주소</th>
+					<td>
+						[${memberDto.memberPost}]
+						${memberDto.memberAddress1}
+						(${memberDto.memberAddress2})
+					</td>
+				</tr>
+				<tr>
+					<th>회원등급</th>
+					<td>${memberDto.memberLevel}</td>
+				</tr>
+				<tr>
+					<th>회원포인트</th>
+					<td>${memberDto.memberPoint}</td>
+				</tr>
+				<tr>
+					<th>가입일시</th>
+					<td>
+						<fmt:formatDate value="${memberDto.memberJoin}"
+							pattern="y년 M월 d일 H시 m분 s초"/>
+					</td>
+				</tr>
+				<tr>
+					<th>로그인일시</th>
+					<td>
+						<fmt:formatDate value="${memberDto.memberLogin}"
+							pattern="y년 M월 d일 H시 m분 s초"/>
+					</td>
+				</tr>
+			</table>
 			
-			
-			
-			<hr>
-			<h1>포인트 구매 내역
-				<a href="/point/charge">추가구매</a>
+			<h1>
+				포인트 구매 내역 &nbsp;&nbsp;
+				<a class="link" href="/point/charge">
+				<i class="fa-solid fa-credit-card"></i>
+				추가구매
+				</a>
 			</h1>
-			
-			
-			<table border="1" width="600">
+
+			<table class="table table-horizontal">
 				<thead>
 					<tr>
 						<th>번호</th>
@@ -122,20 +104,23 @@
 				<tbody>
 					<c:forEach var="buyDto" items="${buyList}">
 					<tr>
-						<td>${buyDto.buySerial}</td>						 
-						<td>${buyDto.itemName}</td>						 
-						<td>${buyDto.buyQty}</td>						 
+						<td>${buyDto.buySerial}</td>
+						<td>${buyDto.itemName}</td>
+						<td>${buyDto.buyQty}</td>
 						<td>
 							<fmt:formatNumber value="${buyDto.buyTotal}" pattern="#,##0"/>
-						</td>						 
+						</td>
 						<td>
 							<fmt:formatDate value="${buyDto.buyTime}" pattern="yyyy-MM-dd HH:mm"/>
 						</td>
 					</tr>
 					</c:forEach>
-				</tbody>	
+				</tbody>
 			</table>
+			
+		</div>
 	</div>
+</div>
 	
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 </body>

@@ -3,21 +3,31 @@ package com.kh.spring10.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.spring10.dao.PocketmonDao;
+import com.kh.spring10.dto.MenuDto;
 import com.kh.spring10.dto.PocketmonDto;
+import com.kh.spring10.vo.PageVO;
 
 @Controller
 @RequestMapping("/pocketmon")
 public class PocketmonController {
 
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));//true면 공백==null
+	}
+	
 	@Autowired
 	private PocketmonDao dao;
 	
@@ -73,18 +83,33 @@ public class PocketmonController {
 	
 	//목록, 검색 페이지
 	//-사용자의 검색어(선택사항)을 전달받아 조회 후 Model에 첨부한다
-	@RequestMapping("/list")
-	public String list(@RequestParam(required = false) String column,
-						@RequestParam(required = false) String keyword,
-						Model model) {
-		boolean isSearch = column !=null & keyword != null;
-		List<PocketmonDto> list = isSearch ?
-				dao.selectList(column, keyword) : dao.selectList();
+//	@RequestMapping("/list")
+//	public String list(@RequestParam(required = false) String column,
+//						@RequestParam(required = false) String keyword,
+//						Model model) {
+//		boolean isSearch = column !=null & keyword != null;
+//		List<PocketmonDto> list = isSearch ?
+//				dao.selectList(column, keyword) : dao.selectList();
+//	
+//		model.addAttribute("list", list);
+//
+//		return "/WEB-INF/views/pocketmon/list.jsp";
+//	}
 	
+	@RequestMapping("/list")
+	public String list(
+			@ModelAttribute PageVO pageVO,
+			Model model) {
+		int count = dao.count(pageVO);
+		pageVO.setCount(count);
+		model.addAttribute("pageVO", pageVO);
+		
+		List<PocketmonDto> list = dao.selectListByPaging(pageVO);
 		model.addAttribute("list", list);
-
+		
 		return "/WEB-INF/views/pocketmon/list.jsp";
 	}
+
 	
 	//상세 페이지
 		@RequestMapping("/detail")

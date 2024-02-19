@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.spring10.dto.PocketmonDto;
 import com.kh.spring10.mapper.PocketmonMapper;
 import com.kh.spring10.mapper.StatMapper;
+import com.kh.spring10.vo.PageVO;
 import com.kh.spring10.vo.StatVO;
 
 //DAO도 이제부터는 등록을 해야한다
@@ -78,6 +79,50 @@ public class PocketmonDao {
 				+ "from pocketmon group by pocketmon_type "
 				+ "order by 개수 desc, pocketmon_type asc";
 		return jdbcTemplate.query(sql, statMapper);
+	}
+	
+	//통합 페이지
+	public List<PocketmonDto> selectListByPaging(PageVO pageVO){
+		if(pageVO.isSearch()) {//검색
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select * from pocketmon "
+									+ "where instr("+pageVO.getColumn()+", ?) > 0 "
+									+ "order by pocketmon_no desc"
+								+ ") TMP"
+							+ ") where rn between ? and ?";
+			Object[] data = {
+					pageVO.getKeyword(), 
+					pageVO.getBeginRow(), 
+					pageVO.getEndRow()
+			};
+			return jdbcTemplate.query(sql, mapper, data);
+		}
+		else {//목록
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select * from pocketmon "
+									+ "order by pocketmon_no desc"
+								+ ") TMP"
+							+ ") where rn between ? and ?";
+			Object[] data = {pageVO.getBeginRow(), pageVO.getEndRow()};
+			return jdbcTemplate.query(sql, mapper, data);
+		}
+	}
+	
+	//카운트 - 목록일 경우와 검색일 경우를 각각 구현
+	public int count(PageVO pageVO) {
+		if(pageVO.isSearch()) {//검색
+			String sql = "select count(*) from pocketmon "
+					+ "where instr("+pageVO.getColumn()+", ?)>0";
+			
+			Object[] data = {pageVO.getKeyword()};
+			return jdbcTemplate.queryForObject(sql,int.class, data);
+		}
+		else {//목록
+			String sql = "Select count(*) from pocketmon";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
 	}
 	
 	

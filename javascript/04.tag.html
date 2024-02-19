@@ -33,6 +33,28 @@
             // console.log(target);
             target.textContent = "Hello!";//대상 태그의 내부 글자를 변경
         }
+     
+        function sum(){
+            var total = 0;
+            for(var i = 1;i<=100;i++){
+            total += i;
+            }
+            var target = document.querySelector(".q2")
+            // console.log(target);
+            target.textContent = total;
+        }
+
+        function seven(){
+            var a = 0;
+            for(var i = 1;i<=100;i++){
+                if(i % 7 ==0){
+                    a++;
+                }
+            }
+            var target = document.querySelector(".q3")
+            // console.log(target);
+            target.textContent = a+"개";
+        }
     </script>
 </head>
 <body>
@@ -45,7 +67,21 @@
             <button onclick="hello()">안녕하세요</button>
             <span class="q1"></span>
         </div>
+
+        <div class="cell">
+            <!-- <span onclick="sum()">1부터 100까지의 합계는 얼마일까요?</span> -->
+            <!-- <span ondblclick="sum()">1부터 100까지의 합계는 얼마일까요?</span> -->
+            <span onmouseover="sum()">1부터 100까지의 합계는 얼마일까요?</span>
+            
+            <span class="q2"></span>
+        </div>
+        <div class="cell">
+            <!-- <span onclick="seven()">1부터 100 사이에 있는 7의 배수는 몇개일까요?</span> -->
+            <span ondblclick="seven()">1부터 100 사이에 있는 7의 배수는 몇개일까요?</span>
+            <span class="q3"></span>
+        </div>
     </div>
+
 
 </body>
 </html>

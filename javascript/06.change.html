@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>바꾸기 문제</title>
+
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- 내가 구현한 스타일 -->
+    <link rel="stylesheet" type="text/css" href="../css/commons.css">
+    <link rel="stylesheet" type="text/css" href="../css/test.css">
+
+    <!-- font awesome 아이콘 CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+
+    <style>
+        
+    </style>
+    
+    <!-- javascript를 의도적을 head 자리에 배치해서 가장 먼저 실행되도록 구현 -->
+    <script type="text/javascript">
+        function switchText1() {
+            var target1 = document.querySelector(".content1");
+            var target2 = document.querySelector(".content2");
+                      
+            var temp = target1.textContent;
+            target1.textContent = target2.textContent;
+            target2.textContent = temp;
+        }
+        function switchText2() {
+            var target3 = document.querySelector(".content3");
+            var target4 = document.querySelector(".content4");
+                      
+            var temp = target3.textContent;
+            target3.textContent = target4.textContent;
+            target4.textContent = temp;
+        }
+    </script>
+</head>
+<body>
+    
+    <div class="container w-200">
+        <div class="cell center">
+            <h1>제목</h1>
+        </div>
+        <div class="cell content1">
+            <span>한국어</span>
+        </div>
+        <div class="cell content3">
+            <span>집에 가고싶다</span>
+        </div>
+        <div class="cell">
+            <button class="btn positive center" onclick="switchText1(), switchText2()">
+                <i class="fa-solid fa-arrow-up-long"></i>
+                <i class="fa-solid fa-arrow-down-long"></i>
+            </button>
+        </div>
+        <div class="cell content2">
+            <span>영어</span>
+        </div>
+        <div class="cell content4">
+            <span>want to go home</span>
+        </div>
+        
+    </div>
+
+</body>
+</html>

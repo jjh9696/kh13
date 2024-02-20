@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제목을 설정하세요</title>
+
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- 내가 구현한 스타일 -->
+    <link rel="stylesheet" type="text/css" href="../css/commons.css">
+    <link rel="stylesheet" type="text/css" href="../css/test.css">
+
+    <!-- font awesome 아이콘 CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+
+    <style>
+        .text{
+            min-height: 150px;
+            resize: none;
+            font-size: 16px;
+        }
+    </style>
+    
+    <!-- javascript를 의도적을 head 자리에 배치해서 가장 먼저 실행되도록 구현 -->
+    <script type="text/javascript">
+       function changeSmall(){
+            var sizeTarget = document.querySelector(".text");
+            var textTarget = document.querySelector(".size-display");
+            sizeTarget.style.fontSize = "12px"; //여러 단어일 경우 카멜 케이스로 작성
+            // target.style["font-size"] = "12px"; //자바스크립트 객체 접근 방식(자바)
+            textTarget.textContent = "12";
+        }
+       function changeNormal(){
+            var sizeTarget = document.querySelector(".text");
+            var textTarget = document.querySelector(".size-display");
+            sizeTarget.style.fontSize = "16px";
+            textTarget.textContent = "16";
+        }
+       function changeLarge(){
+            var sizeTarget = document.querySelector(".text");
+            var textTarget = document.querySelector(".size-display");
+            sizeTarget.style.fontSize = "24px";
+            textTarget.textContent = "24";
+        }
+        function sizeUp() {
+            var sizeTarget = document.querySelector(".text");
+            var textTarget = document.querySelector(".size-display");
+            var currentSize = parseInt(sizeTarget.style.fontSize) || "16"; 
+            if(currentSize >= 40) return;
+            sizeTarget.style.fontSize = (currentSize + 1) + "px";
+            textTarget.textContent = currentSize+1;
+        }
+        function sizeDown() {
+            var sizeTarget = document.querySelector(".text");
+            var textTarget = document.querySelector(".size-display");
+            var currentSize = parseInt(sizeTarget.style.fontSize) || "16"; 
+            sizeTarget.style.fontSize = (currentSize - 1) + "px";
+            textTarget.textContent = currentSize-1;
+        }
+
+        
+    </script>
+</head>
+<body>
+    
+    <div class="container w-500">
+        <div class="cell center">
+            <h1>폰트 사이즈 조절</h1>
+        </div>
+        <div class="cell center">
+            <button class="btn" onclick="changeSmall()">작게</button>
+            <button class="btn" onclick="changeNormal()">보통</button>
+            <button class="btn" onclick="changeLarge()">크게</button>
+        </div>
+        <div class="cell">
+            <hr>
+        </div>
+        <div class="cell center">
+            <button class="btn" onclick="sizeDown()">-</button>
+            <span class="size-display">16</span>
+            <button class="btn" onclick="sizeUp()">+</button>
+        </div>
+        <div class="cell">
+            <hr>
+        </div>
+        <div class="cell">
+            <textarea class="tool text w-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.</textarea>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제목을 설정하세요</title>
+
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- 내가 구현한 스타일 -->
+    <link rel="stylesheet" type="text/css" href="../css/commons.css">
+    <link rel="stylesheet" type="text/css" href="../css/test.css">
+
+    <!-- font awesome 아이콘 CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+
+    <style>
+
+    </style>
+    
+    <!-- javascript를 의도적을 head 자리에 배치해서 가장 먼저 실행되도록 구현 -->
+    <script type="text/javascript">
+
+        function idCheck() {
+            var inputTarget = document.querySelector(".idInput");
+            var text = inputTarget.value;
+
+            var regex = /^[a-z](?=.*[0-9])[A-Z a-z 0-9]{7,19}$/;
+            var isValid = regex.test(text);
+            
+            var regexTarget = document.querySelector(".idResult");
+            if(isValid){
+                regexTarget.style.color = "green";
+                regexTarget.textContent = "사용 가능한 아이디 입니다!";
+            }
+            else{
+                regexTarget.style.color = "red";
+                regexTarget.textContent = "아이디는 소문자 시작, 숫자 포함 8~20자로 작성하세요";
+            }
+            // 공간을 확보하도록 빈 줄 추가
+            regexTarget.style.display = "block";
+        }
+
+        function pwCheck() {
+            var inputTarget = document.querySelector(".pwInput");
+            var text = inputTarget.value;
+
+            var regex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$])[A-Za-z0-9!@#$]{6,15}$/;
+            var isValid = regex.test(text);
+
+            var regexTarget = document.querySelector(".pwResult");
+            if(isValid){
+                regexTarget.style.color = "green";
+                regexTarget.textContent = "올바른 형식의 비밀번호입니다!";
+            }
+            else{
+                regexTarget.style.color = "red";
+                regexTarget.textContent = "비밀번호에는 반드시 숫자, 영문 대소문자, 특수문자를 포함하세요";
+            }
+        }
+
+        function sameCheck() {
+            var pwTarget = document.querySelector(".pwInput");
+            var password = pwTarget.value;
+
+            var sameTarget = document.querySelector(".checkInput");
+            var text = sameTarget.value;
+            
+            var checkTarget = document.querySelector(".checkResult");
+
+            if(password == text){
+                checkTarget.style.color = "green";
+                checkTarget.textContent = "비밀번호가 일치합니다!";
+            }
+            else{
+                checkTarget.style.color = "red";
+                checkTarget.textContent = "비밀번호가 일치하지 않습니다";
+            }
+        }
+
+
+    </script>
+</head>
+<body>
+    
+    <div class="container w-500">
+        <div class="cell center">
+            <h1>회원가입</h1>
+        </div>
+        <div class="cell">
+            <span><b>아이디<span class="red">*</span></b></span>
+        </div>
+        <div class="cell">
+            <input type="text" class="idInput tool w-100" oninput="idCheck()" placeholder="영문 소문자 시작, 숫자 포함 8~20자">
+            <div class="idResult">&nbsp;</div>
+        </div>
+
+        <div class="cell">
+            <span><b>비밀번호<span class="red">*</span></b></span>
+        </div>
+        <div class="cell">
+            <input type="password" class="pwInput tool w-100" oninput="pwCheck()" placeholder="영문 대소문자, 숫자, 특수문자(!@#$) 포함 6~15자">
+        </div>
+        <div class="cell pwResult">&nbsp;</div>
+
+
+        <div class="cell">
+            <span><b>비밀번호 확인<span class="red">*</span></b></span>
+        </div>
+        <div class="cell">
+            <!-- 비밀번호 확인은 백엔드로 전송되지 않도록 이름을 부여하지 않는다 -->
+            <input type="password" class="checkInput tool w-100" oninput="sameCheck()" placeholder="비밀번호를 한 번 더 입력하세요">
+        </div>
+        <div class="cell checkResult">&nbsp;</div>
+
+    </div>
+
+</body>
+</html>

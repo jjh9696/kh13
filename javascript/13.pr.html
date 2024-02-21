@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제목을 설정하세요</title>
+
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- 내가 구현한 스타일 -->
+    <link rel="stylesheet" type="text/css" href="../css/commons.css">
+    <link rel="stylesheet" type="text/css" href="../css/test.css">
+
+    <!-- font awesome 아이콘 CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+
+    <style>
+        .textbox{
+            resize: none;
+            min-height: 200px;
+        }
+    </style>
+    
+    <!-- javascript를 의도적을 head 자리에 배치해서 가장 먼저 실행되도록 구현 -->
+    <script type="text/javascript">
+        function checkText() {
+            var inputTarget = document.querySelector(".temp");
+            var text = inputTarget.value;
+            var lengthTarget = document.querySelector(".result1");
+
+            lengthTarget.textContent = text.length;//숫자표시
+
+            if(text.length > 1000){
+                lengthTarget.style.color = "red";
+                inputTarget.value = text.substring(0, 999);
+            }
+            else{
+                // lengthTarget.style.color = "black";
+                lengthTarget.style.color = ""; //색상제거
+            }
+
+            //심화
+            //-IME 방식의 경우까지 고려해서 글자 수 초과를 막는 방법은 없다
+            //-input 이벤트 이벤트 발생 시 실제 값을 불러와서 원하느 구간까지 잘라낸 뒤 재설정
+            
+            // while(text.length > 1000){
+            //     var content = inputTarget.value;
+            //     inputTarget.value = content.substring(0, content.length-1);
+            //     inputTarget.value.length--;
+            // }
+        }
+    </script>
+</head>
+<body>
+    
+    <div class="container w-600">
+        <div class="cell ">
+            <h2>(Q) 입사 후 20년 뒤에 본인의 모습을 예상해보세요</h2>
+        </div>
+        <div class="cell">
+            <textarea type="text" class="temp w-100 textbox" oninput="checkText()" maxlength="1000"></textarea>
+        </div>
+        <div class="cell right">
+            <span class="result1">0</span> / 1000
+        </div>
+    </div>
+
+</body>
+</html>

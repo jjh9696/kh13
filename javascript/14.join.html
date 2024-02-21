@@ -104,8 +104,8 @@
         </div>
         <div class="cell">
             <input type="password" class="pwInput tool w-100" oninput="pwCheck()" placeholder="영문 대소문자, 숫자, 특수문자(!@#$) 포함 6~15자">
+            <div class="pwResult">&nbsp;</div>
         </div>
-        <div class="cell pwResult">&nbsp;</div>
 
 
         <div class="cell">
@@ -114,9 +114,11 @@
         <div class="cell">
             <!-- 비밀번호 확인은 백엔드로 전송되지 않도록 이름을 부여하지 않는다 -->
             <input type="password" class="checkInput tool w-100" oninput="sameCheck()" placeholder="비밀번호를 한 번 더 입력하세요">
+            <div class="checkResult">&nbsp;</div>
         </div>
-        <div class="cell checkResult">&nbsp;</div>
-
+        <button class="btn positive w-100">
+            회원가입
+        </button>
     </div>
 
 </body>

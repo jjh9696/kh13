@@ -735,10 +735,13 @@ textarea.tool.tool-fixed {
     - 입력창 뒤에 피드백 영역이 있다면 판정 결과에 따라 표시되도록 구현
 */
 .tool.success{
-    border-color:#00b894;
+    border-color:#00b894 !important;
 }
-.tool.fail{
-    border-color:#d63031;
+.tool.fail,
+.tool.fail2,
+.tool.fail3
+{
+    border-color:#d63031 !important;
 }
 .success-feedback{
     color : #00b894;

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 예제</title>
+
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- 내가 구현한 스타일 -->
+    <link rel="stylesheet" type="text/css" href="../css/commons.css">
+    <link rel="stylesheet" type="text/css" href="../css/test.css">
+
+    <!-- font awesome 아이콘 CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        
+    </style>
+
+    <!-- javascript를 의도적으로 head 자리에 배치해서 가장 먼저 실행되도록 구현-->
+    <script type="text/javascript">
+        function checkName() {
+            var inputTarget = document.querySelector("[name=name]");
+            var regex = /^[가-힣]{2,7}$/;
+            var isValid = regex.test(inputTarget.value);
+            inputTarget.classList.remove("success", "fail");
+            inputTarget.classList.add(isValid ? "success" : "fail");
+            return isValid;
+        }
+        function checkKoreanScore() {
+            var inputTarget = document.querySelector("[name=koreanScore]");
+            var score = parseInt(inputTarget.value);
+            var isValid = score >= 0 && score <= 100;
+            inputTarget.classList.remove("success", "fail");
+            inputTarget.classList.add(isValid ? "success" : "fail");
+            return isValid;
+        }
+        function checkEnglishScore() {
+            var inputTarget = document.querySelector("[name=englishScore]");
+            var score = parseInt(inputTarget.value);
+            var isValid = score >= 0 && score <= 100;
+            inputTarget.classList.remove("success", "fail");
+            inputTarget.classList.add(isValid ? "success" : "fail");
+            return isValid;
+        }
+        function checkMathScore() {
+            var inputTarget = document.querySelector("[name=mathScore]");
+            var score = parseInt(inputTarget.value);
+            var isValid = score >= 0 && score <= 100;
+            inputTarget.classList.remove("success", "fail");
+            inputTarget.classList.add(isValid ? "success" : "fail");
+            return isValid;
+        }
+        function checkForm() {
+            var isValid1 = checkName();
+            var isValid2 = checkKoreanScore();
+            var isValid3 = checkEnglishScore();
+            var isValid4 = checkMathScore();
+            return isValid1 && isValid2 && isValid3 && isValid4;
+        }
+        //(추가) 예상 총점과 평균을 출력
+        function calculate() {
+            var target1 = document.querySelector("[name=koreanScore]");
+            var target2 = document.querySelector("[name=englishScore]");
+            var target3 = document.querySelector("[name=mathScore]");
+
+            var korean = parseInt(target1.value || 0);
+            var english = parseInt(target2.value || 0);
+            var math = parseInt(target3.value || 0);
+
+            var total = korean + english + math;
+            var average = total / 3;
+
+            var totalTarget = document.querySelector(".total");
+            var averageTarget = document.querySelector(".average");
+
+            totalTarget.textContent = total;
+            averageTarget.textContent = average;
+        }
+    </script>
+</head>
+<body>
+
+    <form action="?" method="post" autocomplete="off" onsubmit="return checkForm();">
+    <div class="container w-500">
+        <div class="cell center">
+            <h1>학생 등록</h1>
+        </div>
+        <div class="cell">
+            <label>학생명 <i class="fa-solid fa-asterisk red"></i></label>
+            <input type="text" name="name" placeholder="(ex) 피카츄"
+                    class="tool w-100" onblur="checkName();">
+            <div class="fail-feedback">이름은 필수 항목입니다</div>
+        </div>  
+        <div class="cell">
+            <label>국어 점수 <i class="fa-solid fa-asterisk red"></i></label>
+            <input type="text" name="koreanScore" placeholder="(ex) 50"
+                    class="tool w-100" onblur="checkKoreanScore();" oninput="calculate();">
+            <div class="fail-feedback">0 이상 100 이하로 작성하세요</div>
+        </div>
+        <div class="cell">
+            <label>영어 점수 <i class="fa-solid fa-asterisk red"></i></label>
+            <input type="text" name="englishScore" placeholder="(ex) 50"
+                    class="tool w-100" onblur="checkEnglishScore();" oninput="calculate();">
+            <div class="fail-feedback">0 이상 100 이하로 작성하세요</div>
+        </div>
+        <div class="cell">
+            <label>수학 점수 <i class="fa-solid fa-asterisk red"></i></label>
+            <input type="text" name="mathScore" placeholder="(ex) 50"
+                    class="tool w-100" onblur="checkMathScore();" oninput="calculate();">
+            <div class="fail-feedback">0 이상 100 이하로 작성하세요</div>
+        </div>
+        <div class="cell mt-50">
+            <button class="btn positive w-100">
+                <i class="fa-solid fa-plus"></i> 추가하기
+            </button>
+        </div>
+        <div class="cell flex-cell">
+            <div class="w-50 left"><h2>예상총점</h2></div>
+            <div class="w-50 right ellipsis"><h2 class="total"></h2></div>
+        </div>
+        <div class="cell flex-cell">
+            <div class="w-50 left"><h2>예상평균</h2></div>
+            <div class="w-50 right ellipsis"><h2 class="average"></h2></div>
+        </div>
+    </div>
+    </form>
+
+</body>
+</html>

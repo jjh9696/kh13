@@ -144,5 +144,12 @@ public class EmpController {
 //		return "/WEB-INF/views/emp/list.jsp"; 이거 안쓰게 조심
 	}
 	
+	@PostMapping("/deleteAll")
+	public String deleteAll(@RequestParam List<Integer> empNo) {
+		for(int no : empNo) {
+			dao.delete(no);
+		}
+		return "redirect:list";
+	}
 	
 }

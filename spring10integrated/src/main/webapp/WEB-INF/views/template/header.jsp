@@ -30,20 +30,32 @@
 
     <!-- 내가 구현한 스타일 -->
     <link rel="stylesheet" type="text/css" href="/css/commons.css">
-    <link rel="stylesheet" type="text/css" href="/css/test.css">
+    <!-- <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
     <link rel="stylesheet" type="text/css" href="/css/layout.css">
 
     <!-- font awesome 아이콘 CDN -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    
     <style>
+        /* footer {
+            min-height: 1000px; 
+            margin: 0; 
+            padding: 0; 
+        } */
     </style>
+    
+    <!-- jquery CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <!-- 내가 만든 스크립트 추가(jQuery를 사용했으니 jQuery CDN 아래 작성) -->
+    <script src="/js/commons.js"></script>
+    
 </head>
 <body>
     
     <main>
         <div class="header">
-            <h1 class="center">KH정보교육원</h1>            
+            <h1 class="center"><a class="link" href="/">KH정보교육원</a></h1>            
         </div>
         <div class="nav">
 			<ul class="menu">

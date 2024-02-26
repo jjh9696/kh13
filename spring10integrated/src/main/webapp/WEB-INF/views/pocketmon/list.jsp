@@ -52,14 +52,16 @@
 					    	${dto.pocketmonNo}
 				    	</td>
 				    	<td>
-					    	${dto.pocketmonName}
+				    		<a class="link link-animation" href="detail?pocketmonNo=${dto.pocketmonNo}">
+					    		${dto.pocketmonName}
+					    	</a>
 				    	</td>
 				    	<td>
 					    	${dto.pocketmonType}
 				    	</td>
-				    	<td>
+				    	<%-- <td>
 					    	<a href="detail?pocketmonNo=${dto.pocketmonNo}">이동</a>
-				    	</td>
+				    	</td> --%>
 				    </tr>
 				    </c:forEach>
 	    		</tbody>	

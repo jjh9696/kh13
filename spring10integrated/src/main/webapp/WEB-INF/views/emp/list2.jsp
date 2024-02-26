@@ -141,6 +141,7 @@
 		<button class="btn negative">전체삭제</button>
 	</div>
 	</c:if>
+	</form>
 	
 </div>
 <jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include>

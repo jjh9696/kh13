@@ -761,3 +761,14 @@ textarea.tool.tool-fixed {
 {
     display: block;
 }
+
+.progressbar {
+    box-shadow: 0 0 1px 0 #ccc;
+}
+.progressbar > .guage{
+    width: 0;
+    height: 5px;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 11%, rgba(8,39,141,1) 26%, rgba(6,85,171,1) 42%, rgba(4,131,202,1) 60%, rgba(2,169,227,1) 80%, rgba(0,212,255,1) 100%);
+    transition: width 0.25s ease-out;
+}

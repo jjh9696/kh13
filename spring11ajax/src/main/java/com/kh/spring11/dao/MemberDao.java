@@ -175,4 +175,11 @@ public class MemberDao {
 		Object[] data = {point, memberId};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	
+	public MemberDto selectOneByMemberNick(String memberNick) {
+	    String sql = "SELECT * FROM member WHERE member_Nick=?";
+	    Object[] data = {memberNick};
+	    List<MemberDto> list = jdbcTemplate.query(sql, mapper, data);
+	    return list.isEmpty() ? null : list.get(0);
+	}
 }

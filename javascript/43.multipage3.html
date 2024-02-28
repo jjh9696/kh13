@@ -41,33 +41,41 @@
             
             // $(".page:gt(0)").hide(); // 첫 번째 페이지를 제외한 모든 페이지를 숨기기 //권장하지 않음
 
+
+        //(추가) 첫번째 이전버튼과 마지막 다음버튼을 삭제
+            $(".page").find(".btn-prev").first().remove();
+            $(".page").find(".btn-next").last().remove();
+
         //[2] 다음 버튼을 누르면 버튼이 있는 페이지는 숨기고 다음 페이지를 표시
             $(".btn-next").click(function(){
-                // $(this).parent(".page").hide().next(".page").show(); //페이지 바로 밑에 있어야 작동
+                $(this).parent(".page").hide().next(".page").show(); //페이지 바로 밑에 있어야 작동
                 // $(this).parents(".page").hide().next(".page").show(); //페이지 내부에 있어야 작동
                 
-                var currentPage = $(this).parent(".page"); // 현재 페이지 가져오기
-                var nextPage = currentPage.next(".page"); // 다음 페이지 가져오기
+                // var currentPage = $(this).parent(".page"); // 현재 페이지 가져오기
+                // var nextPage = currentPage.next(".page"); // 다음 페이지 가져오기
                 
-                if(nextPage.length === 0) { // 다음 페이지가 없으면
-                    nextPage = $(".page:first"); // 첫 번째 페이지로 이동
-                }
+                // if(nextPage.length === 0) { // 다음 페이지가 없으면
+                //     nextPage = $(".page:first"); // 첫 번째 페이지로 이동
+                // }
                 
-                currentPage.hide(); // 현재 페이지 숨기기
-                nextPage.show(); // 다음 페이지 보이기
+                // currentPage.hide(); // 현재 페이지 숨기기
+                // nextPage.show(); // 다음 페이지 보이기
 
             });
         //[3] 이전 버튼을 누르면 버튼이 있는 페이지는 숨기고 이전 페이지를 표시
             $(".btn-prev").click(function(){
-                var currentPage = $(this).parent(".page"); // 현재 페이지 가져오기
-                var prevPage = currentPage.prev(".page"); // 이전 페이지 가져오기
+                $(this).parent(".page").hide().prev(".page").show(); //페이지 바로 밑에 있어야 작동
+                // $(this).parents(".page").hide().prev(".page").show(); //페이지 내부에 있어야 작동
 
-                if(prevPage.length === 0) { // 이전 페이지가 없으면
-                    prevPage = $(".page:last"); // 마지막 페이지로 이동
-                }
+                // var currentPage = $(this).parent(".page"); // 현재 페이지 가져오기
+                // var prevPage = currentPage.prev(".page"); // 이전 페이지 가져오기
 
-                currentPage.hide(); // 현재 페이지 숨기기
-                prevPage.show(); // 이전 페이지 보이기
+                // if(prevPage.length === 0) { // 이전 페이지가 없으면
+                //     prevPage = $(".page:last"); // 마지막 페이지로 이동
+                // }
+
+                // currentPage.hide(); // 현재 페이지 숨기기
+                // prevPage.show(); // 이전 페이지 보이기
             });
         })
     </script>

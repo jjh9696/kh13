@@ -5,6 +5,56 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<style>
+	.reply-list-wrapper> .reply-item{
+		padding-bottom : 10px;
+		margin-bottom : 20px;
+		border-bottom : 1px solid #b2bec3;
+	}
+</style>
+<script type="text/template" id="reply-item-wrapper">
+<div class="reply-item">
+		<h3 class="reply-writer">작성자</h3>
+		<pre class="reply-content">댓글 내용</pre>
+		<div class="reply-time">yyyy-MM-dd HH:mm:ss</div>
+	</div>
+</script>
+<script type="text/javascript">
+	$(function(){
+		
+		//파라미터에서 게시글 번호를 읽는다
+		var params = new URLSearchParams(location.search);
+		var boardNo = params.get("boardNo");
+		
+		//페이지 로딩 완료 시 댓글 목록을 불러와서 출력
+		$.ajax({
+			url:"/rest/reply/list",
+			method:"post",
+			data:{ replyOrigin : boardNo },
+			success: function(response) {
+				//댓글 개수를 표시
+				$(".reply-count").text(response.length);
+				
+				//response는 List<ReplyDto> 형태
+				for(var i=0; i<response.length; i++){
+					//template 불러오고
+					var templateText = $("#reply-item-wrapper").text();
+					var templateHTML = $.parseHTML(templateText);
+					
+					//정보출력
+					$(templateHTML).find(".reply-writer").text(response[i].replyWriter);
+					$(templateHTML).find(".reply-content").text(response[i].replyContent);
+					$(templateHTML).find(".reply-time").text(response[i].replyTime);
+					
+					//화면에 추가
+					$(".reply-list-wrapper").append(templateHTML);
+					
+				}
+				//console.log(response);
+			}
+		})
+	})
+</script>
 <c:if test="${sessionScope.loginId!=null}">
 <script type="text/javascript">
  //목표 : 하트를 클릭하면 좋아요 갱신 처리하겠다
@@ -104,7 +154,7 @@
 	
 		<td>
 			조회수 ${boardDto.boardReadcount} 
-			댓글 ? 
+			
 			
 			<span class="board-like red">
                 <i class="fa-regular fa-heart"></i>
@@ -137,6 +187,16 @@
 	</tr>
 </table>
 
+<!-- 댓글 작성창 + 댓글 목록 -->
+<div class="cell">
+	<span class="reply-count">0</span>개의 댓글이 있습니다
+</div>
+
+<div class="cell reply-list-wrapper">
+</div>
+<div class="cell">
+	댓글작성창
+</div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 

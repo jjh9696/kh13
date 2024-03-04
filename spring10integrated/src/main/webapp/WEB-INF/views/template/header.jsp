@@ -21,7 +21,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>홈페이지 레이아웃 만들기</title>
+    <title>HOME</title>
 
     <!-- 구글 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,6 +43,7 @@
             margin: 0; 
             padding: 0; 
         } */
+
     </style>
     
     <!-- jquery CDN -->

@@ -186,4 +186,5 @@ public class MemberDao {
 	    List<MemberDto> list = jdbcTemplate.query(sql, mapper, data);
 	    return list.isEmpty() ? null : list.get(0);
 	}
+	
 }

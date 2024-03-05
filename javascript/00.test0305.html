@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 예제</title>
+
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- 내가 구현한 스타일 -->
+    <link rel="stylesheet" type="text/css" href="../css/commons.css">
+    <link rel="stylesheet" type="text/css" href="../css/test.css">
+
+    <!-- font awesome 아이콘 CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+
+    
+    <style>
+        
+        .container{
+            box-shadow: 0 0 10px 1px #2d342d;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        .radio-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        input {
+            border-radius: 4px !important;
+            border: 1px solid #b2bec3 !important;
+            font-size:15px !important;
+        }   
+        .cell{
+            margin-top: 20px;
+        }
+        .positive{
+            background-color: #0984e3 !important;
+        }
+        .btn{
+            font-size:15px !important;
+            border-radius: 8px;
+        }
+    </style>
+    
+    <!-- jquery CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <!-- 내가 만든 스크립트 추가(jQuery를 사용했으니 jQuery CDN 아래 작성) -->
+    <script src="commons.js"></script>
+    <!-- javascript를 의도적을 head 자리에 배치해서 가장 먼저 실행되도록 구현 -->
+    <script type="text/javascript">
+         $(function(){
+            $(".check-form").submit(function(){
+
+                // 입력값 가져오기
+                var userId = $("[name=userId]").val(); // 아이디 입력값 가져오기
+                var userPw = $("[name=userPw]").val(); // 비밀번호 입력값 가져오기
+                var type = $("[name=type]:checked").val(); // 라디오 버튼 값 가져오기
+                        
+                // 아이디, 비밀번호, 라디오 버튼이 모두 입력되었는지 확인
+                if(userId && userPw && type) {
+                    return true; // 전송
+                } else {
+                    // 입력값이 없는 경우 알림창 표시
+                    alert("모든 항목을 입력해야 전송 가능합니다.");
+                    return false; // 전송 취소
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    
+    <div class="container w-400">
+        <form autocomplete="off" action="?" method="post" class="check-form">
+            <div class="cell center">
+                <h1>User Login</h1>
+            </div>
+            <div class="cell">
+                <input type="text" name="userId" placeholder="ID" class="tool w-100">
+            </div>
+            <div class="cell">
+                <input type="password" name="userPw" placeholder="Password" class="tool w-100">
+            </div>
+            <div class="cell radio-container">
+                <label>
+                    <input type="radio" name="type" value="normal" checked> 일반 회원
+                </label>
+                <label>
+                    <input type="radio" name="type" value="admin"> 관리자
+                </label>
+            </div>
+            <div class="cell">
+                <button class="btn positive w-100 tool">로그인</button>
+            </div>
+            <div class="cell">
+                <hr>    
+            </div>
+        </form>
+        <div class="cell">
+            <a href="#"><button class="btn w-100 tool">회원가입</button></a>
+        </div>
+    </div>
+
+</body>
+</html>

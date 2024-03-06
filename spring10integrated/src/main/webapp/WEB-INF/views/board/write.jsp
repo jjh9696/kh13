@@ -4,6 +4,8 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<script src="/js/exit.js"></script>
+
 <form action="write" method="post" autocomplete="off">
 	<%-- (중요) 답변글일 경우 대상의 번호가 반드시 등록페이지로 전송되야함 --%>
 	<c:if test="${param.boardTarget != null}">

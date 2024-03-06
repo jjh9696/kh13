@@ -3,6 +3,8 @@
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<script src="/js/exit.js"></script>
+
 <form action="edit" method="post" autocomplete="off">
 	<input type="hidden" name="boardNo" value="${boardDto.boardNo}">
 

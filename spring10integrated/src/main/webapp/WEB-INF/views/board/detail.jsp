@@ -297,6 +297,8 @@
 			- 상용 에디터를 쓰면 알아서 글자를 보정해주기 때문에 문제가 없다
 			- 기본 textarea를 쓰면 문제가 발생한다
 			- <pre>태그를 사용하면 글자를 있는 그대로 출력한다  
+			- Rich Text Editor를 사용하면 문제가 해결된다(ex : summernote)
+			<pre>${boardDto.boardContent}</pre>
 		--%>
 		<pre>${boardDto.boardContent}</pre>
 	</div>
@@ -331,7 +333,7 @@
 		--%>
 		<c:if test="${sessionScope.loginId != null && (sessionScope.loginId == boardDto.boardWriter || sessionScope.loginLevel == '관리자')}">
 		<a class="btn negative" href="edit?boardNo=${boardDto.boardNo}">글수정</a>
-		<a class="btn negative" href="delete?boardNo=${boardDto.boardNo}">글삭제</a>
+		<a class="btn negative link-confirm" data-message="정말 삭제하시겠습니까?" href="delete?boardNo=${boardDto.boardNo}">글삭제</a>
 		</c:if>
 		<a class="btn positive" href="list">글목록</a>
 	</div>

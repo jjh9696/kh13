@@ -313,8 +313,62 @@ public class MemberController {
 			return "redirect:findIdFail";
 		}
 	}
-	//@RequestMapping("/findIdSuccess")
-	//@RequestMapping("/findIdFail")
+	
+	@RequestMapping("/findIdSuccess")
+	public String findIdSuccess() {
+		return "/WEB-INF/views/member/findIdSuccess.jsp";
+	}
+	
+	@RequestMapping("/findIdFail")
+	public String findIdFail() {
+		return "/WEB-INF/views/member/findIdFail.jsp";
+	}
 	
 	//비밀번호 찾기
+	@GetMapping("/findPw")
+	public String findPw() {
+		return "/WEB-INF/views/member/findPw.jsp";
+	}
+	
+//	@PostMapping("/findPw") //@RequestParam 을 이용하여 2개만 받기
+//	public String findPw(@RequestParam String memberId, @RequestParam String memberEmail) {
+//		 // 아이디로 회원 정보 조회
+//	    MemberDto memberDto = memberDao.selectOne(memberId);
+//	    // 회원이 존재하고 입력한 이메일과 일치할 경우에만 비밀번호 재설정 이메일을 발송합니다.
+//	    if (memberDto != null && memberDto.getMemberEmail().equals(memberEmail)) {
+//	        // 임시 비밀번호 발송
+//	    	emailService.sendTempPassword(memberEmail);
+//	        return "redirect:findPwSuccess";
+//	    } 
+//	    else {
+//	        // 회원이 존재하지 않거나 입력한 이메일과 일치하지 않을 경우에는 실패 페이지로 리다이렉트합니다.
+//	        return "redirect:findPwFail";
+//	    }
+//	}
+	@PostMapping("/findPw") //@ModelAttribute 를 이용하여 한 번에 받기
+	public String findPw(@ModelAttribute MemberDto memberDto) {
+		MemberDto findDto = memberDao.selectOne(memberDto.getMemberId());
+		
+		// 회원이 존재하고 입력한 이메일과 일치할 경우에만 비밀번호 재설정 이메일을 발송합니다.
+		boolean isVaild = findDto != null && findDto.getMemberEmail().equals(memberDto.getMemberEmail()); 
+		if (isVaild) {
+			// 임시 비밀번호 발송
+			emailService.sendTempPassword(findDto);
+			return "redirect:findPwSuccess";
+		} 
+		else {
+			// 회원이 존재하지 않거나 입력한 이메일과 일치하지 않을 경우에는 실패 페이지로 리다이렉트합니다.
+			return "redirect:findPwFail";
+		}
+	}
+	
+	@RequestMapping("/findPwSuccess")
+	public String findPwSuccess() {
+		return "/WEB-INF/views/member/findPwSuccess.jsp";
+	}
+	
+	@RequestMapping("/findPwFail")
+	public String findPwFail() {
+		return "/WEB-INF/views/member/findPwFail.jsp";
+	}
 }

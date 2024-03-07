@@ -187,4 +187,12 @@ public class MemberDao {
 	    return list.isEmpty() ? null : list.get(0);
 	}
 	
+//	//이메일 조회
+//	public MemberDto selectOneByEmail(String memberEmail) {
+//		String sql = "select * from member where member_email=?";
+//		Object[] data = {memberEmail};
+//		List<MemberDto> list = jdbcTemplate.query(sql, mapper, data);
+//		return list.isEmpty() ? null : list.get(0);
+//	}
+	
 }

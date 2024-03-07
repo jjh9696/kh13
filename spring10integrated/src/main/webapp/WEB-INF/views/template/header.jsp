@@ -114,7 +114,7 @@
 
 	<main>
 		<div class="header">
-			<h1 class="center">KH정보교육원</h1>
+			<h1 class="center"><a href="/" class="link">KH정보교육원</a></h1>
 		</div>
 		<div class="nav">
 			<ul class="menu">

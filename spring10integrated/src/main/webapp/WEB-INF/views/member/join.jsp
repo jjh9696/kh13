@@ -134,7 +134,7 @@
             }
         });
         $("[name=memberEmail]").blur(function(){
-            var regex = /^[a-z0-9]{8,20}@[a-z0-9\.]{1,20}$/;
+            var regex = /^[a-z0-9]{6,20}@[a-z0-9\.]{1,20}$/;
             var value = $(this).val();
             state.memberEmailValid = regex.test(value);
             $(this).removeClass("success fail")

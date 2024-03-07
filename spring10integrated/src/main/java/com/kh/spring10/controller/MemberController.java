@@ -17,6 +17,7 @@ import com.kh.spring10.dao.BuyDao;
 import com.kh.spring10.dao.MemberDao;
 import com.kh.spring10.dto.MemberDto;
 import com.kh.spring10.service.AttachService;
+import com.kh.spring10.service.EmailService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -37,6 +38,9 @@ public class MemberController {
 	@Autowired
 	private BuyDao buyDao;
 	
+	@Autowired
+	private EmailService emailService;
+	
 	//회원가입
 	@GetMapping("/join")
 	public String join() {
@@ -51,15 +55,23 @@ public class MemberController {
 	
 	@PostMapping("/join")
 	public String join(@ModelAttribute MemberDto memberDto,
-			@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
-			memberDao.insert(memberDto);
+		@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
+		
+		//회원 정보 등록
+		memberDao.insert(memberDto);
 
-			if(!attach.isEmpty()) {
-				int attachNo = attachService.save(attach);//파일저장+DB저장
-				memberDao.connect(memberDto.getMemberId(), attachNo);//연결
-			}
+		//첨부 파일 등록
+		if(!attach.isEmpty()) {
+			int attachNo = attachService.save(attach);//파일저장+DB저장
+			memberDao.connect(memberDto.getMemberId(), attachNo);//연결
+		}
+		
+		//가입 환영 메일 발송
+		emailService.sendWelcomeMail(memberDto.getMemberEmail());
+		
 		return "redirect:joinFinish";
 	}
+	
 	
 	
 	@RequestMapping("/joinFinish")
@@ -285,5 +297,24 @@ public class MemberController {
 		}
 	}
 	
+	//아이디 찾기
+	@GetMapping("/findId")
+	public String findId() {
+		return "/WEB-INF/views/member/findId.jsp";
+	}
 	
+	@PostMapping("/findId")
+	public String findId(@RequestParam String memberNick) {
+		boolean result = emailService.sendMemberId(memberNick);
+		if(result) {
+			return "redirect:findIdSuccess";
+		}
+		else {
+			return "redirect:findIdFail";
+		}
+	}
+	//@RequestMapping("/findIdSuccess")
+	//@RequestMapping("/findIdFail")
+	
+	//비밀번호 찾기
 }

@@ -21,12 +21,13 @@
 			<i class="fa-solid fa-edit blue ms-20 btn-reply-edit"></i>
 			<i class="fa-solid fa-trash red btn-reply-delete"></i>
 		</h3>
-		<pre class="reply-content">댓글 내용</pre>
+		<pre class="reply-content" style="min-height:150px; font-size:20px;">댓글 내용</pre>
 		<div class="reply-time">yyyy-MM-dd HH:mm:ss</div>
 	</div>
 </script>
 <script type="text/template" id="reply-item-edit-wrapper">
 	<div class="reply-item-edit">
+		<h3 class="reply-writer">작성자</h3>
 		<textarea class="tool w-100 reply-editor2" style="min-height:150px"></textarea>
 		<div class="right">
 			<button class="btn positive btn-reply-save">
@@ -49,7 +50,6 @@
 		//현재 사용자의 정보를 저장한다
 		var loginId = "${sessionScope.loginId}";
 		var isLogin = loginId.length > 0;
-		
 		
 		//페이지 로딩 완료 시 댓글 목록을 불러와서 출력
 		$.ajax({
@@ -79,13 +79,15 @@
 					//- data라는 명령으로는 읽기만 가능
 					//- 태그에 글자를 추가하고 싶다면 .attr() 명령 사용
 					//- 현재 로그인한 사용자의 댓글에만 버튼을 표시(나머진 삭제)
-					if(isLogin && loginId == response[i].replyWriter){//내가 작성한 댓글인 경우
+					//if(내가 작성한 댓글인 경우) {
+					//if(현재사용자ID == 댓글의작성자) {
+					if(isLogin && loginId == response[i].replyWriter) {
 						$(templateHtml).find(".btn-reply-edit")
 												.attr("data-reply-no", response[i].replyNo);
 						$(templateHtml).find(".btn-reply-delete")
-												.attr("data-reply-no", response[i].replyNo);						
+												.attr("data-reply-no", response[i].replyNo);
 					}
-					else{//내가 작성하지 않은경우
+					else {
 						$(templateHtml).find(".btn-reply-edit").remove();
 						$(templateHtml).find(".btn-reply-delete").remove();
 					}
@@ -159,8 +161,10 @@
 			var templateHtml = $.parseHTML(templateText);
 			
 			//댓글내용을 템플릿의 textarea에 설정
-			var replyContent = $(this).parents(".reply-item")
-													.find(".reply-content").text();
+			var replyWriter = $(this).parents(".reply-item").find(".reply-writer").text();
+			$(templateHtml).find(".reply-writer").text(replyWriter);
+			
+			var replyContent = $(this).parents(".reply-item").find(".reply-content").text();
 			$(templateHtml).find(".reply-editor2").val(replyContent);
 			
 			//(추가) 변경버튼을 눌렀을 때 글번호를 알 수 있도록 설정
@@ -300,7 +304,7 @@
 			- Rich Text Editor를 사용하면 문제가 해결된다(ex : summernote)
 			<pre>${boardDto.boardContent}</pre>
 		--%>
-		<pre>${boardDto.boardContent}</pre>
+		${boardDto.boardContent}
 	</div>
 	
 	<hr>
@@ -333,7 +337,9 @@
 		--%>
 		<c:if test="${sessionScope.loginId != null && (sessionScope.loginId == boardDto.boardWriter || sessionScope.loginLevel == '관리자')}">
 		<a class="btn negative" href="edit?boardNo=${boardDto.boardNo}">글수정</a>
-		<a class="btn negative link-confirm" data-message="정말 삭제하시겠습니까?" href="delete?boardNo=${boardDto.boardNo}">글삭제</a>
+		<a class="btn negative link-confirm" 
+				data-message="정말 삭제하시겠습니까?" 
+				href="delete?boardNo=${boardDto.boardNo}">글삭제</a>
 		</c:if>
 		<a class="btn positive" href="list">글목록</a>
 	</div>
@@ -342,7 +348,6 @@
 	<!-- 댓글 작성창 + 댓글 목록 -->
 	<div class="cell">
 		<span class="reply-count">0</span>개의 댓글이 있습니다
-		<hr>
 	</div>
 	<div class="cell reply-list-wrapper">
 		<div class="reply-item">
@@ -369,7 +374,7 @@
 		</div>
 	</div>
 	
-	<!-- 로그인이 딘 경우만 댓글 작성란이 활성화 되도록 구현 -->
+	<%-- 로그인이 된 경우만 댓글 작성란이 활성화되도록 구분 --%>
 	<c:choose>
 		<c:when test="${sessionScope.loginId != null}">
 			<div class="cell">
@@ -397,9 +402,8 @@
 		</c:otherwise>
 	</c:choose>
 	
+	
+	
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-
-
-

@@ -15,15 +15,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        .success-feedback, .fail-feedback {
-            display: none;
-        }
-        .form-control.is-valid {
-            border-color: #198754;
-        }
-        .form-control.is-invalid {
-            border-color: #dc3545;
-        }
+
     </style>
 
     <!-- jQuery -->
@@ -45,37 +37,58 @@
 <body>
 
     <form action="?" method="post" autocomplete="off" class="check-form">
-        <div class="container w-50 mt-4">
-            <div class="text-center mb-4">
-                <h1>사원 등록</h1>
-            </div>
-            <div class="mb-3">
-                <label for="empName" class="form-label">사원명</label>
-                <input type="text" id="empName" name="empName" placeholder="(ex) 홍길동" class="form-control" required>
-                <div class="success-feedback">이름이 형식에 맞습니다</div>
-                <div class="fail-feedback">올바른 이름을 작성하세요</div>
-            </div>
-            <div class="mb-3">
-                <label for="empDept" class="form-label">부서명</label>
-                <input type="text" id="empDept" name="empDept" placeholder="(ex) 영업부" class="form-control" required>
-                <div class="fail-feedback">부서를 반드시 설정하세요</div>
-            </div>
-            <div class="mb-3">
-                <label for="empDate" class="form-label">입사일</label>
-                <input type="date" id="empDate" name="empDate" class="form-control" required>
-                <div class="fail-feedback">잘못된 날짜 형식입니다</div>
-            </div>
-            <div class="mb-3">
-                <label for="empSal" class="form-label">급여액</label>
-                <input type="text" id="empSal" name="empSal" placeholder="(ex) 5000000" class="form-control" required>
-                <div class="fail-feedback">급여는 숫자로 작성하세요</div>
-            </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-success w-100">
-                    <i class="fa-solid fa-plus"></i> 사원 등록
-                </button>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="row">
+                        <div class="text-center mb-4 col">
+                            <h1>사원 등록</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="empName" class="form-label">사원명</label>
+                            <input type="text" id="empName" name="empName" placeholder="(ex) 홍길동" class="form-control" required>
+                            <div class="invalid-feedback">올바른 이름을 작성하세요</div>
+                            <div class="valid-feedback">이름이 형식에 맞습니다</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="empDept" class="form-label">부서명</label>
+                            <input type="text" id="empDept" name="empDept" placeholder="(ex) 영업부" class="form-control" required>
+                            <div class="invalid-feedback">부서를 반드시 설정하세요</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="empDate" class="form-label">입사일</label>
+                            <input type="date" id="empDate" name="empDate" class="form-control" required>
+                            <div class="invalid-feedback">잘못된 날짜 형식입니다</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="empSal" class="form-label">급여액</label>
+                            <input type="text" id="empSal" name="empSal" placeholder="(ex) 5000000" class="form-control" required>
+                            <div class="invalid-feedback">급여는 숫자로 작성하세요</div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="mb-3 col">
+                            <button type="submit" class="btn btn-success btn-lg w-100">
+                                <i class="fa-solid fa-plus"></i> 사원 등록
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
+</body>
 </body>
 </html>

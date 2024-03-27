@@ -36,43 +36,51 @@
         <div class="row mt-4">
             <div class="col-md-6 offset-md-3">
                 <form action="?" method="post" autocomplete="off" class="needs-validation" novalidate>
-                    <div class="mb-3">
-                        <label for="pocketmonNo" class="form-label">
-                            번호 <i class="fa-solid fa-asterisk red"></i>
-                        </label>
-                        <input type="text" id="pocketmonNo" name="pocketmonNo" class="form-control" placeholder="(ex) 1" required>
-                        <div class="invalid-feedback">번호를 반드시 작성하세요</div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="pocketmonNo" class="form-label">
+                                번호 <i class="fa-solid fa-asterisk red"></i>
+                            </label>
+                            <input type="text" id="pocketmonNo" name="pocketmonNo" class="form-control" placeholder="(ex) 1" required>
+                            <div class="invalid-feedback">번호를 반드시 작성하세요</div>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="pocketmonName" class="form-label">
-                            이름 <i class="fa-solid fa-asterisk red"></i>
-                        </label>
-                        <input type="text" id="pocketmonName" name="pocketmonName" class="form-control" placeholder="(ex) 이상해씨" required>
-                        <div class="invalid-feedback">이름을 반드시 작성하세요</div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="pocketmonName" class="form-label">
+                                이름 <i class="fa-solid fa-asterisk red"></i>
+                            </label>
+                            <input type="text" id="pocketmonName" name="pocketmonName" class="form-control" placeholder="(ex) 이상해씨" required>
+                            <div class="invalid-feedback">이름을 반드시 작성하세요</div>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="pocketmonType" class="form-label">
-                            속성 <i class="fa-solid fa-asterisk red"></i>
-                        </label>
-                        <select id="pocketmonType" name="pocketmonType" class="form-select" required>
-                            <option value="">선택하세요</option>
-                            <option value="풀">풀</option>
-                            <option value="불꽃">불꽃</option>
-                            <option value="물">물</option>
-                            <option value="전기">전기</option>
-                            <option value="독">독</option>
-                            <option value="비행">비행</option>
-                            <option value="무속성">무속성</option>
-                        </select>
-                        <div class="invalid-feedback">반드시 속성을 선택해야 합니다</div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="pocketmonType" class="form-label">
+                                속성 <i class="fa-solid fa-asterisk red"></i>
+                            </label>
+                            <select id="pocketmonType" name="pocketmonType" class="form-select" required>
+                                <option value="">선택하세요</option>
+                                <option value="풀">풀</option>
+                                <option value="불꽃">불꽃</option>
+                                <option value="물">물</option>
+                                <option value="전기">전기</option>
+                                <option value="독">독</option>
+                                <option value="비행">비행</option>
+                                <option value="무속성">무속성</option>
+                            </select>
+                            <div class="invalid-feedback">반드시 속성을 선택해야 합니다</div>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-success w-100">
-                            <i class="fas fa-floppy-disk"></i> 등록
-                        </button>
+                    <div class="row mt-4">
+                        <div class="mb-3 col">
+                            <button type="submit" class="btn btn-success w-100">
+                                <i class="fas fa-floppy-disk"></i> 등록
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>

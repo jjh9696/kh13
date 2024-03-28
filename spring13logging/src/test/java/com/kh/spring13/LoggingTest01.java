@@ -24,7 +24,7 @@ public class LoggingTest01 {
 		//-TRACE는 프로그램의 모든 과정에 대한 기록
 		//-DEBUG는 개발 과정에서의 확인 메세지
 		
-		//설정을 안하면 여기부터 보여짐
+		//application.properties에 설정을 안하면 여기부터 보여짐
 		//-INFO는 처리와 관련된 정보 메세지
 		//-WARN은 잠재적 위험요소에 대한 경고
 		//-ERROR는 기능이 중단되는 경우에 대한 메세지(예외)

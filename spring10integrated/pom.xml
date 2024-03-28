@@ -98,6 +98,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+		
+		<!-- lombok -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <!-- <version>1.18.32</version> 스프링과 친한 애들은 버전을 삭제해도 됨-->
+		    <scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>

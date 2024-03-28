@@ -34,9 +34,16 @@
 <!--     <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 <link rel="stylesheet" type="text/css" href="/css/layout.css">
 
-<!-- font awesome 아이콘 CDN -->
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- font awesome 아이콘 CDN -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- bootstrap cdn -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.3/cosmo/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
 </style>
@@ -113,7 +120,58 @@
 <body>
 
 	<main>
-		<div class="header">
+	<div class="container-fluid">
+        <div class="row my-4">
+            <div class="offset-md-1 col-md-10">
+
+                <!-- 메뉴바 -->
+                <nav class="navbar navbar-expand-lg bg-dark fixed-top" data-bs-theme="dark">
+                    <div class="container-fluid">
+                        <!-- 좌상단 글자 -->
+                        <a class="navbar-brand" href="#">햄버거왕의 교실</a>
+
+                        <!-- 햄버거 메뉴 버튼 -->
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbar-wrapper" aria-controls="navbar-wrapper" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <!-- 실제 메뉴 영역 -->
+                        <div class="collapse navbar-collapse" id="navbar-wrapper">
+                            <ul class="navbar-nav me-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" 
+                                        href="#" role="button"
+                                        aria-haspopup="true" aria-expanded="false">데이터관리</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/pocketmon/list">포켓몬스터정보</a>
+                                        <a class="dropdown-item" href="/emp/list">사원정보</a>
+                                        <a class="dropdown-item" href="/menu/list">메뉴정보</a>
+                                        <!-- <div class="dropdown-divider"></div> -->
+                                        <a class="dropdown-item" href="/student/list">학생성적정보</a>
+                                    </div>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/board/list">게시판</a>
+                                </li>
+                            </ul>
+                            <div class="d-flex">
+                                <a href="/member/join" class="link-light link-underline-opacity-0">
+                                    <i class="fa-solid fa-user-plus"></i>
+                                    회원가입
+                                </a>
+                                <a href="/member/login" class="link-light ms-4 link-underline-opacity-0">
+                                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                                    로그인
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                
+		<%-- <div class="header">
 			<h1 class="center"><a href="/" class="link">KH정보교육원</a></h1>
 		</div>
 		<div class="nav">
@@ -131,7 +189,7 @@
 
 				<li><a href="/board/list">자유게시판</a></li>
 
-				<%-- 관리자 메뉴는 관리자에게만 출력 --%>
+				관리자 메뉴는 관리자에게만 출력
 				<c:if test="${sessionScope.loginLevel == '관리자'}">
 					<li><a href="#">관리자메뉴</a>
 						<ul>
@@ -165,7 +223,7 @@
 						</c:otherwise>
 					</c:choose></li>
 			</ul>
-		</div>
-		<div class="section">
+		</div> --%>
+		<div class="section mt-4 pt-4">
 			<!--             <div class="aside"></div> -->
 			<div class="article">

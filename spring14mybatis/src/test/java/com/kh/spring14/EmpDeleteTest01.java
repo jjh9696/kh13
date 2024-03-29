@@ -4,22 +4,25 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.kh.spring14.dao.PocketmonDao;
-import com.kh.spring14.dto.PocketmonDto;
+import com.kh.spring14.dao.EmpDao;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @SpringBootTest
-public class PocketmonSelectTest02 {
+public class EmpDeleteTest01 {
 
 	@Autowired
-	private PocketmonDao pocketmonDao;
+	private EmpDao empDao;
 	
 	@Test
 	public void test() {
-		int pocketmonNo = 50;
-		PocketmonDto pocketmonDto = pocketmonDao.selectOne(pocketmonNo);
-		log.debug("pocketmonDto = {}", pocketmonDto);
+		int empNo=61;
+		if(empDao.delete(empNo)) {
+			log.debug("삭제 성공");
+		}
+		else {
+			log.debug("존재하지 않는 대상");
+		}
 	}
 }

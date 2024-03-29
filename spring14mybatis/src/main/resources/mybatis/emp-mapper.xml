@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!-- 위에있는거 반드시 있어야 함 (첫번째줄에)-->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="emp">
+
+	<select id="list" resultType="EmpDto">
+		select * from emp
+	</select>
+		
+	<insert id="add">
+		insert into emp (
+			emp_no, emp_name, emp_dept, emp_date, emp_sal
+		)
+		values(emp_seq.nextval, #{empName}, #{empDept}, #{empDate}, #{empSal})
+	</insert>
+	
+	<update id="edit">
+		update emp
+		set emp_name=#{empName}, emp_dept=#{empDept}, 
+		emp_date=#{empDate}, emp_sal=#{empSal}
+		where emp_no=#{empNo}
+	</update>
+	
+	<delete id="remove">
+		delete emp
+		where emp_no=#{empNo}
+	</delete>
+	
+	 <select id="find" resultType="EmpDto">
+	 	select * from emp where emp_no=#{empNo}
+	 </select>
+
+</mapper>

@@ -33,7 +33,7 @@ public class PocketmonDao {
 	}
 	
 	public boolean delete(int pocketmonNO) {
-		return sqlSession.update("pocketmon.remove", pocketmonNO) > 0;
+		return sqlSession.delete("pocketmon.remove", pocketmonNO) > 0;
 	}
 	
 	//상세조회를 구현하는 방법은 두가지
@@ -46,6 +46,6 @@ public class PocketmonDao {
 //		return list.isEmpty() ? null : list.get(0);
 		
 		//2
-		return sqlSession.selectOne("pocketmon.find",pocketmonNO);
+		return sqlSession.selectOne("pocketmon.find", pocketmonNO);
 	}
 }

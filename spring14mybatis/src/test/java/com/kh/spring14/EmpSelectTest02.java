@@ -1,25 +1,27 @@
 package com.kh.spring14;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.kh.spring14.dao.PocketmonDao;
-import com.kh.spring14.dto.PocketmonDto;
+import com.kh.spring14.dao.EmpDao;
+import com.kh.spring14.dto.EmpDto;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @SpringBootTest
-public class PocketmonSelectTest02 {
+public class EmpSelectTest02 {
 
 	@Autowired
-	private PocketmonDao pocketmonDao;
+	private EmpDao empDao;
 	
 	@Test
 	public void test() {
-		int pocketmonNo = 50;
-		PocketmonDto pocketmonDto = pocketmonDao.selectOne(pocketmonNo);
-		log.debug("pocketmonDto = {}", pocketmonDto);
+		int empNo = 50;
+		EmpDto empDto = empDao.selectOne(empNo);
+		log.debug("empDto = {}", empDto);
 	}
 }

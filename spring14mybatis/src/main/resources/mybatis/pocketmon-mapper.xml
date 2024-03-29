@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!-- 위에있는거 반드시 있어야 함 (첫번째줄에)-->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pocketmon">
+
+	<!-- resultType은 조회 결과의 형태를 의미하며 select에만 작성 -->
+	<select id="list" resultType="PocketmonDto">
+		select * from pocketmon
+	</select>
+		
+	<insert id="add">
+		insert into pocketmon (
+			pocketmon_no, pocketmon_name, pocketmon_type
+		)
+		values(#{pocketmonNo}, #{pocketmonName}, #{pocketmonType})
+		<!-- naming holder 물음표 대신 #{} 이렇게 씀 -->
+	</insert>
+	
+	<update id="edit">
+		update pocketmon
+		set pocketmon_name=#{pocketmonName}, pocketmon_type=#{pocketmonType}
+		where pocketmon_no=#{pocketmonNo}
+	</update>
+	
+	<delete id="remove">
+		delete pocketmon
+		where pocketmon_no=#{pocketmonNo}
+	</delete>
+	
+	<!-- 
+		상세(단일)조회
+		-구문은 목록때와 동일하게 생성
+		-차이는 호출할 때 selectList로 부르냐, selectOne으로 부르냐의 차이
+	 -->
+	 <select id="find" resultType="PocketmonDto">
+	 	select * from pocketmon where pocketmon_no=#{pocketmonNo}
+	 </select>
+
+</mapper>

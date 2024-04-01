@@ -35,7 +35,7 @@ public class BoardController {
 	
 	//게시판에서는 empty string으로 전달되는 파라미터를 null로 간주하도록 설정
 	//@InitBinder 설정으로 구현
-	@InitBinder
+	@InitBinder//빈 문자열을 null로 처리하는 도구 설정
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
 	}

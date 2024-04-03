@@ -27,13 +27,13 @@ import jakarta.servlet.http.HttpServletResponse;
 @Service
 public class TestInterceptor implements HandlerInterceptor{
 
-//	@Override
-//	public boolean preHandle(HttpServletRequest request, 
-//			HttpServletResponse response, Object handler)
-//			throws Exception {
-//		System.out.println("인터셉터 실행");
-//		return true;//통과
-//	}
+	@Override
+	public boolean preHandle(HttpServletRequest request, 
+			HttpServletResponse response, Object handler)
+			throws Exception {
+		System.out.println("인터셉터 실행");
+		return true;//통과
+	}
 
 //	@Override
 //	public void postHandle(HttpServletRequest request, 

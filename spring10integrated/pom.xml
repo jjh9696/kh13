@@ -89,6 +89,7 @@
 		    <version>1.17.2</version>
 		</dependency>
 
+<!-- 이메일 기능을 사용하기 위한 의존성 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>

@@ -19,6 +19,7 @@ import com.kh.spring10.dto.MemberDto;
 import com.kh.spring10.service.AttachService;
 import com.kh.spring10.service.EmailService;
 
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpSession;
 
 
@@ -55,7 +56,7 @@ public class MemberController {
 	
 	@PostMapping("/join")
 	public String join(@ModelAttribute MemberDto memberDto,
-		@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
+		@RequestParam MultipartFile attach) throws IllegalStateException, IOException, MessagingException {
 		
 		//회원 정보 등록
 		memberDao.insert(memberDto);
@@ -67,7 +68,8 @@ public class MemberController {
 		}
 		
 		//가입 환영 메일 발송
-		emailService.sendWelcomeMail(memberDto.getMemberEmail());
+//		emailService.sendWelcomeMail(memberDto.getMemberEmail());
+		emailService.sendWelcomeMail(memberDto);
 		
 		return "redirect:joinFinish";
 	}
@@ -150,6 +152,7 @@ public class MemberController {
     public String mypage(Model model, HttpSession session) {
         //1.세션에 저장된 아이디를 꺼낸다(세션에는 Object형태로 저장되어있음)
         String loginId = (String) session.getAttribute("loginId");
+        System.out.println("마이페이지 실행!" + loginId);//확인용
 
         //2.아이디에 맞는 정보를 조회한다
         MemberDto memberDto = memberDao.selectOne(loginId);

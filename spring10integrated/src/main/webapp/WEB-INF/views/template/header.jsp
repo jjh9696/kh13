@@ -128,7 +128,7 @@
                 <nav class="navbar navbar-expand-lg bg-dark fixed-top" data-bs-theme="dark">
                     <div class="container-fluid">
                         <!-- 좌상단 글자 -->
-                        <a class="navbar-brand" href="#">햄버거왕의 교실</a>
+                        <a class="navbar-brand" href="/">햄버거왕의 교실</a>
 
                         <!-- 햄버거 메뉴 버튼 -->
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -158,14 +158,29 @@
                                 </li>
                             </ul>
                             <div class="d-flex">
-                                <a href="/member/join" class="link-light link-underline-opacity-0">
-                                    <i class="fa-solid fa-user-plus"></i>
-                                    회원가입
-                                </a>
-                                <a href="/member/login" class="link-light ms-4 link-underline-opacity-0">
-                                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                                    로그인
-                                </a>
+                            	<c:choose>
+									<c:when test="${sessionScope.loginId != null}">
+										<a href="${pageContext.request.contextPath}/member/mypage" class="link-light link-underline-opacity-0">
+		                                    <i class="fa-solid fa-user"></i>
+		                                    ${sessionScope.loginId} 님
+		                                </a>
+		                                <a href="${pageContext.request.contextPath}/member/logout" class="link-light ms-4 link-underline-opacity-0">
+		                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+		                                    로그아웃
+		                                </a>
+									</c:when>
+									<c:otherwise>
+										<a href="${pageContext.request.contextPath}/member/join" class="link-light link-underline-opacity-0">
+		                                    <i class="fa-solid fa-user-plus"></i>
+		                                    회원가입
+		                                </a>
+		                                <a href="${pageContext.request.contextPath}/member/login" class="link-light ms-4 link-underline-opacity-0">
+		                                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+		                                    로그인
+		                                </a>
+									</c:otherwise>
+								</c:choose>
+                                
                             </div>
                         </div>
                     </div>

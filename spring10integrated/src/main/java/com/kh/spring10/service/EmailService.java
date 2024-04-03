@@ -15,6 +15,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.kh.spring10.dao.CertDao;
 import com.kh.spring10.dao.MemberDao;
@@ -45,7 +46,7 @@ public class EmailService {
 	}
 	//가입 환영 이메일 발송
 	public void sendWelcomeMail(MemberDto memberDto) throws IOException, MessagingException {
-		ClassPathResource resource = new ClassPathResource("template/welcome-template.html");
+		ClassPathResource resource = new ClassPathResource("templates/welcome-template.html");
 		File target = resource.getFile();
 		
 		StringBuffer buffer = new StringBuffer();
@@ -60,7 +61,20 @@ public class EmailService {
 		who.text(memberDto.getMemberNick());
 		
 		Element link = document.getElementById("login-link");
-		link.attr("href","member/login");
+//		link.attr("href","http://localhost:8080/member/login");//서버PC에서만
+//		link.attr("href","http://192.168.30.45:8080/member/login");//강의장에서만
+		
+		//주소를 상황에 맞게 생성하는 도구 -ServletUriComponentsBuilder
+		String url = ServletUriComponentsBuilder.fromCurrentContextPath()
+												.path("/member/login")
+												.build().toUriString();
+		link.attr("href", url);
+//		link.attr("href", ServletUriComponentsBuilder.fromCurrentContextPath()); 한 번에 쓰려면 이렇게 가능
+		
+		Element image = document.getElementById("background-img");
+		image.attr("src", ServletUriComponentsBuilder.fromCurrentContextPath()
+													.path("/image/bg.jpg")
+													.build().toUriString());
 		
 		//마임메세지 생성
 		MimeMessage message = sender.createMimeMessage();

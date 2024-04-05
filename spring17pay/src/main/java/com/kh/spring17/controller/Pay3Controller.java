@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.spring17.dao.PaymentDao;
 import com.kh.spring17.dao.ProductDao;
+import com.kh.spring17.dto.PaymentDetailDto;
+import com.kh.spring17.dto.PaymentDto;
 import com.kh.spring17.dto.ProductDto;
 import com.kh.spring17.service.KakaoPayService;
 import com.kh.spring17.vo.KakaoPayApproveRequestVO;
@@ -20,6 +23,7 @@ import com.kh.spring17.vo.KakaoPayApproveResponseVO;
 import com.kh.spring17.vo.KakaoPayReadyRequestVO;
 import com.kh.spring17.vo.KakaoPayReadyResponseVO;
 import com.kh.spring17.vo.PurchaseListVO;
+import com.kh.spring17.vo.PurchaseVO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +40,10 @@ public class Pay3Controller {
     @Autowired
     private ProductDao productDao;
     
+    @Autowired
+    private PaymentDao paymentDao;
+    
+    
     @GetMapping("/purchase")
     public String purchase(Model model) {
         model.addAttribute("list", productDao.selectList());
@@ -47,7 +55,52 @@ public class Pay3Controller {
 					HttpSession session) throws URISyntaxException {
 		log.debug("size = {}", vo.getPurchase().size());
 		log.debug("vo = {}", vo);
-		return null;
+		
+		//vo의 purchase 목록을 이용하여 결제 정보를 생성하는 코드
+		StringBuffer name = new StringBuffer();
+		int total = 0;
+		
+		//이름-OOO 외 N건, 가격
+//		for(PurchaseVO purchaseVO : vo.getPurchase()) {//구매이력을 반복하며 조회
+		for(int i=0; i<vo.getPurchase().size();i++) {
+			PurchaseVO purchaseVO = vo.getPurchase().get(i);
+			ProductDto productDto = productDao.selectOne(purchaseVO.getNo());
+			if(i==0) {
+				name.append(productDto.getName());//이름(한번만, i=0)
+			}
+			total += productDto.getPrice() * purchaseVO.getQty();//가격 * 수량
+		}
+		//구매목록이 2개 이상이라면 "외 N건" 이라는 글자를 추가
+		if(vo.getPurchase().size()>=2) {
+			name.append(" 외 ");
+			name.append(vo.getPurchase().size()-1);
+			name.append("건");
+		}
+		
+		log.debug("결제이름 = {}", name);
+		log.debug("결제금액 = {}", total);
+		
+		//결제 준비 요청 - KakaoPayReadyRequestVO, KakaoPayReadyResponseVO
+		KakaoPayReadyRequestVO requestVO = 
+				KakaoPayReadyRequestVO.builder()
+					.partnerOrderId(UUID.randomUUID().toString())
+					.partnerUserId("testuser1")
+					.itemName(name.toString())
+					.totalAmount(total)
+				.build();
+		
+		KakaoPayReadyResponseVO responseVO =
+				kakaoPayService.ready(requestVO);
+		
+		//세션에 Flash Attribute를 추가
+				session.setAttribute("partner_order_id", requestVO.getPartnerOrderId());
+				session.setAttribute("partner_user_id", requestVO.getPartnerUserId());
+				session.setAttribute("tid", responseVO.getTid());
+		//(+추가) 사용자가 구매한 상품번호와 수량 목록을결제 성공 페이지로 전송
+//				session.setAttribute("list", vo.getPurchase()); =
+				session.setAttribute("vo", vo);
+		
+		return "redirect:"+responseVO.getNextRedirectPcUrl();//결제페이지 안내
     }
     
     @GetMapping("/purchase/success")
@@ -67,6 +120,13 @@ public class Pay3Controller {
 		session.removeAttribute("tid");
     	
 		KakaoPayApproveResponseVO responseVO = kakaoPayService.approve(requestVO);
+		
+		//세션에 전송된 vo(구매목록)을 꺼내서 DB에 저장할 때 활용
+		PurchaseListVO vo = (PurchaseListVO) session.getAttribute("vo");
+		session.removeAttribute("vo");
+		
+		//카카오페이서비스에 모듈화 해놓은 걸 불러오기!(컨트롤러가 길어지면 안되서 모듈화 해서 저장함)
+		kakaoPayService.insertPayment(vo, responseVO);
     	
     	return "redirect:successComplete";
     }

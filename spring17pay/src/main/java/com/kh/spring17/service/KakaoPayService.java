@@ -3,21 +3,28 @@ package com.kh.spring17.service;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.kh.spring17.configuration.KakaoPayProperties;
+import com.kh.spring17.dao.PaymentDao;
+import com.kh.spring17.dao.ProductDao;
+import com.kh.spring17.dto.PaymentDetailDto;
+import com.kh.spring17.dto.PaymentDto;
+import com.kh.spring17.dto.ProductDto;
 import com.kh.spring17.vo.KakaoPayApproveRequestVO;
 import com.kh.spring17.vo.KakaoPayApproveResponseVO;
 import com.kh.spring17.vo.KakaoPayReadyRequestVO;
 import com.kh.spring17.vo.KakaoPayReadyResponseVO;
+import com.kh.spring17.vo.PurchaseListVO;
+import com.kh.spring17.vo.PurchaseVO;
 
 @Service
 public class KakaoPayService {
@@ -30,6 +37,12 @@ public class KakaoPayService {
 	
 	@Autowired
 	private HttpHeaders header;
+	
+	@Autowired
+	private PaymentDao paymentDao;
+	@Autowired
+	private ProductDao productDao;
+	
 	
 	//준비요청 메소드
 	public KakaoPayReadyResponseVO ready(KakaoPayReadyRequestVO requestVO) throws URISyntaxException {
@@ -78,5 +91,43 @@ public class KakaoPayService {
 		HttpEntity entity = new HttpEntity(body, header);//헤더+바디
 		
 		return template.postForObject(uri, entity, KakaoPayApproveResponseVO.class);
+	}
+	
+	
+	//여러 번의 등록 과정이 모두 성공하거나 모두 실패해야 한다
+	//-> 하나의 트랜잭션(transaction)으로 관리되어야 한다
+	@Transactional
+	public void insertPayment(PurchaseListVO vo, KakaoPayApproveResponseVO responseVO) {
+		//DB에 결제 완료된 내역을 저장
+				//-결제 대표 정보(payment) = 번호생성 후 등록
+				int paymentNo = paymentDao.paymentSequence();
+				PaymentDto paymentDto = PaymentDto.builder()
+					.paymentNo(paymentNo)//시퀀스
+					.paymentName(responseVO.getItemName())//대표결제명
+					.paymentTotal(responseVO.getAmount().getTotal())//결제총금액
+					.paymentRemain(responseVO.getAmount().getTotal())//잔여금액(결제총금액과 동일)
+					.memberId(responseVO.getPartnerUserId())//구매자ID
+					.paymentTid(responseVO.getTid())//거래번호
+				.build();
+				paymentDao.insertPayment(paymentDto);
+				
+				//-결제 상세 내역(payment_detail) - 목록 개수만큼 반복적으로 등록
+				for(PurchaseVO purchaseVO : vo.getPurchase()) {
+					ProductDto productDto = 
+							productDao.selectOne(purchaseVO.getNo());//상품정보 조회
+					
+					int paymentDetailNo = paymentDao.paymentDetailSequence();
+					PaymentDetailDto paymentDetailDto = PaymentDetailDto.builder()
+							.paymentDetailNo(paymentDetailNo)//시퀀스
+//							.paymentDetailProduct(purchaseVO.getNo())//상품번호 (둘다 됨)
+							.paymentDetailProduct(productDto.getNo())//상품번호
+							.paymentDetailQty(purchaseVO.getQty())//수량
+							.paymentDetailName(productDto.getName())//상품명
+							.paymentDetailPrice(productDto.getPrice())//상품가격
+							.paymentDetailStatus("승인")
+							.paymentNo(paymentNo)//결제대표번호
+						.build();
+					paymentDao.insertPaymentDetail(paymentDetailDto);//등록
+				}
 	}
 }

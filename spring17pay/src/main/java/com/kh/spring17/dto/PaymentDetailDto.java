@@ -7,11 +7,15 @@ import lombok.NoArgsConstructor;
 
 @Data @Builder @NoArgsConstructor @AllArgsConstructor
 public class PaymentDetailDto {
-	private int paymentDetailNo;
-	private int paymentDetailProduct;
-	private int paymentDetailQty;
-	private String paymentDetailName;
-	private int paymentDetailPrice;
-	private String paymentDetailStatus;
-	private int paymentNo;
+    private int paymentDetailNo;
+    private int paymentDetailProduct;
+    private int paymentDetailQty;
+    private String paymentDetailName;
+    private int paymentDetailPrice;
+    private String paymentDetailStatus;
+    private int paymentNo;
+    
+    public int getTotalPrice() {
+        return this.paymentDetailPrice * this.paymentDetailQty;
+    }
 }

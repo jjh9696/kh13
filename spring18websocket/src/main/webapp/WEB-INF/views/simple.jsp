@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>웹소켓 연결/종료</title>
 </head>
 <body>
 	<h1>웹소켓 연결/종료</h1>

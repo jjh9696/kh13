@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>그룹채팅 예제</title>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
@@ -26,32 +26,31 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
 	<script type="text/javascript">
-	
-	$(function(){
-		
-		$(".btn-connect").click(function(){
-			window.socket = new SockJS("${pageContext.request.contextPath}/ws/group");
+		$(function(){
 			
-			//연결 완료 시 해야하 작업들을 "콜백 함수"로 설정
-			window.socket.onmessage = function(e){
-				var area = $("<div").text(e.data);
-				$(".chat-wrapper").append(area);
-			}
-		});	
-		
-		$(".btn-disconnect").click(function(){
-			window.socket.close();
-		});
-		
-		//전송버튼을 누르면 입력한 메세지가 있는 경우 서버에 전송
-		$(".btn-send").click(function(){
-			var text = $(".text-input").val();//입력창의 입력값을 불러온다
-			if(text.length == 0) return;//입력값이 없으면 중지한다
+			$(".btn-connect").click(function(){
+				window.socket = new SockJS("${pageContext.request.contextPath}/ws/group");
+				
+				//연결 완료 시 해야할 작업들을 "콜백 함수"로 설정
+				window.socket.onmessage = function(e){
+					var area = $("<div").text(e.data);
+					$(".chat-wrapper").append(area);
+				}
+			});	
 			
-			window.socket.send(text);//서버로 입력값을 전송한다
-			$(".text-input".val(""));//입력창의 입력값을 삭제한다
+			$(".btn-disconnect").click(function(){
+				window.socket.close();
+			});
+			
+			//전송버튼을 누르면 입력한 메세지가 있는 경우 서버에 전송
+			$(".btn-send").click(function(){
+				var text = $(".text-input").val();//입력창의 입력값을 불러온다
+				if(text.length == 0) return;//입력값이 없으면 중지한다
+				
+				window.socket.send(text);//서버로 입력값을 전송한다
+				$(".text-input".val(""));//입력창의 입력값을 삭제한다
+			});
 		});
-	});
 	</script>
 </body>
 </html>

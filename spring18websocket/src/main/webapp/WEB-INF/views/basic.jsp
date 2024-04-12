@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Basic 웹소켓 예제</title>
 </head>
 <body>
 

@@ -18,4 +18,8 @@ public class PageController {
 		return "simple";
 	}
 	
+	@RequestMapping("/chatbot")
+	public String chatbot() {
+		return "chatbot";
+	}
 }

@@ -1,6 +1,7 @@
 package com.kh.spring18.websocket;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -32,6 +33,19 @@ public class MemberWebSocketServer extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		users.add(session);
 		log.debug("사용자 접속! 현재 사용자 {}명", users.size());
+		
+		//과연 HttpSession에 있는 loginId와 loginlevel이 연동 되었을까?
+		//log.debug("HttpSession 정보 = {}", session.getAttributes());
+		
+		//이렇게 써도 되긴하는데 두 번 꺼내기 때문에 효율적이지 않다(느려짐)
+		//String memberId = (String)session.getAttributes().get("loginId");
+		//String memberLevel = (String)session.getAttributes().get("loginLevel");
+		
+		Map<String, Object> data = session.getAttributes();
+		String memberId = (String)data.get("loginId");
+		String memberLevel = (String)data.get("loginLevel");
+		log.debug("아이디 = {}, 등급 = {}", memberId, memberLevel);
+				
 	}
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
@@ -44,22 +58,32 @@ public class MemberWebSocketServer extends TextWebSocketHandler {
 		//서버와 클라이언트간의 메세지 규약을 만들어보자
 		//- 클라이언트 -----> 서버 : ChatRequestVO
 		//- 서버 -----> 클라이언트 : ChatResponseVO
-
+		
+		//(+추가) 연동된 세션 정보를 확인해서 비회원이면 차단
+		//비회원 = 연동된 세션에 loginId, loginLevel 중 하나라도 없는 경우
+		Map<String, Object> data = session.getAttributes();
+		String memberId = (String) data.get("loginId");
+		String memberLevel = (String) data.get("loginLevel");
+		boolean isMember = memberId != null && memberLevel != null;
+		if(isMember == false) return;//회원이 아니면 차단
+		
 		//[1] 사용자가 보낸 메세지를 ChatRequestVO로 해석
 		ObjectMapper mapper = new ObjectMapper();
 		ChatRequestVO requestVO = 
 				mapper.readValue(message.getPayload(), ChatRequestVO.class);
-
+		
 		//[2] 사용자에게 보낼 메세지를 ChatResponseVO로 생성
 		ChatResponseVO responseVO = ChatResponseVO.builder()
 					.content(requestVO.getContent())//내용은 그대로 복사
 					.time(LocalDateTime.now().toString())//시간 추가
+					.memberId(memberId)//작성자 정보 추가
+					.memberLevel(memberLevel)//작성등급 정보 추가
 				.build();
-
+		
 		//[3] 메세지 객체 생성
 		String json = mapper.writeValueAsString(responseVO);
 		TextMessage response = new TextMessage(json);
-
+		
 		//전체에게 메세지를 전송(broadcast)
 		for(WebSocketSession user : users) {
 			user.sendMessage(response);

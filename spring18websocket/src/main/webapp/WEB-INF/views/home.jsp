@@ -15,6 +15,12 @@
 	<c:choose>
 		<c:when test="${sessionScope.loginId != null}">
 			<h2><a href="logout">로그아웃</a></h2>
+			<h2><a href="basic">기본 웹소켓 예제</a></h2>
+			<h2><a href="simple">간단한 전송 웹소켓 예제</a></h2>
+			<h2><a href="chatbot">챗봇 웹소켓 예제</a></h2>
+			<h2><a href="group">그룹 웹소켓 예제</a></h2>
+			<h2><a href="json">JSON 웹소켓 예제</a></h2>
+			<h2><a href="member">회원전용 웹소켓 예제</a></h2>
 		</c:when>
 		<c:otherwise>
 			<form action="login" method="post">
@@ -24,5 +30,7 @@
 			</form>
 		</c:otherwise>
 	</c:choose>
+	
+	
 </body>
 </html>

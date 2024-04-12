@@ -62,6 +62,11 @@ public class PageController {
 		return "json";
 	}
 	
+	@RequestMapping("/member")
+	public String member() {
+		return "member";
+	}
+	
 	@RequestMapping("/")
 	public String home() {
 		return "home";

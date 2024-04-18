@@ -25,10 +25,10 @@ public class KakaoPayTest06 {
 		//데이터 준비 - KakaoPayApproveRequestVO
 		KakaoPayApproveRequestVO requestVO = 
 				KakaoPayApproveRequestVO.builder()
-					.tid("T60e32c64510678bc609")
-					.partnerOrderId("a326f704-93ac-4e85-9295-10d76ccb0c50")
+					.tid("T616afe54510678be1d9")
+					.partnerOrderId("1cf729c7-840c-49c3-ab10-117a34317e18")
 					.partnerUserId("testuser1")
-					.pgToken("9edf6cc7131814e60223")
+					.pgToken("7a3d36d7b12488c7cc4e")
 				.build();
 		
 		//처리

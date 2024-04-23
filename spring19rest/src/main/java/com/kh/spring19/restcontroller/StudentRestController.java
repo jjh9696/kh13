@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.spring19.dao.StudentDao;
-import com.kh.spring19.dto.EmpDto;
 import com.kh.spring19.dto.StudentDto;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -75,7 +74,7 @@ public class StudentRestController {
 			@ApiResponse(responseCode = "200",description = "조회 완료",
 				content = @Content(
 						mediaType = "application/json",
-						array = @ArraySchema(schema = @Schema(implementation = EmpDto.class))
+						array = @ArraySchema(schema = @Schema(implementation = StudentDto.class))
 				)
 			),
 			@ApiResponse(responseCode = "500",description = "서버 오류",

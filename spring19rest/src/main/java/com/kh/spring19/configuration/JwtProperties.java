@@ -10,7 +10,6 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "custom.jwt")
 public class JwtProperties {
 	private String keyStr;
-	private int expireHour;
-	private String issuer;	
-
+	private int expireHour, expireHourRefresh;
+	private String issuer;
 }

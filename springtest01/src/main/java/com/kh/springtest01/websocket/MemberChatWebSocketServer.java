@@ -15,6 +15,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.springtest01.dao.MessageDao;
 import com.kh.springtest01.dto.MessageDto;
+import com.kh.springtest01.service.JwtService;
 import com.kh.springtest01.vo.ChatRequestVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,18 +27,21 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Service
-public class MemberWebSocketServer extends TextWebSocketHandler {
-
-	//사용자의 정보를 저장할 저장소 생성
-	private Set<WebSocketSession> users = new CopyOnWriteArraySet<>();//동기화 됨(자물쇠 있음)
+public class MemberChatWebSocketServer extends TextWebSocketHandler {
 
 	@Autowired
 	private MessageDao messageDao;
 	
+	@Autowired
+	private JwtService jwtService;
+	
+	//사용자의 정보를 저장할 저장소 생성
+	private Set<WebSocketSession> users = new CopyOnWriteArraySet<>();//동기화 됨(자물쇠 있음)
+
+	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		users.add(session);
-		log.debug("사용자 접속! 현재 사용자 {}명", users.size());
 		
 		//과연 HttpSession에 있는 loginId와 loginlevel이 연동 되었을까?
 		//log.debug("HttpSession 정보 = {}", session.getAttributes());
@@ -64,7 +68,6 @@ public class MemberWebSocketServer extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		users.remove(session);
-		log.debug("사용자 종료! 현재 사용자 {}명", users.size());
 	}
 	@Override
 	protected void handleTextMessage(WebSocketSession session, 

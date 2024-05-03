@@ -6,9 +6,8 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
-import com.kh.springtest01.interceptor.JwtHandshakeInterceptor;
 import com.kh.springtest01.websocket.ChatbotWebSocketServer;
-import com.kh.springtest01.websocket.MemberWebSocketServer;
+import com.kh.springtest01.websocket.MemberChatWebSocketServer;
 
 @EnableWebSocket
 @Configuration
@@ -18,18 +17,16 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer {
     private ChatbotWebSocketServer chatbotWebSocketServer;
 
     @Autowired
-    private MemberWebSocketServer memberWebSocketServer;
+    private MemberChatWebSocketServer memberChatWebSocketServer;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(chatbotWebSocketServer, "/ws/chatbot/{userId}/{roomId}/websocket")
-                .addInterceptors(new JwtHandshakeInterceptor())
+        registry.addHandler(chatbotWebSocketServer, "/ws/chatbot")
+        		.setAllowedOriginPatterns("*")
                 .withSockJS();
 
-        registry.addHandler(memberWebSocketServer, "/ws/member")
-                .addInterceptors(new JwtHandshakeInterceptor())
+        registry.addHandler(memberChatWebSocketServer, "/ws/memberChat")
+		        .setAllowedOriginPatterns("*")
                 .withSockJS();
     }
 }
-
-

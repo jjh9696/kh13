@@ -53,7 +53,7 @@ public class StudentRestController {
 						schema = @Schema(implementation = String.class), 
 						examples = @ExampleObject("server error")
 				)
-			),
+			)
 		}
 	)
 	
@@ -83,7 +83,7 @@ public class StudentRestController {
 						schema = @Schema(implementation = String.class), 
 						examples = @ExampleObject("server error")
 				)
-			),
+			)
 		}
 	)
 	

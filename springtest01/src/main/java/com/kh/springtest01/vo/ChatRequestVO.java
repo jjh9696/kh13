@@ -12,4 +12,6 @@ import lombok.NoArgsConstructor;
 @Data @Builder @NoArgsConstructor @AllArgsConstructor
 public class ChatRequestVO {
 	private String content;//채팅내용
+	private String token;
+//	private String refreshToken;
 }

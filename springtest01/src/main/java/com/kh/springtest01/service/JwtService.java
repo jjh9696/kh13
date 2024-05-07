@@ -30,6 +30,7 @@ public class JwtService {
 		String keyStr = jwtProperties.getKeyStr();
 		SecretKey key = 
 				Keys.hmacShaKeyFor(keyStr.getBytes(StandardCharsets.UTF_8));
+				//StandardCharsets.UTF_8은 기본설정, 안써도 됨
 		//2. 토큰의 만료시간 설정 (java.util.Date)
 		Calendar c = Calendar.getInstance();
 		Date now = c.getTime();//현재시각 추출

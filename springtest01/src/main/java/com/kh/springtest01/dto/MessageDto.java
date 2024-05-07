@@ -18,6 +18,8 @@ public class MessageDto {
 	private int messageNo;
 	private String messageSender;
 	private String messageSenderLevel;
+	private String messageReceiver;
+	private String messageReceiverLevel;
 	private String messageContent;
 	private Date messageTime;
 

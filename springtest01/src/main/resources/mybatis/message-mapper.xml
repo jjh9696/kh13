@@ -12,11 +12,15 @@
     </select>
 	<insert id="add">
 		insert into message(
-		 	message_no, message_sender, message_sender_level, 
+		 	message_no, 
+		 	message_sender, message_sender_level, 
+		 	message_receiver, message_receiver_level
 		 	message_content, message_time
 	 	)
 	 	values(
-	 		#{messageNo}, #{messageSender}, #{messageSenderLevel},
+	 		#{messageNo}, 
+	 		#{messageSender}, #{messageSenderLevel},
+	 		#{messageReceiver}, #{messageReceiverLevel},
 	 		#{messageContent}, sysdate
  		)
 	</insert>

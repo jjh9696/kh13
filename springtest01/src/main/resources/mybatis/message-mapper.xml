@@ -3,36 +3,47 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    
+
 <mapper namespace="message">
 
 	<!-- 등록 -->
 	<select id="sequence" resultType="int">
-        select message_seq.nextval from dual
-    </select>
+		select message_seq.nextval from
+		dual
+	</select>
 	<insert id="add">
 		insert into message(
-		 	message_no, 
-		 	message_sender, message_sender_level, 
-		 	message_receiver, message_receiver_level
-		 	message_content, message_time
-	 	)
-	 	values(
-	 		#{messageNo}, 
-	 		#{messageSender}, #{messageSenderLevel},
-	 		#{messageReceiver}, #{messageReceiverLevel},
-	 		#{messageContent}, sysdate
- 		)
+		message_no,
+		message_sender,
+		message_sender_level,
+		message_receiver, message_receiver_level,
+		message_content, message_time
+		)
+		values(
+		#{messageNo},
+		#{messageSender},
+		#{messageSenderLevel},
+		#{messageReceiver}, #{messageReceiverLevel},
+		#{messageContent}, sysdate
+		)
 	</insert>
-	
+
 	<!-- 목록 -->
 	<select id="list" resultType="MessageDto">
-		select * from message order by message_no asc
+		select * from message order by
+		message_no asc
 	</select>
 
 	<!-- 상세 -->
 	<select id="find" resultType="MessageDto">
-		select * from message where message_no = #{messageNo}
+		select * from message where
+		message_no = #{messageNo}
 	</select>
-	
+
+	<!-- 사용자의 채팅 기록 여부를 확인하는 쿼리 -->
+	<select id="hasChatHistory" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM message
+		WHERE message_sender = #{memberId} OR message_receiver = #{memberId}
+	</select>
+
 </mapper>

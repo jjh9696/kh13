@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.springtest01.dao.MemberDao;
 import com.kh.springtest01.dto.MemberDto;
 import com.kh.springtest01.service.JwtService;
-import com.kh.springtest01.vo.room.MemberLoginVO;
+import com.kh.springtest01.vo.MemberLoginVO;
 
 @CrossOrigin
 @RestController

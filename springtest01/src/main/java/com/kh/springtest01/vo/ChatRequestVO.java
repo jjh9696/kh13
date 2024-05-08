@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 public class ChatRequestVO {
 	private String content;//채팅내용
 	private String token;
-	private String memberId, memberLevel;
+    private String receiverId;
+    private String receiverLevel;
+
 //	private String refreshToken;
 }

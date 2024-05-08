@@ -1,4 +1,4 @@
-package com.kh.springtest01.vo.room;
+package com.kh.springtest01.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

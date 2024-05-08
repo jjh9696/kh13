@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.springtest01.configuration.JwtProperties;
 import com.kh.springtest01.dto.MemberDto;
-import com.kh.springtest01.vo.room.MemberLoginVO;
+import com.kh.springtest01.vo.MemberLoginVO;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

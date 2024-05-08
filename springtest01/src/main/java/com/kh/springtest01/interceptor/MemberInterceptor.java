@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.kh.springtest01.service.JwtService;
-import com.kh.springtest01.vo.room.MemberLoginVO;
+import com.kh.springtest01.vo.MemberLoginVO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

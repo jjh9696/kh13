@@ -30,11 +30,15 @@ public class MessageDao {
 		return sqlSession.selectOne("message.find", messageNo);
 	}
 
+	//메세지 조회
+//	public MessageDto selectMessage(String memberId) {
+//		return sqlSession.selectOne("message.findMessage", memberId);
+//	}
+
 	// 사용자의 채팅 기록 여부를 확인하는 메서드
 	public boolean hasChatHistory(String memberId) {
-	    int count = sqlSession.selectOne("message.hasChatHistory", memberId);
-	    return count > 0;
+		int count = sqlSession.selectOne("message.hasChatHistory", memberId);
+		return count > 0;
 	}
-	
 
 }

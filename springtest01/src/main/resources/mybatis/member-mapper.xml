@@ -10,16 +10,18 @@
 	<select id="list" resultType="MemberDto">
 		select * from member
 	</select>
-	
+
 	<!-- 상세 -->
 	<select id="find" resultType="MemberDto">
 		select * from member where
 		member_id = #{memberId}
 	</select>
-	
-	<!-- 아이디 조회 -->
-	<select id="listMemberId" resultType="JustMemberIdVO">
-		select member_id from member
+
+	<!-- 아이디, 등급 조회 -->
+	<select id="listMemberId" resultType="JustMemberInfoVO">
+		SELECT member_id, member_level
+		FROM member
+		ORDER BY member_id ASC
 	</select>
 
 </mapper>
